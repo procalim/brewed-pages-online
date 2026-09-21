@@ -64,11 +64,16 @@ export const checkoutUrlFor = (product?: { checkoutUrl?: string }) =>
 export const whatsappLink = (message: string) =>
   `https://wa.me/${site.contact.whatsapp}?text=${encodeURIComponent(message)}`;
 
-/** Brand images — imported once so paths never drift */
+/**
+ * Brand images — resolved against the deployment's base path, so the site
+ * works served from the root or from a sub-folder.
+ */
+const base = import.meta.env.BASE_URL;
+
 export const brandImages = {
-  chefPortrait: "/brand/chef-portrait.jpg",
-  chefShrimp: "/brand/chef-shrimp-rainbow.jpg",
-  chefDuck: "/brand/chef-duck-cherry.jpg",
-  chefBeef: "/brand/chef-beef-tenderloin.jpg",
-  codexCover: "/brand/edible-codex-cover.jpg",
+  chefPortrait: `${base}brand/chef-portrait.jpg`,
+  chefShrimp: `${base}brand/chef-shrimp-rainbow.jpg`,
+  chefDuck: `${base}brand/chef-duck-cherry.jpg`,
+  chefBeef: `${base}brand/chef-beef-tenderloin.jpg`,
+  codexCover: `${base}brand/edible-codex-cover.jpg`,
 } as const;

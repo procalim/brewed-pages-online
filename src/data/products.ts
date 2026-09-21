@@ -12,7 +12,7 @@ export type Product = {
   gallery: string[];
   price: number;
   compareAt?: number;
-  badge?: "bestseller" | "new";
+  badge?: "bestseller" | "new" | "free";
   rating: number;
   reviews: number;
   featured?: boolean;
@@ -56,13 +56,13 @@ export const products: Product[] = [
     reviews: 812,
     featured: true,
     focus: "center 60%",
-    checkoutUrl: "",
+    checkoutUrl: "https://whop.com/the-edible-codex/the-edible-codex-cookbook/",
   },
   {
     id: 2,
     slug: "the-five-sauces",
     title: { ar: "الصلصات الخمس", en: "The Five Signature Sauces" },
-    subtitle: { ar: "خمس صلصات ملوّنة تصنع الفرق في أي طبق", en: "Five colour sauces that carry any plate" },
+    subtitle: { ar: "خمس صلصات ملوّنة — هديّة مجانية", en: "Five colour sauces — free gift" },
     description: {
       ar: "الصلصة هي الفرق بين طبق جيّد وطبق يُذكر. خمس صلصات — البنجر، الكركم، الأعشاب، الفلفل المشوي، والبلسمك المركّز — بنِسَب مضبوطة بالجرام، وخطوات مصوّرة، وطرق حفظ ومدد صلاحية واضحة. نفس الصلصات التي تراها في صور الأطباق.",
       en: "Sauce is the difference between a good plate and a memorable one. Five sauces — beetroot, turmeric, herb, roasted pepper and reduced balsamic — with exact ratios in grams, photographed steps, storage methods and honest shelf lives. The same sauces you see on the plates.",
@@ -75,15 +75,14 @@ export const products: Product[] = [
     ],
     image: brandImages.chefShrimp,
     gallery: [brandImages.chefShrimp, brandImages.chefDuck, brandImages.chefBeef],
-    /** ← عدّل السعر إن كان مختلفاً على Whop */
-    price: 4.99,
-    compareAt: 9.99,
-    badge: "new",
+    /** مجاني · free — a price of 0 renders as "مجاناً" everywhere */
+    price: 0,
+    badge: "free",
     rating: 4.9,
     reviews: 208,
     featured: true,
     focus: "center 75%",
-    checkoutUrl: "",
+    checkoutUrl: "https://whop.com/the-edible-codex/the-edible-codex-five-sauces/",
   },
 ];
 

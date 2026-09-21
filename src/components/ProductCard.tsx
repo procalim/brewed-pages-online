@@ -8,8 +8,16 @@ import type { Product } from "@/data/products";
 const ProductCard = ({ product }: { product: Product }) => {
   const { t, L, lang } = useLang();
 
+  const isFree = product.price === 0;
+
   const badgeLabel =
-    product.badge === "bestseller" ? t("product.bestseller") : product.badge === "new" ? t("product.new") : null;
+    product.badge === "bestseller"
+      ? t("product.bestseller")
+      : product.badge === "free"
+        ? t("product.freeBadge")
+        : product.badge === "new"
+          ? t("product.new")
+          : null;
 
   const savePct = product.compareAt
     ? Math.round(((product.compareAt - product.price) / product.compareAt) * 100)
@@ -58,8 +66,8 @@ const ProductCard = ({ product }: { product: Product }) => {
         <p className="mt-2 flex-1 text-[13px] leading-relaxed text-muted-foreground">{L(product.subtitle)}</p>
 
         <div className="mt-5 flex items-baseline gap-2">
-          <span className="font-display text-2xl text-navy-700">
-            {formatPrice(product.price, lang, site.currency.symbol)}
+          <span className={`font-display text-2xl ${isFree ? "text-gold-600" : "text-navy-700"}`}>
+            {isFree ? t("product.free") : formatPrice(product.price, lang, site.currency.symbol)}
           </span>
           {product.compareAt && (
             <span className="text-sm text-muted-foreground line-through">
@@ -75,7 +83,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           onClick={() => onBuyClick(product)}
           className="btn-gold mt-5 w-full"
         >
-          {t("product.buyNow")}
+          {isFree ? t("product.getFree") : t("product.buyNow")}
           <ArrowRight className="h-4 w-4 flip-rtl" />
         </a>
       </div>

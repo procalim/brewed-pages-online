@@ -62,29 +62,19 @@ Each product carries a `focus` value (e.g. `"center 75%"`) that decides which pa
 
 ## ٥. الدفع عبر Whop · Whop checkout
 
-**خطوة واحدة فقط لتفعيل الدفع:** افتح `src/data/site.ts` وضع رابط منتجك على Whop:
+**الدفع مربوط بالكامل.** لا سلة ولا نموذج بيانات: كل زر شراء رابط واحد يفتح صفحة Whop مباشرة.
 
-```ts
-checkout: {
-  provider: "whop",
-  url: "https://whop.com/your-store/the-edible-codex",   // ← ضع رابطك هنا
-},
-```
+روابط الدفع موضوعة في `checkoutUrl` لكل منتج في `src/data/products.ts`:
 
-بمجرد وضع الرابط يتغيّر الموقع تلقائياً:
+| المنتج | السعر | رابط Whop |
+| --- | --- | --- |
+| الكتاب | $9.99 | `whop.com/the-edible-codex/the-edible-codex-cookbook/` |
+| الصلصات الخمس | مجاناً | `whop.com/the-edible-codex/the-edible-codex-five-sauces/` |
 
-- زر **"اشترِ الآن"** في صفحة المنتج يفتح صفحة Whop مباشرة.
-- صفحة `/checkout` تتحوّل إلى صفحة تسليم أنيقة: زر دفع لكل منتج في السلة + زر واتساب للمساعدة.
-- تختفي رسالة "واجهة طلب تجريبية" ويظهر "الدفع الآمن عبر Whop".
+سعر `0` يُعرض تلقائياً كـ «مجاناً» ويتغيّر نص الزر إلى «احصل عليه مجاناً».
 
-لكل منتج رابط Whop خاص؟ ضع الرابط في `checkoutUrl` داخل ذلك المنتج في `src/data/products.ts`
-(يتجاوز الرابط العام). Per-product links override the global one.
-
-إن تُرك الرابط فارغاً يعمل نموذج الطلب الداخلي + واتساب كبديل.
-
-**السلة:** محفوظة في `localStorage` وتبقى بعد إغلاق المتصفح — `src/context/CartContext.tsx`.
-أكواد الخصم العاملة داخل الموقع: `CODEX20` (٢٠٪) و `CHEF10` (١٠٪) — عدّلها في `products.ts`.
-ملاحظة: الخصم يُطبَّق على عرض السلة فقط؛ السعر النهائي عند الدفع يحدّده Whop.
+لتغيير رابط أو سعر: عدّل `checkoutUrl` أو `price` في `src/data/products.ts` فقط.
+إن تُرك `checkoutUrl` فارغاً يفتح الزر رسالة واتساب جاهزة بدلاً من أن يكون معطّلاً.
 
 ## ٥ب. بكسل Whop · Whop pixel — **مثبَّت بالفعل** ✅
 

@@ -96,6 +96,9 @@ export const dictionary = {
   /* ── Product card / detail ── */
   "product.addToCart": { ar: "أضف إلى السلة", en: "Add to cart" },
   "product.buyNow": { ar: "اشترِ الآن", en: "Buy now" },
+  "product.free": { ar: "مجاناً", en: "Free" },
+  "product.getFree": { ar: "احصل عليه مجاناً", en: "Get it free" },
+  "product.freeBadge": { ar: "هديّة مجانية", en: "Free gift" },
   "product.added": { ar: "أُضيف إلى السلة", en: "Added to cart" },
   "product.instant": { ar: "تحميل فوري", en: "Instant download" },
   "product.bestseller": { ar: "الأكثر مبيعاً", en: "Bestseller" },

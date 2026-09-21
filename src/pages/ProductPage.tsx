@@ -38,6 +38,7 @@ const ProductPage = () => {
     : 0;
 
   const onWhop = Boolean(checkoutUrlFor(product));
+  const isFree = product.price === 0;
   const related = products.filter((p) => p.slug !== product.slug);
 
   return (
@@ -122,8 +123,8 @@ const ProductPage = () => {
             <p className="mt-3 text-[15px] text-gold-600">{L(product.subtitle)}</p>
 
             <div className="mt-6 flex items-baseline gap-4">
-              <span className="font-display text-4xl text-navy-700">
-                {formatPrice(product.price, lang, site.currency.symbol)}
+              <span className={`font-display text-4xl ${isFree ? "text-gold-600" : "text-navy-700"}`}>
+                {isFree ? t("product.free") : formatPrice(product.price, lang, site.currency.symbol)}
               </span>
               {product.compareAt && (
                 <span className="text-lg text-muted-foreground line-through">
@@ -144,7 +145,9 @@ const ProductPage = () => {
               onClick={() => onBuyClick(product)}
               className="btn-gold w-full text-base"
             >
-              {t("product.buyNow")} · {formatPrice(product.price, lang, site.currency.symbol)}
+              {isFree
+                ? t("product.getFree")
+                : `${t("product.buyNow")} · ${formatPrice(product.price, lang, site.currency.symbol)}`}
               <ArrowRight className="h-4 w-4 flip-rtl" />
             </a>
 

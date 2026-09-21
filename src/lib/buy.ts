@@ -1,5 +1,5 @@
 import type { Lang } from "@/i18n/dictionary";
-import { checkoutUrlFor, site, whatsappLink } from "@/data/site";
+import { checkoutUrlFor, whatsappLink } from "@/data/site";
 import type { Product } from "@/data/products";
 import { trackCheckoutStart } from "./pixel";
 
@@ -14,8 +14,8 @@ export const buyLink = (product: Product, lang: Lang) =>
   checkoutUrlFor(product) ??
   whatsappLink(
     lang === "ar"
-      ? `أريد شراء: ${product.title.ar} — ${site.currency.symbol}${product.price}`
-      : `I'd like to buy: ${product.title.en} — ${site.currency.symbol}${product.price}`,
+      ? `أريد الحصول على: ${product.title.ar}`
+      : `I'd like to get: ${product.title.en}`,
   );
 
 /** Report the handoff to the Whop pixel before the new tab opens. */

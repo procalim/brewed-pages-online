@@ -26,6 +26,8 @@ export type Recipe = {
   ingredients: string[];
   steps: string[];
   tip: string;
+  /** Plate photo under public/brand/recipes/. Falls back to the colour plate. */
+  photo?: boolean;
 };
 
 export const accentHex: Record<RecipeAccent, string> = {
@@ -39,6 +41,7 @@ export const accentHex: Record<RecipeAccent, string> = {
 export const recipes: Recipe[] = [
   {
     slug: "the-original-baked-feta-pasta",
+    photo: true,
     number: 1,
     source: "codex",
     accent: "magenta",
@@ -327,6 +330,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "beet-and-pickled-ginger",
+    photo: true,
     number: 0,
     source: "sauces",
     accent: "magenta",
@@ -354,6 +358,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "herb-and-chlorophyll",
+    photo: true,
     number: 0,
     source: "sauces",
     accent: "green",
@@ -382,6 +387,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "aged-balsamic-and-date",
+    photo: true,
     number: 0,
     source: "sauces",
     accent: "dark",
@@ -408,6 +414,10 @@ export const recipes: Recipe[] = [
   },];
 
 export const getRecipe = (slug?: string) => recipes.find((r) => r.slug === slug);
+
+/** Path to a recipe's plate photo, or null when it has none yet. */
+export const recipePhoto = (recipe: Recipe) =>
+  recipe.photo ? `${import.meta.env.BASE_URL}brand/recipes/${recipe.slug}.jpg` : null;
 
 /** Every tag in use, for the filter row. */
 export const recipeTags = [...new Set(recipes.flatMap((r) => r.tags))].sort();

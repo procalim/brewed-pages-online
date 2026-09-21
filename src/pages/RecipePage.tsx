@@ -6,7 +6,7 @@ import RecipeCard from "@/components/RecipeCard";
 import SectionHeading from "@/components/SectionHeading";
 import BuyButton from "@/components/BuyButton";
 import { useLang } from "@/i18n/LanguageContext";
-import { accentHex, getRecipe, recipes } from "@/data/recipes";
+import { accentHex, getRecipe, recipePhoto, recipes } from "@/data/recipes";
 import { getProduct } from "@/data/products";
 import { site } from "@/data/site";
 
@@ -32,6 +32,7 @@ const RecipePage = () => {
   }
 
   const accent = accentHex[recipe.accent];
+  const photo = recipePhoto(recipe);
   // The sauce chapter sells the free booklet; everything else sells the book.
   const product = getProduct(recipe.source === "sauces" ? "the-five-sauces" : "the-edible-codex")!;
   const related = recipes.filter((r) => r.slug !== recipe.slug).slice(0, 3);
@@ -41,11 +42,13 @@ const RecipePage = () => {
       <Seo
         title={L(recipe.title)}
         description={L(recipe.subtitle)}
+        image={photo ?? undefined}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Recipe",
           name: L(recipe.title),
           description: L(recipe.subtitle),
+          ...(photo ? { image: `${site.url}${photo}` } : {}),
           author: { "@type": "Person", name: site.brand.chefEn },
           inLanguage: lang,
           recipeYield: recipe.serves,
@@ -77,11 +80,15 @@ const RecipePage = () => {
 
       {/* The plate */}
       <section className="relative overflow-hidden bg-navy-700">
-        <div
-          className="absolute inset-0"
-          style={{ background: `radial-gradient(circle at 50% 30%, ${accent} 0%, ${accent}AA 24%, transparent 60%)` }}
-        />
-        <div className="absolute inset-0 bg-ink-fade opacity-80" />
+        {photo ? (
+          <img src={photo} alt={L(recipe.title)} className="absolute inset-0 h-full w-full object-cover" />
+        ) : (
+          <div
+            className="absolute inset-0"
+            style={{ background: `radial-gradient(circle at 50% 30%, ${accent} 0%, ${accent}AA 24%, transparent 60%)` }}
+          />
+        )}
+        <div className="absolute inset-0 bg-ink/70" />
         <div className="container-luxe relative z-10 py-16 text-center md:py-20">
           <span className="eyebrow">
             {recipe.source === "sauces" ? t("recipes.sauceChapter") : `N° ${String(recipe.number).padStart(3, "0")}`}

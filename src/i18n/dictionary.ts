@@ -7,6 +7,7 @@ export const dictionary = {
   "nav.shop": { ar: "المتجر", en: "Shop" },
   "nav.about": { ar: "عن الشيف", en: "About" },
   "nav.gallery": { ar: "المعرض", en: "Gallery" },
+  "nav.recipes": { ar: "الوصفات", en: "Recipes" },
   "nav.faq": { ar: "الأسئلة الشائعة", en: "FAQ" },
   "nav.contact": { ar: "تواصل", en: "Contact" },
   "nav.menu": { ar: "القائمة", en: "Menu" },
@@ -118,6 +119,34 @@ export const dictionary = {
   "product.notFound": { ar: "هذا الإصدار غير موجود.", en: "That edition could not be found." },
   "product.backToShop": { ar: "العودة إلى المتجر", en: "Back to the shop" },
   "product.secure": { ar: "دفع آمن ومشفّر", en: "Secure encrypted checkout" },
+
+  /* ── Recipes ── */
+  "recipes.eyebrow": { ar: "من الكتاب", en: "From the Book" },
+  "recipes.title": { ar: "وصفات مجانية", en: "Free Recipes" },
+  "recipes.subtitle": {
+    ar: "وصفات كاملة من ذا إديبل كودكس — بالمقادير والخطوات ونصيحة الشيف، مجاناً وبلا تسجيل.",
+    en: "Complete recipes from The Edible Codex — ingredients, steps and the chef's note, free and with no sign-up.",
+  },
+  "recipes.searchPlaceholder": { ar: "ابحث بالاسم أو بالمكوّن…", en: "Search by name or ingredient…" },
+  "recipes.one": { ar: "وصفة واحدة", en: "recipe" },
+  "recipes.many": { ar: "وصفة", en: "recipes" },
+  "recipes.empty": { ar: "لا توجد وصفة مطابقة.", en: "No recipe matches that." },
+  "recipes.read": { ar: "اقرأ", en: "Read" },
+  "recipes.ingredients": { ar: "المكوّنات", en: "Ingredients" },
+  "recipes.method": { ar: "الطريقة", en: "Method" },
+  "recipes.tip": { ar: "نصيحة الشيف", en: "Chef's note" },
+  "recipes.more": { ar: "وصفات أخرى", en: "More recipes" },
+  "recipes.backToAll": { ar: "كل الوصفات", en: "All recipes" },
+  "recipes.notFound": { ar: "هذه الوصفة غير موجودة.", en: "That recipe could not be found." },
+  "recipes.fromBook": { ar: "من هذا الإصدار", en: "From this edition" },
+  "recipes.codexChapter": { ar: "الكوديكس", en: "The Codex" },
+  "recipes.sauceChapter": { ar: "الصلصات", en: "Sauces" },
+  "recipes.homeTitle": { ar: "جرّب قبل أن تشتري", en: "Taste Before You Buy" },
+  "recipes.homeBody": {
+    ar: "وصفات كاملة من الكتاب، منشورة مجاناً — اطبخها الليلة وقرّر بنفسك.",
+    en: "Complete recipes from the book, published free — cook one tonight and judge for yourself.",
+  },
+  "recipes.homeCta": { ar: "تصفّح الوصفات المجانية", en: "Browse the free recipes" },
 
   /* ── Gallery ── */
   "gallery.eyebrow": { ar: "من المطبخ", en: "From the Pass" },

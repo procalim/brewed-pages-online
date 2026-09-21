@@ -40,7 +40,7 @@ export const site = {
 
   social: {
     /** ضع رابط حسابك هنا · put your real profile link here */
-    instagram: "https://instagram.com/",
+    instagram: "https://instagram.com/ahmet_salameh",
   },
 
   /** Currency shown on every price · العملة المعروضة */

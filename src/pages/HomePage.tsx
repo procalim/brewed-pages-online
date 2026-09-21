@@ -7,6 +7,8 @@ import TrustStrip from "@/components/TrustStrip";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { formatPrice, useLang } from "@/i18n/LanguageContext";
 import { faqs, getProduct, products, testimonials } from "@/data/products";
+import { recipes } from "@/data/recipes";
+import RecipeCard from "@/components/RecipeCard";
 import BuyButton from "@/components/BuyButton";
 import { brandImages, site } from "@/data/site";
 
@@ -215,6 +217,28 @@ const HomePage = () => {
               <ArrowRight className="h-4 w-4 flip-rtl" />
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* ── FREE RECIPES ── */}
+      <section className="section container-luxe">
+        <SectionHeading
+          eyebrow={t("recipes.eyebrow")}
+          title={t("recipes.homeTitle")}
+          subtitle={t("recipes.homeBody")}
+        />
+
+        <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+          {recipes.slice(0, 3).map((recipe) => (
+            <RecipeCard key={recipe.slug} recipe={recipe} />
+          ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <Link to="/recipes" className="btn-navy">
+            {t("recipes.homeCta")}
+            <ArrowRight className="h-4 w-4 flip-rtl" />
+          </Link>
         </div>
       </section>
 

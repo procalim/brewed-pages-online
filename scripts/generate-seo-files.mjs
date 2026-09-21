@@ -15,13 +15,18 @@ const { url } = JSON.parse(fs.readFileSync(path.join(root, "site.config.json"), 
 const origin = url.replace(/\/$/, "");
 
 // Product slugs are read straight out of the catalogue.
-const productsSource = fs.readFileSync(path.join(root, "src/data/products.ts"), "utf8");
-const slugs = [...productsSource.matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]);
+const readSlugs = (file) =>
+  [...fs.readFileSync(path.join(root, file), "utf8").matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]);
+
+const slugs = readSlugs("src/data/products.ts");
+const recipeSlugs = readSlugs("src/data/recipes.ts");
 
 const routes = [
   { path: "/", priority: "1.0", changefreq: "weekly" },
   { path: "/shop", priority: "0.9", changefreq: "weekly" },
   ...slugs.map((slug) => ({ path: `/shop/${slug}`, priority: "0.9", changefreq: "weekly" })),
+  { path: "/recipes", priority: "0.9", changefreq: "weekly" },
+  ...recipeSlugs.map((slug) => ({ path: `/recipes/${slug}`, priority: "0.8", changefreq: "monthly" })),
   { path: "/about", priority: "0.6", changefreq: "monthly" },
   { path: "/faq", priority: "0.6", changefreq: "monthly" },
   { path: "/contact", priority: "0.5", changefreq: "monthly" },

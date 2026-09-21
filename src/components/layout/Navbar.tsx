@@ -7,6 +7,7 @@ import { useLang } from "@/i18n/LanguageContext";
 const links = [
   { to: "/", key: "nav.home" },
   { to: "/shop", key: "nav.shop" },
+  { to: "/recipes", key: "nav.recipes" },
   { to: "/about", key: "nav.about" },
   { to: "/faq", key: "nav.faq" },
   { to: "/contact", key: "nav.contact" },

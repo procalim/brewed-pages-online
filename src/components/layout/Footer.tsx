@@ -17,6 +17,7 @@ const Footer = () => {
 
   const explore = [
     { to: "/shop", key: "nav.shop" as const },
+    { to: "/recipes", key: "nav.recipes" as const },
     { to: "/about", key: "nav.about" as const },
     { to: "/contact", key: "nav.contact" as const },
   ];

@@ -11,6 +11,8 @@ import ScrollToTop from "@/components/ScrollToTop";
 import RouteTracker from "@/components/RouteTracker";
 import HomePage from "@/pages/HomePage";
 import ShopPage from "@/pages/ShopPage";
+import RecipesPage from "@/pages/RecipesPage";
+import RecipePage from "@/pages/RecipePage";
 import ProductPage from "@/pages/ProductPage";
 import AboutPage from "@/pages/AboutPage";
 import ContactPage from "@/pages/ContactPage";
@@ -39,6 +41,8 @@ const App = () => (
                   <Route path="/shop/:slug" element={<ProductPage />} />
                   {/* Keep the older /product/:slug shape working */}
                   <Route path="/product/:slug" element={<ProductPage />} />
+                  <Route path="/recipes" element={<RecipesPage />} />
+                  <Route path="/recipes/:slug" element={<RecipePage />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/faq" element={<FaqPage />} />
                   <Route path="/contact" element={<ContactPage />} />

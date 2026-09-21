@@ -124,7 +124,7 @@ const Footer = () => {
           </p>
 
           <div className="flex items-center gap-2" title={t("footer.payments")}>
-            {["Visa", "MC", "Amex", "Mada", "Apple", "PayPal"].map((p) => (
+            {["Visa", "MC", "Amex", "Apple", "Google", "PayPal"].map((p) => (
               <PaymentMark key={p} label={p} />
             ))}
           </div>

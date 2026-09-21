@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { CheckCircle2, Lock, MessageCircle, ShoppingBag } from "lucide-react";
+import { CheckCircle2, ExternalLink, Lock, MessageCircle, ShoppingBag } from "lucide-react";
 import Seo from "@/components/Seo";
 import { formatPrice, useLang } from "@/i18n/LanguageContext";
 import { useCart } from "@/context/CartContext";
-import { site, whatsappLink } from "@/data/site";
+import { checkoutUrlFor, site, whatsappLink } from "@/data/site";
 
 const CheckoutPage = () => {
   const { t, L, lang } = useLang();
@@ -14,6 +14,12 @@ const CheckoutPage = () => {
 
   const update = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((prev) => ({ ...prev, [key]: e.target.value }));
+
+  // Whop sells one product per checkout link, so each line gets its own
+  // pay button. Whop يبيع بمنتج لكل رابط، لذلك لكل منتج زر دفع خاص.
+  const payLinks = items
+    .map(({ product, qty }) => ({ product, qty, url: checkoutUrlFor(product) }))
+    .filter((line): line is { product: typeof line.product; qty: number; url: string } => Boolean(line.url));
 
   const orderLines = items
     .map(({ product, qty }) => `• ${L(product.title)} × ${qty}`)
@@ -71,54 +77,103 @@ const CheckoutPage = () => {
         <h1 className="font-display text-3xl text-navy-700 md:text-4xl">{t("checkout.title")}</h1>
 
         <div className="mt-10 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
-          <form onSubmit={placeOrder} className="rounded-sm border border-gold/25 bg-white p-7 shadow-luxe md:p-9">
-            <h2 className="text-[11px] font-semibold uppercase tracking-luxe text-gold">{t("checkout.contact")}</h2>
+          <div className="rounded-sm border border-gold/25 bg-white p-7 shadow-luxe md:p-9">
+            {payLinks.length > 0 ? (
+              /* Whop is connected — hand the buyer straight over to it. */
+              <>
+                <h2 className="font-display text-xl text-navy-700">{t("checkout.whop.title")}</h2>
+                <p className="mt-3 text-[14px] leading-relaxed text-muted-foreground">{t("checkout.whop.body")}</p>
 
-            <div className="mt-6 grid gap-5 sm:grid-cols-2">
-              <label className="block">
-                <span className="mb-2 block text-[12px] text-muted-foreground">{t("checkout.fullName")}</span>
-                <input required value={form.name} onChange={update("name")} className="field-luxe" />
-              </label>
-              <label className="block">
-                <span className="mb-2 block text-[12px] text-muted-foreground">{t("checkout.email")}</span>
-                <input required type="email" value={form.email} onChange={update("email")} className="field-luxe" />
-              </label>
-              <label className="block">
-                <span className="mb-2 block text-[12px] text-muted-foreground">{t("checkout.phone")}</span>
-                <input required type="tel" dir="ltr" value={form.phone} onChange={update("phone")} className="field-luxe" />
-              </label>
-              <label className="block">
-                <span className="mb-2 block text-[12px] text-muted-foreground">{t("checkout.country")}</span>
-                <input required value={form.country} onChange={update("country")} className="field-luxe" />
-              </label>
-            </div>
+                <ul className="mt-7 space-y-3">
+                  {payLinks.map(({ product, url }) => (
+                    <li key={product.slug}>
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="btn-gold w-full justify-between"
+                      >
+                        <span className="truncate">{L(product.title)}</span>
+                        <span className="flex shrink-0 items-center gap-2">
+                          {formatPrice(product.price, lang, site.currency.symbol)}
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
 
-            <label className="mt-5 block">
-              <span className="mb-2 block text-[12px] text-muted-foreground">{t("checkout.notes")}</span>
-              <textarea rows={4} value={form.notes} onChange={update("notes")} className="field-luxe resize-none" />
-            </label>
+                <div className="my-7 gold-rule" />
 
-            <button type="submit" className="btn-gold mt-7 w-full">
-              <Lock className="h-4 w-4" />
-              {t("checkout.place")} · {formatPrice(total, lang, site.currency.symbol)}
-            </button>
+                <p className="text-[13px] text-muted-foreground">{t("checkout.help")}</p>
+              <a
+                href={whatsappLink(
+                  `${lang === "ar" ? "طلب جديد" : "New order"} · ${site.brand.name}\n${orderLines}\n${t("cart.total")}: ${formatPrice(total, lang, site.currency.symbol)}`,
+                )}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="btn-outline-gold mt-3 w-full text-navy-700 hover:text-ink"
+              >
+                <MessageCircle className="h-4 w-4" />
+                {t("checkout.whatsapp")}
+              </a>
 
-            <a
-              href={whatsappLink(
-                `${lang === "ar" ? "طلب جديد" : "New order"} · ${site.brand.name}\n${orderLines}\n${t("cart.total")}: ${formatPrice(total, lang, site.currency.symbol)}`,
-              )}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="btn-outline-gold mt-3 w-full text-navy-700 hover:text-ink"
-            >
-              <MessageCircle className="h-4 w-4" />
-              {t("checkout.whatsapp")}
-            </a>
+                <p className="mt-6 flex items-center gap-2 text-[12px] text-muted-foreground">
+                  <Lock className="h-3.5 w-3.5 text-gold" />
+                  {t("product.whop")}
+                </p>
+              </>
+            ) : (
+              <form onSubmit={placeOrder}>
+                <h2 className="text-[11px] font-semibold uppercase tracking-luxe text-gold">{t("checkout.contact")}</h2>
 
-            <p className="mt-5 rounded-sm border border-dashed border-gold/40 bg-ivory p-4 text-[12px] leading-relaxed text-muted-foreground">
-              {t("checkout.demoNote")}
-            </p>
-          </form>
+                <div className="mt-6 grid gap-5 sm:grid-cols-2">
+                  <label className="block">
+                    <span className="mb-2 block text-[12px] text-muted-foreground">{t("checkout.fullName")}</span>
+                    <input required value={form.name} onChange={update("name")} className="field-luxe" />
+                  </label>
+                  <label className="block">
+                    <span className="mb-2 block text-[12px] text-muted-foreground">{t("checkout.email")}</span>
+                    <input required type="email" value={form.email} onChange={update("email")} className="field-luxe" />
+                  </label>
+                  <label className="block">
+                    <span className="mb-2 block text-[12px] text-muted-foreground">{t("checkout.phone")}</span>
+                    <input required type="tel" dir="ltr" value={form.phone} onChange={update("phone")} className="field-luxe" />
+                  </label>
+                  <label className="block">
+                    <span className="mb-2 block text-[12px] text-muted-foreground">{t("checkout.country")}</span>
+                    <input required value={form.country} onChange={update("country")} className="field-luxe" />
+                  </label>
+                </div>
+
+                <label className="mt-5 block">
+                  <span className="mb-2 block text-[12px] text-muted-foreground">{t("checkout.notes")}</span>
+                  <textarea rows={4} value={form.notes} onChange={update("notes")} className="field-luxe resize-none" />
+                </label>
+
+                <button type="submit" className="btn-gold mt-7 w-full">
+                  <Lock className="h-4 w-4" />
+                  {t("checkout.place")} · {formatPrice(total, lang, site.currency.symbol)}
+                </button>
+
+              <a
+                href={whatsappLink(
+                  `${lang === "ar" ? "طلب جديد" : "New order"} · ${site.brand.name}\n${orderLines}\n${t("cart.total")}: ${formatPrice(total, lang, site.currency.symbol)}`,
+                )}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="btn-outline-gold mt-3 w-full text-navy-700 hover:text-ink"
+              >
+                <MessageCircle className="h-4 w-4" />
+                {t("checkout.whatsapp")}
+              </a>
+
+                <p className="mt-5 rounded-sm border border-dashed border-gold/40 bg-ivory p-4 text-[12px] leading-relaxed text-muted-foreground">
+                  {t("checkout.demoNote")}
+                </p>
+              </form>
+            )}
+          </div>
 
           {/* Summary */}
           <aside className="h-fit rounded-sm border border-gold/25 bg-ivory p-7 lg:sticky lg:top-28">

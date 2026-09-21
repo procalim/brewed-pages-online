@@ -22,10 +22,10 @@ export const site = {
   contact: {
     email: "procalimyoga@gmail.com",
     /** International format, digits only — used to build the WhatsApp link */
-    whatsapp: "9660000000",
-    phoneDisplay: "+966 00 000 0000",
-    cityEn: "Riyadh, Saudi Arabia",
-    cityAr: "الرياض، المملكة العربية السعودية",
+    whatsapp: "962775320369",
+    phoneDisplay: "+962 7 7532 0369",
+    cityEn: "Amman, Jordan",
+    cityAr: "عمّان، الأردن",
     hoursEn: "Sun – Thu · 10:00 – 18:00",
     hoursAr: "الأحد – الخميس · ١٠:٠٠ – ١٨:٠٠",
   },
@@ -42,7 +42,24 @@ export const site = {
     code: "USD",
     symbol: "$",
   },
+
+  /**
+   * Whop checkout · الدفع عبر Whop
+   * ضع رابط متجرك أو منتجك على Whop هنا، مثال:
+   *   https://whop.com/your-store/the-edible-codex
+   * يمكن أيضاً إعطاء كل منتج رابطه الخاص عبر `checkoutUrl` في products.ts.
+   * إن ترك فارغاً يعمل نموذج الطلب الداخلي + واتساب بدلاً منه.
+   * Leave empty to fall back to the built-in order form.
+   */
+  checkout: {
+    provider: "whop" as const,
+    url: "",
+  },
 } as const;
+
+/** The Whop link a given product should open, if one is configured. */
+export const checkoutUrlFor = (product?: { checkoutUrl?: string }) =>
+  product?.checkoutUrl || site.checkout.url || null;
 
 export const whatsappLink = (message: string) =>
   `https://wa.me/${site.contact.whatsapp}?text=${encodeURIComponent(message)}`;

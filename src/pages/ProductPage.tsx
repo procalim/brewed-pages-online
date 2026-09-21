@@ -8,7 +8,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { formatPrice, useLang } from "@/i18n/LanguageContext";
 import { useCart } from "@/context/CartContext";
 import { faqs, getProduct, products } from "@/data/products";
-import { site } from "@/data/site";
+import { checkoutUrlFor, site } from "@/data/site";
 
 const ProductPage = () => {
   const { slug } = useParams();
@@ -42,7 +42,15 @@ const ProductPage = () => {
     ? Math.round(((product.compareAt - product.price) / product.compareAt) * 100)
     : 0;
 
+  const whopUrl = checkoutUrlFor(product);
+
   const buyNow = () => {
+    // With Whop connected, "buy now" hands the visitor straight to the
+    // hosted checkout. Without it, the built-in order flow takes over.
+    if (whopUrl) {
+      window.open(whopUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
     add(product.slug, qty);
     navigate("/checkout");
   };
@@ -178,7 +186,7 @@ const ProductPage = () => {
 
             <p className="mt-4 flex items-center justify-center gap-2 text-[12px] text-muted-foreground">
               <ShieldCheck className="h-4 w-4 text-gold" />
-              {t("product.secure")}
+              {whopUrl ? t("product.whop") : t("product.secure")}
             </p>
 
             {/* Included */}

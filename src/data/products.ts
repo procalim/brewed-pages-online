@@ -19,6 +19,8 @@ export type Product = {
   featured?: boolean;
   /** CSS object-position for the cover crop — keeps the dish in frame. */
   focus?: string;
+  /** Whop checkout link for this product. Falls back to site.checkout.url. */
+  checkoutUrl?: string;
 };
 
 /**
@@ -46,13 +48,15 @@ export const products: Product[] = [
     ],
     image: brandImages.codexCover,
     gallery: [brandImages.codexCover, brandImages.chefShrimp, brandImages.chefDuck, brandImages.chefBeef],
-    price: 39,
-    compareAt: 79,
+    price: 9.99,
+    compareAt: 19.99,
     badge: "bestseller",
     category: "codex",
     rating: 4.9,
     reviews: 812,
     focus: "center 60%",
+    /** ضع رابط هذا المنتج على Whop هنا · this product's Whop link */
+    checkoutUrl: "",
     featured: true,
   },
   {
@@ -71,8 +75,8 @@ export const products: Product[] = [
     ],
     image: brandImages.chefShrimp,
     gallery: [brandImages.chefShrimp, brandImages.chefDuck, brandImages.chefBeef],
-    price: 24,
-    compareAt: 49,
+    price: 7.99,
+    compareAt: 14.99,
     category: "masterclass",
     rating: 4.8,
     reviews: 341,
@@ -95,8 +99,8 @@ export const products: Product[] = [
     ],
     image: brandImages.chefDuck,
     gallery: [brandImages.chefDuck, brandImages.chefShrimp],
-    price: 19,
-    compareAt: 35,
+    price: 5.99,
+    compareAt: 11.99,
     badge: "new",
     category: "masterclass",
     rating: 4.9,
@@ -119,8 +123,8 @@ export const products: Product[] = [
     ],
     image: brandImages.chefBeef,
     gallery: [brandImages.chefBeef, brandImages.chefDuck],
-    price: 22,
-    compareAt: 42,
+    price: 6.99,
+    compareAt: 12.99,
     category: "masterclass",
     rating: 4.7,
     reviews: 176,
@@ -143,8 +147,8 @@ export const products: Product[] = [
     ],
     image: brandImages.chefPortrait,
     gallery: [brandImages.chefPortrait, brandImages.codexCover, brandImages.chefShrimp],
-    price: 79,
-    compareAt: 205,
+    price: 19.99,
+    compareAt: 30.96,
     badge: "bundle",
     category: "bundle",
     rating: 5.0,

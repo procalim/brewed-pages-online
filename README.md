@@ -32,8 +32,8 @@ All content lives in four files — you never have to dig through components.
 > **مهم:** التقييمات في `products.ts` نماذج توضيحية — استبدلها بتقييمات عملائك الحقيقيين قبل النشر.
 > **Important:** the reviews in `products.ts` are placeholders — replace them with real customer reviews before launch.
 
-> أرقام الجوال والواتساب في `site.ts` أرقام مؤقتة (`9660000000`) — ضع رقمك الحقيقي قبل الإطلاق.
-> The phone/WhatsApp numbers in `site.ts` are placeholders — set your real number before launch.
+> الأسعار الحالية: الإصدار الرئيسي **$9.99** والباقي مُسعَّر حوله. احرص أن يطابق السعر ما هو معروض على Whop.
+> Current pricing: the flagship is **$9.99** and the rest is scaled around it — keep it in sync with Whop.
 
 ## ٣. الصور · Brand images
 
@@ -60,14 +60,31 @@ Each product carries a `focus` value (e.g. `"center 75%"`) that decides which pa
 | `/cart` · `/checkout` | السلة (مع كود خصم) · إتمام الطلب |
 | `/policies/privacy`، `/policies/terms`، `/policies/refund` | السياسات |
 
-## ٥. السلة والدفع · Cart & payment
+## ٥. الدفع عبر Whop · Whop checkout
 
-- السلة محفوظة في `localStorage` وتبقى بعد إغلاق المتصفح — `src/context/CartContext.tsx`.
-- أكواد الخصم العاملة: `CODEX20` (٢٠٪) و `CHEF10` (١٠٪) — عدّلها في `products.ts`.
-- **الدفع غير مربوط بعد.** صفحة `/checkout` تسجّل الطلب محلياً وتعطي رقم طلب، مع زر إرسال الطلب عبر واتساب.
-  لربط بوابة دفع حقيقية (Stripe / Tap / Shopify Buy Button)، استبدل دالة `placeOrder` في `src/pages/CheckoutPage.tsx`
-  باستدعاء البوابة. كل ما تحتاجه (المنتجات، الإجمالي، بيانات العميل) متاح داخل الدالة.
-  **Payment is not connected yet.** Replace `placeOrder` in `src/pages/CheckoutPage.tsx` with your gateway call.
+**خطوة واحدة فقط لتفعيل الدفع:** افتح `src/data/site.ts` وضع رابط منتجك على Whop:
+
+```ts
+checkout: {
+  provider: "whop",
+  url: "https://whop.com/your-store/the-edible-codex",   // ← ضع رابطك هنا
+},
+```
+
+بمجرد وضع الرابط يتغيّر الموقع تلقائياً:
+
+- زر **"اشترِ الآن"** في صفحة المنتج يفتح صفحة Whop مباشرة.
+- صفحة `/checkout` تتحوّل إلى صفحة تسليم أنيقة: زر دفع لكل منتج في السلة + زر واتساب للمساعدة.
+- تختفي رسالة "واجهة طلب تجريبية" ويظهر "الدفع الآمن عبر Whop".
+
+لكل منتج رابط Whop خاص؟ ضع الرابط في `checkoutUrl` داخل ذلك المنتج في `src/data/products.ts`
+(يتجاوز الرابط العام). Per-product links override the global one.
+
+إن تُرك الرابط فارغاً يعمل نموذج الطلب الداخلي + واتساب كبديل.
+
+**السلة:** محفوظة في `localStorage` وتبقى بعد إغلاق المتصفح — `src/context/CartContext.tsx`.
+أكواد الخصم العاملة داخل الموقع: `CODEX20` (٢٠٪) و `CHEF10` (١٠٪) — عدّلها في `products.ts`.
+ملاحظة: الخصم يُطبَّق على عرض السلة فقط؛ السعر النهائي عند الدفع يحدّده Whop.
 
 ## ٦. اللغة والاتجاه · Language & direction
 

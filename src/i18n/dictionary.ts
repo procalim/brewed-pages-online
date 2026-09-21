@@ -241,6 +241,17 @@ export const dictionary = {
   "checkout.notes": { ar: "ملاحظات على الطلب (اختياري)", en: "Order notes (optional)" },
   "checkout.place": { ar: "تأكيد الطلب", en: "Place order" },
   "checkout.whatsapp": { ar: "إرسال الطلب عبر واتساب", en: "Send order via WhatsApp" },
+  "checkout.whop.title": { ar: "أكمل الدفع عبر Whop", en: "Complete payment on Whop" },
+  "checkout.whop.body": {
+    ar: "الدفع والتسليم يتمّان عبر Whop بشكل آمن. اضغط على المنتج لإتمام الشراء واستلام رابط التحميل مباشرة.",
+    en: "Payment and delivery are handled securely by Whop. Tap a product to complete the purchase and get your download link.",
+  },
+  "checkout.help": {
+    ar: "تحتاج مساعدة في الطلب أو تفضّل الشراء بطريقة أخرى؟ راسلنا مباشرة.",
+    en: "Need help with your order, or prefer to buy another way? Message us directly.",
+  },
+  "checkout.whop.pay": { ar: "ادفع عبر Whop", en: "Pay on Whop" },
+  "product.whop": { ar: "الدفع الآمن عبر Whop", en: "Secure payment via Whop" },
   "checkout.demoNote": {
     ar: "هذه واجهة طلب تجريبية: عند الربط ببوابة دفع (Stripe أو Tap أو Shopify) ستتحوّل مباشرة إلى صفحة الدفع.",
     en: "This is a demo order flow: once a payment gateway (Stripe, Tap or Shopify) is connected it will redirect straight to payment.",

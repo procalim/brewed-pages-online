@@ -2,13 +2,14 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Star } from "lucide-react";
 import { formatPrice, useLang } from "@/i18n/LanguageContext";
 import { buyLink, onBuyClick } from "@/lib/buy";
-import { site } from "@/data/site";
+import { checkoutDomainLabel, checkoutUrlFor, site } from "@/data/site";
 import type { Product } from "@/data/products";
 
 const ProductCard = ({ product }: { product: Product }) => {
   const { t, L, lang } = useLang();
 
   const isFree = product.price === 0;
+  const destination = checkoutDomainLabel(checkoutUrlFor(product));
 
   const badgeLabel =
     product.badge === "bestseller"
@@ -86,6 +87,12 @@ const ProductCard = ({ product }: { product: Product }) => {
           {isFree ? t("product.getFree") : t("product.buyNow")}
           <ArrowRight className="h-4 w-4 flip-rtl" />
         </a>
+
+        {destination && (
+          <p dir="ltr" className="mt-2.5 text-center text-[11px] text-muted-foreground">
+            {t("product.viaWhop")} · {destination}
+          </p>
+        )}
       </div>
     </article>
   );

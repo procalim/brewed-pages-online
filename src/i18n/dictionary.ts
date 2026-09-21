@@ -218,6 +218,15 @@ export const dictionary = {
 
 
   "product.whop": { ar: "الدفع الآمن عبر Whop", en: "Secure payment via Whop" },
+  "product.whopNote": {
+    ar: "ستنتقل إلى صفحة الدفع الرسمية لمتجرنا على منصّة Whop:",
+    en: "You'll continue to our store's official checkout on Whop:",
+  },
+  "product.whopTrust": {
+    ar: "دفع مشفّر · تسليم فوري · استرداد خلال ٣٠ يوماً",
+    en: "Encrypted payment · instant delivery · 30-day refund",
+  },
+  "product.viaWhop": { ar: "الدفع عبر Whop", en: "Checkout via Whop" },
 
   /* ── Trust strip ── */
   "trust.instant": { ar: "تحميل فوري", en: "Instant delivery" },

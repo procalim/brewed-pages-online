@@ -8,7 +8,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { formatPrice, useLang } from "@/i18n/LanguageContext";
 import { buyLink, onBuyClick } from "@/lib/buy";
 import { faqs, getProduct, products } from "@/data/products";
-import { checkoutUrlFor, site } from "@/data/site";
+import { checkoutDomainLabel, checkoutUrlFor, site } from "@/data/site";
 
 const ProductPage = () => {
   const { slug } = useParams();
@@ -37,7 +37,9 @@ const ProductPage = () => {
     ? Math.round(((product.compareAt - product.price) / product.compareAt) * 100)
     : 0;
 
-  const onWhop = Boolean(checkoutUrlFor(product));
+  const whopUrl = checkoutUrlFor(product);
+  const onWhop = Boolean(whopUrl);
+  const destination = checkoutDomainLabel(whopUrl);
   const isFree = product.price === 0;
   const related = products.filter((p) => p.slug !== product.slug);
 
@@ -151,10 +153,23 @@ const ProductPage = () => {
               <ArrowRight className="h-4 w-4 flip-rtl" />
             </a>
 
-            <p className="mt-4 flex items-center justify-center gap-2 text-[12px] text-muted-foreground">
-              <ShieldCheck className="h-4 w-4 text-gold" />
-              {onWhop ? t("product.whop") : t("product.secure")}
-            </p>
+            {onWhop ? (
+              <div className="mt-4 rounded-sm border border-gold/25 bg-ivory px-5 py-4 text-center">
+                <p className="flex items-center justify-center gap-2 text-[12px] text-navy-700">
+                  <ShieldCheck className="h-4 w-4 shrink-0 text-gold" />
+                  {t("product.whopNote")}
+                </p>
+                <p dir="ltr" className="mt-1.5 font-sans text-[13px] font-semibold tracking-tight text-gold-600">
+                  {destination}
+                </p>
+                <p className="mt-2 text-[11px] text-muted-foreground">{t("product.whopTrust")}</p>
+              </div>
+            ) : (
+              <p className="mt-4 flex items-center justify-center gap-2 text-[12px] text-muted-foreground">
+                <ShieldCheck className="h-4 w-4 text-gold" />
+                {t("product.secure")}
+              </p>
+            )}
 
             {/* Included */}
             <div className="mt-9 rounded-sm border border-gold/25 bg-ivory p-7">

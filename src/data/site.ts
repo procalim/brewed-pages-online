@@ -61,6 +61,22 @@ export const site = {
 export const checkoutUrlFor = (product?: { checkoutUrl?: string }) =>
   product?.checkoutUrl || site.checkout.url || null;
 
+/**
+ * The checkout destination, written out for the visitor — seeing
+ * "whop.com/the-edible-codex" before the jump is what makes the handoff
+ * feel deliberate instead of like being thrown to a stranger's site.
+ */
+export const checkoutDomainLabel = (url: string | null) => {
+  if (!url) return null;
+  try {
+    const parsed = new URL(url);
+    const store = parsed.pathname.split("/").filter(Boolean)[0];
+    return store ? `${parsed.host}/${store}` : parsed.host;
+  } catch {
+    return null;
+  }
+};
+
 export const whatsappLink = (message: string) =>
   `https://wa.me/${site.contact.whatsapp}?text=${encodeURIComponent(message)}`;
 

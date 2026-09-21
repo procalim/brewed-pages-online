@@ -36,10 +36,10 @@ const Logo = ({ tone = "dark", compact = false }: { tone?: "dark" | "light"; com
 
       {!compact && (
         <span className="flex flex-col leading-none">
-          <span className={`font-display text-[17px] font-semibold tracking-tight ${wordmark}`}>
+          <span className={`whitespace-nowrap font-display text-[15px] font-semibold tracking-tight sm:text-[17px] ${wordmark}`}>
             The <span className="gold-text">Edible</span> Codex
           </span>
-          <span className="mt-1 text-[9px] font-sans font-medium uppercase tracking-luxe text-gold/80">
+          <span className="mt-1 hidden whitespace-nowrap text-[9px] font-sans font-medium uppercase tracking-luxe text-gold/80 sm:block">
             {lang === "ar" ? site.brand.taglineAr : site.brand.taglineEn}
           </span>
         </span>

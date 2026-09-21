@@ -1,203 +1,288 @@
-
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { ChevronRight } from 'lucide-react';
-
-const FEATURED_COLLECTIONS = [
-  {
-    id: 1,
-    title: "Literary Essays",
-    image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=687&auto=format&fit=crop",
-    description: "Thoughtful perspectives on literature, culture, and more.",
-    slug: "literary-essays"
-  },
-  {
-    id: 2,
-    title: "Culinary Journeys",
-    image: "https://images.unsplash.com/photo-1476275466078-4007374efbbe?q=80&w=1129&auto=format&fit=crop",
-    description: "Explore the rich intersections of food culture and storytelling.",
-    slug: "culinary-journeys"
-  },
-  {
-    id: 3,
-    title: "Limited Editions",
-    image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=687&auto=format&fit=crop",
-    description: "Exclusive releases with special bindings and illustrations.",
-    slug: "limited-editions"
-  }
-];
-
-const NEW_ARRIVALS = [
-  {
-    id: 1,
-    title: "The Secret Library",
-    author: "Oliver Tearle",
-    image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=687&auto=format&fit=crop",
-    price: 24.99,
-    slug: "the-secret-library"
-  },
-  {
-    id: 2,
-    title: "Culinary Mysteries",
-    author: "Amanda Lee",
-    image: "https://images.unsplash.com/photo-1476275466078-4007374efbbe?q=80&w=1129&auto=format&fit=crop",
-    price: 19.99,
-    slug: "culinary-mysteries"
-  },
-  {
-    id: 3,
-    title: "Essays on Taste",
-    author: "Malcolm Richards",
-    image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=687&auto=format&fit=crop",
-    price: 22.99,
-    slug: "essays-on-taste"
-  },
-  {
-    id: 4,
-    title: "Brewed Thoughts",
-    author: "Eleanor Hart",
-    image: "https://images.unsplash.com/photo-1476275466078-4007374efbbe?q=80&w=1129&auto=format&fit=crop",
-    price: 18.99,
-    slug: "brewed-thoughts"
-  }
-];
+import { Link } from "react-router-dom";
+import { ArrowRight, BookOpen, ChefHat, Check, Droplets, Infinity as InfinityIcon, Quote, Star } from "lucide-react";
+import Seo from "@/components/Seo";
+import SectionHeading from "@/components/SectionHeading";
+import ProductCard from "@/components/ProductCard";
+import TrustStrip from "@/components/TrustStrip";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { formatPrice, useLang } from "@/i18n/LanguageContext";
+import { useCart } from "@/context/CartContext";
+import { faqs, getProduct, products, testimonials } from "@/data/products";
+import { brandImages, site } from "@/data/site";
 
 const HomePage = () => {
-  const [email, setEmail] = useState('');
+  const { t, L, lang } = useLang();
+  const { add } = useCart();
+  const flagship = getProduct("the-edible-codex")!;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In a real app, this would send the email to a newsletter service
-    console.log(`Subscribed with email: ${email}`);
-    setEmail('');
-    // Show a toast notification
-    alert('Thanks for subscribing!');
-  };
+  const valueProps = [
+    { Icon: ChefHat, title: t("value.1.title"), body: t("value.1.body") },
+    { Icon: BookOpen, title: t("value.2.title"), body: t("value.2.body") },
+    { Icon: Droplets, title: t("value.3.title"), body: t("value.3.body") },
+    { Icon: InfinityIcon, title: t("value.4.title"), body: t("value.4.body") },
+  ];
+
+  const gallery = [
+    { image: brandImages.chefShrimp, title: t("gallery.1.title"), body: t("gallery.1.body") },
+    { image: brandImages.chefDuck, title: t("gallery.2.title"), body: t("gallery.2.body") },
+    { image: brandImages.chefBeef, title: t("gallery.3.title"), body: t("gallery.3.body") },
+  ];
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-codex-dark-brown text-codex-cream py-20 md:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/lovable-uploads/2999c0a2-0b95-4505-bc78-75e636f35eba.png')] bg-cover bg-center opacity-20"></div>
-        <div className="container px-4 md:px-6 mx-auto relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="font-serif text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Books Brewed With Intention
+    <>
+      <Seo title={t("hero.title.line1") + " " + t("hero.title.line2")} description={t("hero.subtitle")} />
+
+      {/* ── HERO ── */}
+      <section className="texture-dark relative overflow-hidden">
+        <div className="container-luxe relative z-10 grid items-center gap-12 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
+          <div className="animate-fade-in">
+            <span className="eyebrow eyebrow-start">{t("hero.eyebrow")}</span>
+
+            <h1 className="mt-6 font-display text-[clamp(2.6rem,7vw,4.6rem)] font-semibold leading-[1.05] text-ivory text-balance">
+              {t("hero.title.line1")}
+              <span className="block gold-text animate-shimmer">{t("hero.title.line2")}</span>
             </h1>
-            <p className="text-lg md:text-xl text-codex-cream/90 mb-10">
-              A specialty bookshop with a curated collection focused on niche, high-quality literature.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild className="bg-codex-amber hover:bg-codex-gold text-codex-dark-brown">
-                <Link to="/shop">Explore Our Collection</Link>
-              </Button>
-              <Button asChild variant="outline" className="border-codex-cream/40 hover:bg-codex-cream/10 text-codex-cream">
-                <Link to="/about">Our Story</Link>
-              </Button>
+
+            <p className="mt-6 max-w-lg text-[15px] leading-relaxed text-ivory/70 md:text-base">{t("hero.subtitle")}</p>
+
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Link to={`/shop/${flagship.slug}`} className="btn-gold">
+                {t("hero.cta.primary")}
+                <ArrowRight className="h-4 w-4 flip-rtl" />
+              </Link>
+              <Link to="/shop" className="btn-outline-gold">
+                {t("hero.cta.secondary")}
+              </Link>
+            </div>
+
+            <dl className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-gold/20 pt-8">
+              {[
+                { value: "260", label: t("hero.stat.recipes") },
+                { value: "100", label: t("hero.stat.bonus") },
+                { value: "12K+", label: t("hero.stat.readers") },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <dt className="font-display text-3xl text-gold md:text-4xl">{stat.value}</dt>
+                  <dd className="mt-1.5 text-[11px] uppercase leading-relaxed tracking-[0.1em] text-ivory/50">
+                    {stat.label}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          {/* Chef portrait in a gold frame */}
+          <div className="relative animate-fade-in-slow">
+            <div className="absolute -inset-3 rounded-sm border border-gold/25" aria-hidden="true" />
+            <div className="absolute -inset-8 hidden rounded-sm border border-gold/10 lg:block" aria-hidden="true" />
+            <img
+              src={brandImages.chefPortrait}
+              alt={lang === "ar" ? site.brand.chefAr : site.brand.chefEn}
+              className="relative aspect-[4/5] w-full rounded-sm object-cover object-top shadow-luxe"
+              fetchPriority="high"
+            />
+            <div className="absolute bottom-5 start-5 end-5 rounded-sm border border-gold/25 bg-ink/85 px-5 py-4 backdrop-blur-sm">
+              <p className="font-display text-base text-ivory">
+                {lang === "ar" ? site.brand.chefAr : site.brand.chefEn}
+              </p>
+              <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-gold/80">
+                {lang === "ar" ? site.brand.taglineAr : site.brand.taglineEn}
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Collections */}
-      <section className="section-padding container px-4 md:px-6 mx-auto">
-        <div className="mb-12 text-center">
-          <h2 className="font-serif text-3xl font-medium mb-3">Featured Collections</h2>
-          <p className="text-codex-charcoal/80 max-w-2xl mx-auto">
-            Explore our thoughtfully curated selections, each revealing a unique literary journey.
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {FEATURED_COLLECTIONS.map((collection) => (
-            <Link key={collection.id} to={`/shop?collection=${collection.slug}`} className="group">
-              <div className="relative h-64 overflow-hidden rounded-lg mb-4">
-                <img 
-                  src={collection.image} 
-                  alt={collection.title}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-codex-dark-brown/80 to-transparent flex items-end">
-                  <div className="p-6">
-                    <h3 className="text-xl font-serif text-white mb-1">{collection.title}</h3>
-                  </div>
-                </div>
-              </div>
-              <p className="text-codex-charcoal/80 text-sm">{collection.description}</p>
-              <div className="mt-3 flex items-center text-codex-amber font-medium text-sm group-hover:underline">
-                View Collection <ChevronRight className="ml-1 h-4 w-4" />
-              </div>
-            </Link>
+      <TrustStrip />
+
+      {/* ── VALUE PROPS ── */}
+      <section className="section container-luxe">
+        <SectionHeading eyebrow={t("featured.eyebrow")} title={t("value.title")} subtitle={t("value.subtitle")} />
+
+        <div className="grid gap-px overflow-hidden rounded-sm border border-gold/20 bg-gold/20 sm:grid-cols-2 lg:grid-cols-4">
+          {valueProps.map(({ Icon, title, body }) => (
+            <div key={title} className="group bg-white p-8 transition-colors duration-300 hover:bg-ivory">
+              <span className="grid h-12 w-12 place-items-center rounded-sm bg-navy text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-ink">
+                <Icon className="h-5 w-5" />
+              </span>
+              <h3 className="mt-6 font-display text-lg text-navy-700">{title}</h3>
+              <p className="mt-3 text-[13px] leading-relaxed text-muted-foreground">{body}</p>
+            </div>
           ))}
         </div>
       </section>
 
-      {/* New Arrivals */}
-      <section className="bg-codex-cream/30 section-padding">
-        <div className="container px-4 md:px-6 mx-auto">
-          <div className="mb-12 text-center">
-            <h2 className="font-serif text-3xl font-medium mb-3">New Arrivals</h2>
-            <p className="text-codex-charcoal/80 max-w-2xl mx-auto">
-              The latest additions to our carefully selected catalog.
-            </p>
+      {/* ── FLAGSHIP ── */}
+      <section className="texture-navy section">
+        <div className="container-luxe grid items-center gap-14 lg:grid-cols-2">
+          <div className="relative order-2 lg:order-1">
+            <div className="absolute -inset-4 rounded-sm border border-gold/20" aria-hidden="true" />
+            <img
+              src={brandImages.codexCover}
+              alt={L(flagship.title)}
+              loading="lazy"
+              className="relative w-full rounded-sm object-cover shadow-luxe"
+            />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {NEW_ARRIVALS.map((book) => (
-              <Link key={book.id} to={`/shop/${book.slug}`}>
-                <Card className="hover-lift overflow-hidden border-none">
-                  <div className="h-64 overflow-hidden">
-                    <img 
-                      src={book.image} 
-                      alt={book.title}
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                    />
-                  </div>
-                  <CardContent className="pt-4">
-                    <h3 className="font-serif font-medium text-lg">{book.title}</h3>
-                    <p className="text-sm text-codex-charcoal/80 mb-2">{book.author}</p>
-                    <p className="font-medium text-codex-amber">${book.price.toFixed(2)}</p>
-                  </CardContent>
-                </Card>
-              </Link>
+          <div className="order-1 lg:order-2">
+            <span className="eyebrow eyebrow-start">{t("featured.eyebrow")}</span>
+            <h2 className="mt-5 font-display text-3xl leading-tight text-ivory md:text-[2.7rem]">
+              {t("featured.title")}
+            </h2>
+            <p className="mt-5 text-[15px] leading-relaxed text-ivory/70">{t("featured.body")}</p>
+
+            <ul className="mt-8 space-y-3.5">
+              {["featured.bullet.1", "featured.bullet.2", "featured.bullet.3", "featured.bullet.4"].map((key) => (
+                <li key={key} className="flex items-start gap-3 text-[14px] text-ivory/85">
+                  <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-gold/15 text-gold">
+                    <Check className="h-3 w-3" />
+                  </span>
+                  {t(key as "featured.bullet.1")}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-9 flex flex-wrap items-center gap-6">
+              <div className="flex items-baseline gap-3">
+                <span className="font-display text-4xl text-gold">
+                  {formatPrice(flagship.price, lang, site.currency.symbol)}
+                </span>
+                {flagship.compareAt && (
+                  <span className="text-lg text-ivory/40 line-through">
+                    {formatPrice(flagship.compareAt, lang, site.currency.symbol)}
+                  </span>
+                )}
+              </div>
+              <button type="button" onClick={() => add(flagship.slug)} className="btn-gold">
+                {t("product.addToCart")}
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── GALLERY ── */}
+      <section className="section container-luxe">
+        <SectionHeading eyebrow={t("gallery.eyebrow")} title={t("gallery.title")} subtitle={t("gallery.subtitle")} />
+
+        <div className="grid gap-6 md:grid-cols-3">
+          {gallery.map((item) => (
+            <figure key={item.title} className="group relative overflow-hidden rounded-sm bg-ink">
+              <img
+                src={item.image}
+                alt={item.title}
+                loading="lazy"
+                className="aspect-[3/4] w-full object-cover object-bottom transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-ink-fade" />
+              <figcaption className="absolute bottom-0 start-0 end-0 p-6">
+                <h3 className="font-display text-lg text-ivory">{item.title}</h3>
+                <p className="mt-1.5 text-[12px] uppercase tracking-[0.12em] text-gold/85">{item.body}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      {/* ── EDITIONS ── */}
+      <section className="bg-ivory-dim/50 section">
+        <div className="container-luxe">
+          <SectionHeading eyebrow={t("shop.eyebrow")} title={t("shop.title")} subtitle={t("shop.subtitle")} />
+
+          <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+            {products.slice(0, 3).map((product) => (
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
-          
+
           <div className="mt-12 text-center">
-            <Button asChild variant="outline">
-              <Link to="/shop">View All Books</Link>
-            </Button>
+            <Link to="/shop" className="btn-navy">
+              {t("shop.viewAll")}
+              <ArrowRight className="h-4 w-4 flip-rtl" />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <section className="bg-codex-dark-blue text-codex-cream section-padding">
-        <div className="container px-4 md:px-6 mx-auto">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-serif text-3xl font-medium mb-3">Join Our Literary Circle</h2>
-            <p className="text-codex-cream/80 mb-8">
-              Subscribe to our newsletter for curated reading lists, exclusive offers, and literary insights.
-            </p>
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input 
-                type="email" 
-                placeholder="Your email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="px-4 py-2 flex-grow bg-codex-dark-blue border border-codex-cream/30 rounded-md focus:outline-none focus:ring-1 focus:ring-codex-amber"
-                required
-              />
-              <Button type="submit" className="bg-codex-amber hover:bg-codex-gold text-codex-dark-brown">
-                Subscribe
-              </Button>
-            </form>
+      {/* ── REVIEWS ── */}
+      <section className="section container-luxe">
+        <SectionHeading eyebrow={t("reviews.eyebrow")} title={t("reviews.title")} subtitle={t("reviews.rating")} />
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {testimonials.map((review) => (
+            <blockquote key={L(review.name)} className="card-luxe flex h-full flex-col p-7">
+              <Quote className="h-7 w-7 text-gold/35 flip-rtl" />
+              <p className="mt-4 flex-1 text-[14px] leading-relaxed text-navy-800/85">“{L(review.quote)}”</p>
+
+              <div className="mt-6 flex items-center gap-1">
+                {Array.from({ length: review.rating }).map((_, i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-gold text-gold" />
+                ))}
+              </div>
+
+              <footer className="mt-4 border-t border-border pt-4">
+                <p className="font-display text-[15px] text-navy-700">{L(review.name)}</p>
+                <p className="mt-0.5 text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+                  {L(review.role)} · {t("reviews.verified")}
+                </p>
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+      </section>
+
+      {/* ── OFFER ── */}
+      <section className="texture-dark relative overflow-hidden">
+        <img
+          src={brandImages.chefShrimp}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover opacity-15"
+        />
+        <div className="container-luxe relative z-10 py-20 text-center md:py-28">
+          <span className="eyebrow">{t("offer.eyebrow")}</span>
+          <h2 className="mx-auto mt-6 max-w-2xl font-display text-3xl leading-tight text-ivory md:text-[2.8rem] text-balance">
+            {t("offer.title")}
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-ivory/70">{t("offer.body")}</p>
+
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Link to={`/shop/${flagship.slug}`} className="btn-gold">
+              {t("offer.cta")}
+              <ArrowRight className="h-4 w-4 flip-rtl" />
+            </Link>
+            <span className="text-[12px] uppercase tracking-[0.14em] text-ivory/50">{t("product.guaranteeValue")}</span>
           </div>
         </div>
       </section>
-    </div>
+
+      {/* ── FAQ ── */}
+      <section className="section container-luxe">
+        <SectionHeading eyebrow={t("faq.eyebrow")} title={t("faq.title")} subtitle={t("faq.subtitle")} />
+
+        <Accordion type="single" collapsible className="mx-auto max-w-3xl">
+          {faqs.slice(0, 4).map((faq, i) => (
+            <AccordionItem key={i} value={`faq-${i}`} className="border-b border-gold/20">
+              <AccordionTrigger className="py-5 text-start font-display text-base text-navy-700 hover:text-gold-600 hover:no-underline">
+                {L(faq.q)}
+              </AccordionTrigger>
+              <AccordionContent className="pb-5 text-[14px] leading-relaxed text-muted-foreground">
+                {L(faq.a)}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+
+        <div className="mt-10 text-center">
+          <Link to="/faq" className="btn-outline-gold text-navy-700 hover:text-ink">
+            {t("faq.eyebrow")}
+            <ArrowRight className="h-4 w-4 flip-rtl" />
+          </Link>
+        </div>
+      </section>
+    </>
   );
 };
 

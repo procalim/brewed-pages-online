@@ -1,0 +1,283 @@
+export type Lang = "ar" | "en";
+
+/** Every visible string on the site, in both languages. */
+export const dictionary = {
+  /* ── Navigation & shell ── */
+  "nav.home": { ar: "الرئيسية", en: "Home" },
+  "nav.shop": { ar: "المتجر", en: "Shop" },
+  "nav.about": { ar: "عن الشيف", en: "About" },
+  "nav.gallery": { ar: "المعرض", en: "Gallery" },
+  "nav.faq": { ar: "الأسئلة الشائعة", en: "FAQ" },
+  "nav.contact": { ar: "تواصل", en: "Contact" },
+  "nav.menu": { ar: "القائمة", en: "Menu" },
+  "nav.close": { ar: "إغلاق", en: "Close" },
+  "nav.cart": { ar: "السلة", en: "Cart" },
+  "nav.search": { ar: "بحث", en: "Search" },
+  "nav.language": { ar: "English", en: "العربية" },
+
+  "announce.1": { ar: "تحميل فوري بعد الشراء · وصول مدى الحياة", en: "Instant download · Lifetime access" },
+  "announce.2": { ar: "هدية: ١٠٠ وصفة سريعة مجاناً مع كل نسخة", en: "Bonus: 100 free quick meals with every copy" },
+  "announce.3": { ar: "ضمان استرداد خلال ٣٠ يوماً", en: "30-day money-back guarantee" },
+
+  /* ── Home · hero ── */
+  "hero.eyebrow": { ar: "مطبخ المؤلف · إصدار رقمي", en: "Author's Kitchen · Digital Edition" },
+  "hero.title.line1": { ar: "فنّ الطبق", en: "The Art of" },
+  "hero.title.line2": { ar: "الاحترافي", en: "The Plate" },
+  "hero.subtitle": {
+    ar: "٢٦٠ وصفة مُنسَّقة بعناية، مصوَّرة ومشروحة خطوة بخطوة، من مطبخ محترف إلى مطبخك.",
+    en: "260 curated recipes, photographed and broken down step by step — from a professional kitchen to yours.",
+  },
+  "hero.cta.primary": { ar: "احصل على النسخة", en: "Get the Codex" },
+  "hero.cta.secondary": { ar: "تصفّح المتجر", en: "Browse the Shop" },
+  "hero.stat.recipes": { ar: "وصفة منسّقة", en: "Curated recipes" },
+  "hero.stat.bonus": { ar: "وصفة سريعة مجاناً", en: "Free quick meals" },
+  "hero.stat.readers": { ar: "قارئ حول العالم", en: "Readers worldwide" },
+  "hero.scroll": { ar: "تابع النزول", en: "Scroll" },
+
+  /* ── Value props ── */
+  "value.title": { ar: "لماذا هذا الإصدار مختلف", en: "Why This Edition Is Different" },
+  "value.subtitle": {
+    ar: "كل تفصيلة صُمِّمت لتنقل معايير المطبخ الاحترافي إلى منزلك دون تعقيد.",
+    en: "Every detail is built to carry professional kitchen standards into your home — without the complexity.",
+  },
+  "value.1.title": { ar: "تنسيق احترافي", en: "Professional Plating" },
+  "value.1.body": {
+    ar: "دروس تصوير وتنسيق الأطباق بنفس أسلوب مطاعم النجوم، بخطوات واضحة.",
+    en: "Plating and food-styling lessons in fine-dining language, reduced to clear steps.",
+  },
+  "value.2.title": { ar: "مقادير مضبوطة", en: "Tested Ratios" },
+  "value.2.body": {
+    ar: "كل وصفة اختُبرت في مطبخ حقيقي بمقادير بالجرام والكوب معاً.",
+    en: "Every recipe tested in a working kitchen, with grams and cups side by side.",
+  },
+  "value.3.title": { ar: "صلصات وأساسات", en: "Sauces & Bases" },
+  "value.3.body": {
+    ar: "مكتبة صلصات ملوّنة كاملة: البنجر، الكركم، الأعشاب، الفلفل المشوي والبلسمك.",
+    en: "A full colour-sauce library: beetroot, turmeric, herb, roasted pepper and balsamic.",
+  },
+  "value.4.title": { ar: "وصول مدى الحياة", en: "Lifetime Access" },
+  "value.4.body": {
+    ar: "تحميل فوري، تحديثات مجانية للأبد، ويعمل على الجوال واللوح والحاسوب.",
+    en: "Instant download, free updates forever, readable on phone, tablet and desktop.",
+  },
+
+  /* ── Featured product ── */
+  "featured.eyebrow": { ar: "الإصدار الرئيسي", en: "The Flagship" },
+  "featured.title": { ar: "ذا إديبل كودكس", en: "The Edible Codex" },
+  "featured.body": {
+    ar: "مجلّد رقمي من ٢٦٠ وصفة مقسّمة إلى فصول: المقبلات، اللحوم، المأكولات البحرية، الصلصات، والتنسيق. مع فصل هدية من ١٠٠ وصفة سريعة تُنجز في ٢٠ دقيقة.",
+    en: "A digital volume of 260 recipes across chapters — starters, meats, seafood, sauces and plating — plus a bonus chapter of 100 quick meals you can finish in 20 minutes.",
+  },
+  "featured.bullet.1": { ar: "٢٦٠ وصفة مع صور نهائية لكل طبق", en: "260 recipes, each with a finished plate photo" },
+  "featured.bullet.2": { ar: "فصل كامل عن الصلصات الملوّنة", en: "A full chapter on signature colour sauces" },
+  "featured.bullet.3": { ar: "قوائم تسوّق جاهزة للطباعة", en: "Printable shopping lists" },
+  "featured.bullet.4": { ar: "هدية: ١٠٠ وصفة سريعة", en: "Bonus: 100 quick meals" },
+
+  /* ── Product grid ── */
+  "shop.eyebrow": { ar: "المتجر", en: "The Shop" },
+  "shop.title": { ar: "إصداراتنا", en: "Our Editions" },
+  "shop.subtitle": {
+    ar: "إصدارات رقمية قابلة للتحميل فوراً، صُمِّمت لتُقرأ وتُطبَّق في نفس اليوم.",
+    en: "Digital editions, downloadable the moment you order, designed to be read and cooked the same day.",
+  },
+  "shop.viewAll": { ar: "عرض كل الإصدارات", en: "View all editions" },
+  "shop.results": { ar: "نتيجة", en: "results" },
+  "shop.result": { ar: "نتيجة واحدة", en: "result" },
+  "shop.searchPlaceholder": { ar: "ابحث عن إصدار…", en: "Search editions…" },
+  "shop.filters": { ar: "التصنيفات", en: "Filters" },
+  "shop.sort": { ar: "الترتيب", en: "Sort by" },
+  "shop.sort.featured": { ar: "المميّز", en: "Featured" },
+  "shop.sort.priceAsc": { ar: "السعر: من الأقل", en: "Price: low to high" },
+  "shop.sort.priceDesc": { ar: "السعر: من الأعلى", en: "Price: high to low" },
+  "shop.empty": { ar: "لا توجد نتائج مطابقة.", en: "No editions match your filters." },
+  "shop.clear": { ar: "مسح الفلاتر", en: "Clear filters" },
+  "shop.all": { ar: "الكل", en: "All" },
+
+  /* ── Product card / detail ── */
+  "product.addToCart": { ar: "أضف إلى السلة", en: "Add to cart" },
+  "product.buyNow": { ar: "اشترِ الآن", en: "Buy now" },
+  "product.added": { ar: "أُضيف إلى السلة", en: "Added to cart" },
+  "product.instant": { ar: "تحميل فوري", en: "Instant download" },
+  "product.bestseller": { ar: "الأكثر مبيعاً", en: "Bestseller" },
+  "product.bundle": { ar: "باقة موفّرة", en: "Bundle & save" },
+  "product.new": { ar: "جديد", en: "New" },
+  "product.save": { ar: "وفّر", en: "Save" },
+  "product.includes": { ar: "ماذا يتضمّن", en: "What's included" },
+  "product.details": { ar: "تفاصيل الإصدار", en: "Edition details" },
+  "product.format": { ar: "الصيغة", en: "Format" },
+  "product.formatValue": { ar: "PDF + EPUB · عربي / إنجليزي", en: "PDF + EPUB · Arabic / English" },
+  "product.delivery": { ar: "التسليم", en: "Delivery" },
+  "product.deliveryValue": { ar: "رابط تحميل فوري بعد الدفع", en: "Instant download link after payment" },
+  "product.guarantee": { ar: "الضمان", en: "Guarantee" },
+  "product.guaranteeValue": { ar: "استرداد كامل خلال ٣٠ يوماً", en: "Full refund within 30 days" },
+  "product.quantity": { ar: "الكمية", en: "Quantity" },
+  "product.related": { ar: "قد يعجبك أيضاً", en: "You may also like" },
+  "product.notFound": { ar: "هذا الإصدار غير موجود.", en: "That edition could not be found." },
+  "product.backToShop": { ar: "العودة إلى المتجر", en: "Back to the shop" },
+  "product.secure": { ar: "دفع آمن ومشفّر", en: "Secure encrypted checkout" },
+
+  /* ── Gallery ── */
+  "gallery.eyebrow": { ar: "من المطبخ", en: "From the Pass" },
+  "gallery.title": { ar: "أطباق من الكتاب", en: "Plates From the Book" },
+  "gallery.subtitle": {
+    ar: "صور حقيقية من جلسات التصوير — نفس الأطباق التي ستتعلّم تنفيذها.",
+    en: "Real frames from the shoot — the same plates you will learn to build.",
+  },
+  "gallery.1.title": { ar: "روبيان بصلصات الطيف", en: "Shrimp, Spectrum Sauces" },
+  "gallery.1.body": { ar: "ستّ صلصات ملوّنة على طبق واحد", en: "Six colour sauces on a single plate" },
+  "gallery.2.title": { ar: "صدر بطّ بالكرز", en: "Duck Breast & Cherry" },
+  "gallery.2.body": { ar: "رشّ حرّ وتوزيع متدرّج", en: "Free splatter, graded placement" },
+  "gallery.3.title": { ar: "تندرلوين مع هريس الجزر", en: "Tenderloin, Carrot Purée" },
+  "gallery.3.body": { ar: "خطوط بلسمك متساوية", en: "Evenly drawn balsamic lines" },
+
+  /* ── Testimonials ── */
+  "reviews.eyebrow": { ar: "آراء القرّاء", en: "Reader Reviews" },
+  "reviews.title": { ar: "ماذا قالوا بعد أول أسبوع", en: "What They Said After Week One" },
+  "reviews.verified": { ar: "مشترٍ موثّق", en: "Verified buyer" },
+  "reviews.count": { ar: "تقييم", en: "reviews" },
+  "reviews.rating": { ar: "٤٫٩ من ٥ · أكثر من ٨٠٠ تقييم", en: "4.9 / 5 · 800+ ratings" },
+
+  /* ── Offer strip ── */
+  "offer.eyebrow": { ar: "عرض الإطلاق", en: "Launch Offer" },
+  "offer.title": { ar: "النسخة الكاملة + الهدية", en: "The Complete Edition + Bonus" },
+  "offer.body": {
+    ar: "احصل على ٢٦٠ وصفة مع فصل الـ١٠٠ وصفة السريعة مجاناً، بسعر الإطلاق ولفترة محدودة.",
+    en: "Get all 260 recipes with the 100 quick-meals chapter free, at launch pricing for a limited time.",
+  },
+  "offer.cta": { ar: "اطلب الآن", en: "Order now" },
+
+  /* ── Newsletter ── */
+  "news.title": { ar: "انضم إلى قائمة المطبخ", en: "Join the Kitchen List" },
+  "news.body": {
+    ar: "وصفة جديدة كل أسبوع، ونصائح تنسيق، وعروض خاصة للمشتركين فقط.",
+    en: "A new recipe each week, plating notes, and subscriber-only offers.",
+  },
+  "news.placeholder": { ar: "بريدك الإلكتروني", en: "Your email address" },
+  "news.cta": { ar: "اشترك", en: "Subscribe" },
+  "news.success": { ar: "تم الاشتراك — تحقّق من بريدك.", en: "You're subscribed — check your inbox." },
+  "news.privacy": { ar: "لن نشارك بريدك مع أي جهة. إلغاء الاشتراك بنقرة.", en: "We never share your email. Unsubscribe in one click." },
+
+  /* ── About ── */
+  "about.eyebrow": { ar: "عن الشيف", en: "About the Chef" },
+  "about.title": { ar: "القصة خلف الكوديكس", en: "The Story Behind the Codex" },
+  "about.lead": {
+    ar: "بدأ المشروع من دفتر ملاحظات في مطبخ مزدحم: كل صلصة نجحت، كل نسبة ضُبطت، كل طبق استحقّ أن يُصوَّر.",
+    en: "It started as a notebook in a busy kitchen: every sauce that worked, every ratio that landed, every plate worth photographing.",
+  },
+  "about.p1": {
+    ar: "بعد سنوات بين خطّ الإنتاج ومطبخ التطوير، تحوّل الدفتر إلى نظام كامل: طريقة تفكير في الطبق قبل أن يبدأ الطهي — اللون، الملمس، الحرارة، ثم الطعم.",
+    en: "After years between the line and the development kitchen, that notebook became a system: a way of thinking about the plate before the cooking starts — colour, texture, temperature, then taste.",
+  },
+  "about.p2": {
+    ar: "ذا إديبل كودكس هو ذلك النظام، مكتوباً بلغة يفهمها من يطبخ في المنزل، ومصوّراً بنفس معايير المطاعم التي خرج منها.",
+    en: "The Edible Codex is that system, written in language a home cook understands and photographed to the standard of the restaurants it came from.",
+  },
+  "about.p3": {
+    ar: "لا نبيع وصفات فقط — نبيع الثقة بأن الطبق الذي تخرجه من مطبخك يستحق أن يُقدَّم.",
+    en: "We are not selling recipes alone — we are selling the confidence that what leaves your kitchen deserves to be served.",
+  },
+  "about.values.title": { ar: "ما نلتزم به", en: "What We Stand For" },
+  "about.v1.title": { ar: "دقّة", en: "Precision" },
+  "about.v1.body": { ar: "لا وصفة تُنشر قبل أن تُختبر ثلاث مرات على الأقل.", en: "No recipe is published before it is tested at least three times." },
+  "about.v2.title": { ar: "وضوح", en: "Clarity" },
+  "about.v2.body": { ar: "خطوات قصيرة، بلا مصطلحات غامضة، وبصورة لكل مرحلة حرجة.", en: "Short steps, no fog of jargon, and a photo at every critical stage." },
+  "about.v3.title": { ar: "جمال", en: "Beauty" },
+  "about.v3.body": { ar: "الطبق يُؤكل بالعين أولاً — ولذلك التنسيق جزء من الوصفة لا إضافة عليها.", en: "We eat with the eyes first — so plating is part of the recipe, not an afterthought." },
+  "about.cta": { ar: "ابدأ من الإصدار الرئيسي", en: "Start with the flagship edition" },
+  "about.numbers.years": { ar: "سنوات في المطبخ", en: "Years in kitchens" },
+  "about.numbers.recipes": { ar: "وصفة مُختبرة", en: "Tested recipes" },
+  "about.numbers.countries": { ar: "دولة وصلها الكتاب", en: "Countries reached" },
+
+  /* ── Contact ── */
+  "contact.eyebrow": { ar: "تواصل", en: "Get in Touch" },
+  "contact.title": { ar: "نحن نقرأ كل رسالة", en: "We Read Every Message" },
+  "contact.subtitle": {
+    ar: "أسئلة عن الطلب، تعاون تجاري، أو طلب خاص — اكتب لنا وسنردّ خلال يوم عمل.",
+    en: "Order questions, partnerships, or a custom request — write to us and we reply within one business day.",
+  },
+  "contact.form.name": { ar: "الاسم", en: "Name" },
+  "contact.form.email": { ar: "البريد الإلكتروني", en: "Email" },
+  "contact.form.subject": { ar: "الموضوع", en: "Subject" },
+  "contact.form.message": { ar: "رسالتك", en: "Your message" },
+  "contact.form.send": { ar: "إرسال الرسالة", en: "Send message" },
+  "contact.form.sending": { ar: "جارٍ الإرسال…", en: "Sending…" },
+  "contact.form.success": { ar: "وصلتنا رسالتك، شكراً لك.", en: "Your message reached us. Thank you." },
+  "contact.whatsapp": { ar: "راسلنا على واتساب", en: "Message us on WhatsApp" },
+  "contact.email": { ar: "البريد", en: "Email" },
+  "contact.phone": { ar: "الهاتف", en: "Phone" },
+  "contact.location": { ar: "الموقع", en: "Location" },
+  "contact.hours": { ar: "أوقات العمل", en: "Hours" },
+
+  /* ── FAQ ── */
+  "faq.eyebrow": { ar: "الأسئلة الشائعة", en: "FAQ" },
+  "faq.title": { ar: "أسئلة قبل الشراء", en: "Questions Before You Buy" },
+  "faq.subtitle": { ar: "لم تجد إجابتك؟ راسلنا مباشرة.", en: "Didn't find your answer? Write to us directly." },
+
+  /* ── Cart & checkout ── */
+  "cart.title": { ar: "سلة المشتريات", en: "Your Cart" },
+  "cart.empty": { ar: "سلتك فارغة حالياً.", en: "Your cart is empty." },
+  "cart.emptyCta": { ar: "ابدأ التسوّق", en: "Start shopping" },
+  "cart.subtotal": { ar: "المجموع الفرعي", en: "Subtotal" },
+  "cart.discount": { ar: "الخصم", en: "Discount" },
+  "cart.total": { ar: "الإجمالي", en: "Total" },
+  "cart.checkout": { ar: "إتمام الطلب", en: "Checkout" },
+  "cart.continue": { ar: "متابعة التسوّق", en: "Continue shopping" },
+  "cart.remove": { ar: "إزالة", en: "Remove" },
+  "cart.item": { ar: "منتج", en: "item" },
+  "cart.items": { ar: "منتجات", en: "items" },
+  "cart.note": { ar: "المنتجات رقمية — لا رسوم شحن.", en: "All products are digital — no shipping fees." },
+  "cart.promo": { ar: "كود الخصم", en: "Promo code" },
+  "cart.apply": { ar: "تطبيق", en: "Apply" },
+  "cart.promoApplied": { ar: "تم تطبيق الكود", en: "Code applied" },
+  "cart.promoInvalid": { ar: "كود غير صالح", en: "Invalid code" },
+
+  "checkout.title": { ar: "إتمام الطلب", en: "Checkout" },
+  "checkout.contact": { ar: "بيانات التواصل", en: "Contact details" },
+  "checkout.summary": { ar: "ملخّص الطلب", en: "Order summary" },
+  "checkout.fullName": { ar: "الاسم الكامل", en: "Full name" },
+  "checkout.email": { ar: "البريد الإلكتروني", en: "Email address" },
+  "checkout.phone": { ar: "رقم الجوال", en: "Phone number" },
+  "checkout.country": { ar: "الدولة", en: "Country" },
+  "checkout.notes": { ar: "ملاحظات على الطلب (اختياري)", en: "Order notes (optional)" },
+  "checkout.place": { ar: "تأكيد الطلب", en: "Place order" },
+  "checkout.whatsapp": { ar: "إرسال الطلب عبر واتساب", en: "Send order via WhatsApp" },
+  "checkout.demoNote": {
+    ar: "هذه واجهة طلب تجريبية: عند الربط ببوابة دفع (Stripe أو Tap أو Shopify) ستتحوّل مباشرة إلى صفحة الدفع.",
+    en: "This is a demo order flow: once a payment gateway (Stripe, Tap or Shopify) is connected it will redirect straight to payment.",
+  },
+  "checkout.success.title": { ar: "تم استلام طلبك", en: "Order received" },
+  "checkout.success.body": {
+    ar: "سنرسل رابط التحميل إلى بريدك خلال دقائق. رقم الطلب:",
+    en: "We'll send the download link to your email within minutes. Order number:",
+  },
+
+  /* ── Trust strip ── */
+  "trust.instant": { ar: "تحميل فوري", en: "Instant delivery" },
+  "trust.secure": { ar: "دفع آمن", en: "Secure payment" },
+  "trust.refund": { ar: "استرداد ٣٠ يوماً", en: "30-day refund" },
+  "trust.support": { ar: "دعم مباشر", en: "Direct support" },
+
+  /* ── Footer ── */
+  "footer.about": {
+    ar: "إصدارات طهي رقمية من مطبخ محترف — وصفات مُختبرة، تنسيق احترافي، ولغة واضحة.",
+    en: "Digital culinary editions from a professional kitchen — tested recipes, serious plating, plain language.",
+  },
+  "footer.explore": { ar: "تصفّح", en: "Explore" },
+  "footer.help": { ar: "المساعدة", en: "Help" },
+  "footer.legal": { ar: "القانوني", en: "Legal" },
+  "footer.follow": { ar: "تابعنا", en: "Follow" },
+  "footer.rights": { ar: "جميع الحقوق محفوظة.", en: "All rights reserved." },
+  "footer.payments": { ar: "طرق الدفع المقبولة", en: "Accepted payment methods" },
+
+  "legal.privacy": { ar: "سياسة الخصوصية", en: "Privacy Policy" },
+  "legal.terms": { ar: "الشروط والأحكام", en: "Terms of Service" },
+  "legal.refund": { ar: "سياسة الاسترداد", en: "Refund Policy" },
+  "legal.updated": { ar: "آخر تحديث", en: "Last updated" },
+
+  /* ── 404 ── */
+  "nf.title": { ar: "الصفحة غير موجودة", en: "Page not found" },
+  "nf.body": { ar: "الرابط الذي فتحته لم يعد متاحاً.", en: "The link you opened is no longer available." },
+  "nf.cta": { ar: "العودة للرئيسية", en: "Back home" },
+} as const;
+
+export type DictKey = keyof typeof dictionary;

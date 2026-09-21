@@ -57,9 +57,9 @@ const HomePage = () => {
           alt=""
           aria-hidden="true"
           fetchPriority="high"
-          className="absolute inset-0 h-full w-full scale-110 object-cover opacity-45 blur-[6px] md:opacity-40 md:blur-[8px]"
+          className="absolute inset-0 h-full w-full scale-105 object-cover opacity-80 blur-[3px] md:opacity-75 md:blur-[4px]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/70 to-ink/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/45 to-ink/85" />
 
         <div className="container-luxe relative z-10 grid items-center gap-12 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
           <div className="animate-fade-in">

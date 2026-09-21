@@ -62,8 +62,8 @@ export const products: Product[] = [
     reviews: 812,
     featured: true,
     focus: "center 60%",
-    checkoutUrl: "https://whop.com/checkout/plan_yC2EH8kuwf8pi",
-    planId: "plan_yC2EH8kuwf8pi",
+    checkoutUrl: "https://whop.com/checkout/plan_em9IY2N3WR5Je",
+    planId: "plan_em9IY2N3WR5Je",
   },
   {
     id: 2,
@@ -89,8 +89,8 @@ export const products: Product[] = [
     reviews: 208,
     featured: true,
     focus: "center 75%",
-    checkoutUrl: "https://whop.com/checkout/plan_em9IY2N3WR5Je",
-    planId: "plan_em9IY2N3WR5Je",
+    checkoutUrl: "https://whop.com/checkout/plan_yC2EH8kuwf8pi",
+    planId: "plan_yC2EH8kuwf8pi",
   },
 ];
 

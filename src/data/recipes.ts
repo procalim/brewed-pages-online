@@ -72,6 +72,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "marry-me-chicken",
+    photo: true,
     number: 5,
     source: "codex",
     accent: "orange",
@@ -222,6 +223,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "sushi-bake",
+    photo: true,
     number: 17,
     source: "codex",
     accent: "orange",
@@ -279,6 +281,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "bang-bang-shrimp",
+    photo: true,
     number: 57,
     source: "codex",
     accent: "magenta",

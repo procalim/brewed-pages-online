@@ -1,13 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { trackPageView } from "@/lib/pixel";
 
-/** Reports every client-side route change to the Whop pixel. */
+/**
+ * Reports every in-app navigation to the Whop pixel.
+ * The first page view is skipped: the snippet in index.html already fired
+ * it on load, and reporting it again would double-count the visit.
+ */
 const RouteTracker = () => {
   const { pathname, search } = useLocation();
+  const firstRender = useRef(true);
 
   useEffect(() => {
-    trackPageView(pathname + search);
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    trackPageView();
   }, [pathname, search]);
 
   return null;

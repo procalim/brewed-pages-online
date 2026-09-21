@@ -1,50 +1,60 @@
 /**
  * Whop pixel bridge · جسر بكسل Whop
  *
- * The snippet Whop hands you in "Set up our pixel" goes into index.html.
- * It installs a global queue function; this file only forwards page views
- * to it, because a single-page app changes route without reloading the
- * document — without this, Whop would record one page view per visit.
+ * The snippet in index.html installs `window.whop` and fires the first
+ * "page" event itself. This app is a single-page app: navigating to
+ * another page never reloads the document, so without the code below Whop
+ * would only ever record one page view per visit. Every in-app navigation
+ * is reported here instead.
  *
- * الكود الذي يعطيك إياه Whop يوضع في index.html، وهذا الملف يبلّغه بكل
- * انتقال بين الصفحات لأن الموقع يعمل بتوجيه داخلي دون إعادة تحميل.
- *
- * إن كان اسم الدالة في كود Whop مختلفاً، أضفه إلى القائمة أدناه فقط.
+ * كود Whop في index.html يسجّل أول زيارة بنفسه، وهذا الملف يسجّل كل انتقال
+ * بعدها داخل الموقع (لأن الموقع لا يعيد تحميل الصفحة عند التنقّل).
  */
 
-type PixelFn = (...args: unknown[]) => void;
+type TrackFn = (...args: unknown[]) => void;
+type WhopPixel = { track: TrackFn };
 
-/** Global names Whop's snippet is known to install. */
-const GLOBAL_NAMES = ["whopq", "whop", "wpq"] as const;
-
-const getPixel = (): PixelFn | null => {
+const getPixel = (): WhopPixel | null => {
   if (typeof window === "undefined") return null;
-  for (const name of GLOBAL_NAMES) {
-    const candidate = (window as unknown as Record<string, unknown>)[name];
-    if (typeof candidate === "function") return candidate as PixelFn;
+  const whop = (window as unknown as { whop?: unknown }).whop;
+
+  // Whop's snippet installs an object carrying track()/setScope()/scope().
+  if (whop && typeof whop === "object" && typeof (whop as WhopPixel).track === "function") {
+    return whop as WhopPixel;
+  }
+  // Some pixel builds install a bare queue function instead.
+  if (typeof whop === "function") {
+    const fn = whop as TrackFn;
+    return { track: (...args: unknown[]) => fn(...args) };
   }
   return null;
 };
 
-/** True once the pixel snippet has actually loaded. */
+/** True once the snippet has run. */
 export const hasPixel = () => getPixel() !== null;
 
-export const trackPageView = (path: string) => {
+/** Whop's page-view event, as fired by the snippet itself on first load. */
+export const trackPageView = () => {
   const pixel = getPixel();
   if (!pixel) return;
   try {
-    pixel("track", "page_view", { path });
+    pixel.track("page");
   } catch {
     /* analytics must never break the page */
   }
 };
 
-/** Fire when a visitor is sent to Whop checkout, so the funnel joins up. */
+/**
+ * Custom event fired when a visitor is handed over to Whop checkout, so the
+ * funnel joins up. It is optional — delete the calls to it, or rename the
+ * event, if Whop's docs specify a different name for this step.
+ * حدث اختياري عند تحويل الزائر إلى صفحة الدفع.
+ */
 export const trackCheckoutStart = (productSlug: string, price: number) => {
   const pixel = getPixel();
   if (!pixel) return;
   try {
-    pixel("track", "begin_checkout", { product: productSlug, value: price });
+    pixel.track("checkout_start", { product: productSlug, value: price });
   } catch {
     /* analytics must never break the page */
   }

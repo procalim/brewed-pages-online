@@ -2,7 +2,13 @@ import { useEffect } from "react";
 import { useLang } from "@/i18n/LanguageContext";
 import { site } from "@/data/site";
 
-type SeoProps = { title: string; description: string; image?: string };
+type SeoProps = {
+  title: string;
+  description: string;
+  image?: string;
+  /** Structured data for this page, handed to search engines as JSON-LD. */
+  jsonLd?: Record<string, unknown>;
+};
 
 const setMeta = (selector: string, attr: "name" | "property", key: string, content: string) => {
   let el = document.head.querySelector<HTMLMetaElement>(selector);
@@ -14,23 +20,61 @@ const setMeta = (selector: string, attr: "name" | "property", key: string, conte
   el.setAttribute("content", content);
 };
 
-/** Keeps <title> and the social meta tags in sync with the active page and language. */
-const Seo = ({ title, description, image = `${import.meta.env.BASE_URL}brand/logo-square.jpg` }: SeoProps) => {
+const setLink = (rel: string, href: string, hreflang?: string) => {
+  const selector = hreflang ? `link[rel="${rel}"][hreflang="${hreflang}"]` : `link[rel="${rel}"]:not([hreflang])`;
+  let el = document.head.querySelector<HTMLLinkElement>(selector);
+  if (!el) {
+    el = document.createElement("link");
+    el.rel = rel;
+    if (hreflang) el.hreflang = hreflang;
+    document.head.appendChild(el);
+  }
+  el.href = href;
+};
+
+/** Keeps the title, social tags, canonical URL and structured data in sync. */
+const Seo = ({
+  title,
+  description,
+  image = `${import.meta.env.BASE_URL}brand/logo-square.jpg`,
+  jsonLd,
+}: SeoProps) => {
   const { lang } = useLang();
   const brand = lang === "ar" ? site.brand.nameAr : site.brand.name;
 
   useEffect(() => {
     const full = `${title} | ${brand}`;
+    const origin = site.url.replace(/\/$/, "");
+    const canonical = origin + window.location.pathname;
+    const absoluteImage = image.startsWith("http") ? image : origin + image.replace(/^\./, "");
+
     document.title = full;
     setMeta('meta[name="description"]', "name", "description", description);
     setMeta('meta[property="og:title"]', "property", "og:title", full);
     setMeta('meta[property="og:description"]', "property", "og:description", description);
-    setMeta('meta[property="og:image"]', "property", "og:image", image);
+    setMeta('meta[property="og:image"]', "property", "og:image", absoluteImage);
+    setMeta('meta[property="og:url"]', "property", "og:url", canonical);
     setMeta('meta[property="og:locale"]', "property", "og:locale", lang === "ar" ? "ar_SA" : "en_US");
     setMeta('meta[name="twitter:title"]', "name", "twitter:title", full);
     setMeta('meta[name="twitter:description"]', "name", "twitter:description", description);
-    setMeta('meta[name="twitter:image"]', "name", "twitter:image", image);
+    setMeta('meta[name="twitter:image"]', "name", "twitter:image", absoluteImage);
+
+    // One address per page, and both languages point at it.
+    setLink("canonical", canonical);
+    setLink("alternate", canonical, "ar");
+    setLink("alternate", canonical, "en");
+    setLink("alternate", canonical, "x-default");
   }, [title, description, image, brand, lang]);
+
+  useEffect(() => {
+    if (!jsonLd) return;
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.dataset.page = "true";
+    script.textContent = JSON.stringify(jsonLd);
+    document.head.appendChild(script);
+    return () => script.remove();
+  }, [jsonLd]);
 
   return null;
 };

@@ -29,7 +29,23 @@ const HomePage = () => {
 
   return (
     <>
-      <Seo title={t("hero.title.line1") + " " + t("hero.title.line2")} description={t("hero.subtitle")} />
+      <Seo
+        title={t("hero.title.line1") + " " + t("hero.title.line2")}
+        description={t("hero.subtitle")}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Store",
+          name: site.brand.name,
+          description: t("hero.subtitle"),
+          url: site.url,
+          logo: `${site.url}/brand/logo-square.jpg`,
+          image: `${site.url}/brand/logo-square.jpg`,
+          founder: { "@type": "Person", name: site.brand.chefEn },
+          telephone: site.contact.phoneDisplay,
+          address: { "@type": "PostalAddress", addressLocality: "Amman", addressCountry: "JO" },
+          sameAs: [site.social.instagram],
+        }}
+      />
 
       {/* ── HERO ── */}
       <section className="texture-dark relative overflow-hidden">

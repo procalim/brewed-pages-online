@@ -126,6 +126,24 @@ Each product carries a `focus` value (e.g. `"center 75%"`) that decides which pa
 
 Vite · React 18 · TypeScript · Tailwind CSS · shadcn/ui · React Router · lucide-react
 
+## ٨ب. محركات البحث · SEO
+
+الأساس التقني جاهز ويُحدَّث تلقائياً مع كل بناء:
+
+- `sitemap.xml` و `robots.txt` يُولَّدان من صفحات الموقع ومنتجاته الحقيقية
+  (`scripts/generate-seo-files.mjs`) — لا يحتاجان تعديلاً يدوياً أبداً.
+- رابط أساسي (canonical) ووسوم `hreflang` للعربية والإنجليزية في كل صفحة.
+- بيانات منظّمة (JSON-LD): `Store` للرئيسية، `Product` مع السعر والعملة
+  لكل منتج، و`FAQPage` لصفحة الأسئلة.
+- عناوين ووصف اجتماعي مستقلّان لكل صفحة (`src/components/Seo.tsx`).
+
+**لم نضف `aggregateRating`** إلى بيانات المنتج عمداً: التقييمات المعروضة
+نموذجية، ونشر تقييمات غير حقيقية كبيانات منظّمة يخالف إرشادات جوجل ويضلّل
+المشتري. أضفها بعد جمع تقييمات حقيقية.
+
+**عند شراء النطاق:** غيّر العنوان في `site.config.json` فقط — تتبعه خريطة
+الموقع والروابط الأساسية والبيانات المنظّمة كلها.
+
 ## ٩. النشر · Deploy
 
 ```sh

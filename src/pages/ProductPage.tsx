@@ -44,7 +44,31 @@ const ProductPage = () => {
 
   return (
     <>
-      <Seo title={L(product.title)} description={L(product.subtitle)} image={product.image} />
+      <Seo
+        title={L(product.title)}
+        description={L(product.description)}
+        image={product.image}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: L(product.title),
+          description: L(product.description),
+          image: `${site.url}${product.image}`,
+          brand: { "@type": "Brand", name: site.brand.name },
+          // No aggregateRating here: the reviews on the site are still
+          // placeholders, and publishing invented ratings as structured data
+          // would mislead shoppers and breach Google's guidelines. Add it
+          // once real reviews exist.
+          offers: {
+            "@type": "Offer",
+            url: `${site.url}/shop/${product.slug}`,
+            price: product.price,
+            priceCurrency: site.currency.code,
+            availability: "https://schema.org/InStock",
+            itemCondition: "https://schema.org/NewCondition",
+          },
+        }}
+      />
 
       <div className="border-b border-border bg-white">
         <div className="container-luxe flex items-center gap-2 py-4 text-[12px] text-muted-foreground">

@@ -11,7 +11,19 @@ const FaqPage = () => {
 
   return (
     <>
-      <Seo title={t("faq.title")} description={t("faq.subtitle")} />
+      <Seo
+        title={t("faq.title")}
+        description={t("faq.subtitle")}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((faq) => ({
+            "@type": "Question",
+            name: L(faq.q),
+            acceptedAnswer: { "@type": "Answer", text: L(faq.a) },
+          })),
+        }}
+      />
 
       <section className="texture-navy">
         <div className="container-luxe py-16 text-center md:py-20">

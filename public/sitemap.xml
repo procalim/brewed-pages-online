@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://procalim.github.io/</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://procalim.github.io/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://procalim.github.io/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://procalim.github.io/" />
+  </url>
+  <url>
+    <loc>https://procalim.github.io/shop</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://procalim.github.io/shop" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://procalim.github.io/shop" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://procalim.github.io/shop" />
+  </url>
+  <url>
+    <loc>https://procalim.github.io/shop/the-edible-codex</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://procalim.github.io/shop/the-edible-codex" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://procalim.github.io/shop/the-edible-codex" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://procalim.github.io/shop/the-edible-codex" />
+  </url>
+  <url>
+    <loc>https://procalim.github.io/shop/the-five-sauces</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://procalim.github.io/shop/the-five-sauces" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://procalim.github.io/shop/the-five-sauces" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://procalim.github.io/shop/the-five-sauces" />
+  </url>
+  <url>
+    <loc>https://procalim.github.io/about</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://procalim.github.io/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://procalim.github.io/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://procalim.github.io/about" />
+  </url>
+  <url>
+    <loc>https://procalim.github.io/faq</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://procalim.github.io/faq" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://procalim.github.io/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://procalim.github.io/faq" />
+  </url>
+  <url>
+    <loc>https://procalim.github.io/contact</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://procalim.github.io/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://procalim.github.io/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://procalim.github.io/contact" />
+  </url>
+  <url>
+    <loc>https://procalim.github.io/policies/privacy</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://procalim.github.io/policies/privacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://procalim.github.io/policies/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://procalim.github.io/policies/privacy" />
+  </url>
+  <url>
+    <loc>https://procalim.github.io/policies/terms</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://procalim.github.io/policies/terms" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://procalim.github.io/policies/terms" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://procalim.github.io/policies/terms" />
+  </url>
+  <url>
+    <loc>https://procalim.github.io/policies/refund</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://procalim.github.io/policies/refund" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://procalim.github.io/policies/refund" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://procalim.github.io/policies/refund" />
+  </url>
+</urlset>

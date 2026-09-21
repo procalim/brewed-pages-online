@@ -7,7 +7,15 @@
  * ─────────────────────────────────────────────────────────────
  */
 
+import config from "../../site.config.json";
+
 export const site = {
+  /**
+   * العنوان الكامل للموقع — غيّره هنا فقط عند شراء النطاق
+   * (site.config.json)، فخريطة الموقع والروابط الأساسية تقرأ منه.
+   */
+  url: config.url,
+
   brand: {
     name: "The Edible Codex",
     nameAr: "ذا إديبل كودكس",

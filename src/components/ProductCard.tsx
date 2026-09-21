@@ -1,22 +1,15 @@
 import { Link } from "react-router-dom";
-import { ShoppingBag, Star } from "lucide-react";
+import { ArrowRight, Star } from "lucide-react";
 import { formatPrice, useLang } from "@/i18n/LanguageContext";
-import { useCart } from "@/context/CartContext";
+import { buyLink, onBuyClick } from "@/lib/buy";
 import { site } from "@/data/site";
 import type { Product } from "@/data/products";
 
 const ProductCard = ({ product }: { product: Product }) => {
   const { t, L, lang } = useLang();
-  const { add } = useCart();
 
   const badgeLabel =
-    product.badge === "bestseller"
-      ? t("product.bestseller")
-      : product.badge === "bundle"
-        ? t("product.bundle")
-        : product.badge === "new"
-          ? t("product.new")
-          : null;
+    product.badge === "bestseller" ? t("product.bestseller") : product.badge === "new" ? t("product.new") : null;
 
   const savePct = product.compareAt
     ? Math.round(((product.compareAt - product.price) / product.compareAt) * 100)
@@ -64,27 +57,27 @@ const ProductCard = ({ product }: { product: Product }) => {
         </h3>
         <p className="mt-2 flex-1 text-[13px] leading-relaxed text-muted-foreground">{L(product.subtitle)}</p>
 
-        <div className="mt-5 flex items-end justify-between gap-3">
-          <div className="flex items-baseline gap-2">
-            <span className="font-display text-2xl text-navy-700">
-              {formatPrice(product.price, lang, site.currency.symbol)}
+        <div className="mt-5 flex items-baseline gap-2">
+          <span className="font-display text-2xl text-navy-700">
+            {formatPrice(product.price, lang, site.currency.symbol)}
+          </span>
+          {product.compareAt && (
+            <span className="text-sm text-muted-foreground line-through">
+              {formatPrice(product.compareAt, lang, site.currency.symbol)}
             </span>
-            {product.compareAt && (
-              <span className="text-sm text-muted-foreground line-through">
-                {formatPrice(product.compareAt, lang, site.currency.symbol)}
-              </span>
-            )}
-          </div>
-
-          <button
-            type="button"
-            onClick={() => add(product.slug)}
-            aria-label={`${t("product.addToCart")} — ${L(product.title)}`}
-            className="grid h-11 w-11 shrink-0 place-items-center rounded-sm border border-navy/15 bg-navy text-ivory transition-all duration-300 hover:bg-gold hover:text-ink"
-          >
-            <ShoppingBag className="h-4 w-4" />
-          </button>
+          )}
         </div>
+
+        <a
+          href={buyLink(product, lang)}
+          target="_blank"
+          rel="noreferrer noopener"
+          onClick={() => onBuyClick(product)}
+          className="btn-gold mt-5 w-full"
+        >
+          {t("product.buyNow")}
+          <ArrowRight className="h-4 w-4 flip-rtl" />
+        </a>
       </div>
     </article>
   );

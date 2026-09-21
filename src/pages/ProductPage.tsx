@@ -1,29 +1,23 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { ChevronLeft, Check, Download, Minus, Plus, RotateCcw, ShieldCheck, Star } from "lucide-react";
+import { Link, useParams } from "react-router-dom";
+import { ArrowRight, ChevronLeft, Check, Download, RotateCcw, ShieldCheck, Star } from "lucide-react";
 import Seo from "@/components/Seo";
 import ProductCard from "@/components/ProductCard";
 import SectionHeading from "@/components/SectionHeading";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { formatPrice, useLang } from "@/i18n/LanguageContext";
-import { useCart } from "@/context/CartContext";
+import { buyLink, onBuyClick } from "@/lib/buy";
 import { faqs, getProduct, products } from "@/data/products";
 import { checkoutUrlFor, site } from "@/data/site";
-import { trackCheckoutStart } from "@/lib/pixel";
 
 const ProductPage = () => {
   const { slug } = useParams();
-  const navigate = useNavigate();
   const { t, L, lang } = useLang();
-  const { add } = useCart();
   const product = getProduct(slug);
-
   const [active, setActive] = useState(0);
-  const [qty, setQty] = useState(1);
 
   useEffect(() => {
     setActive(0);
-    setQty(1);
     window.scrollTo({ top: 0 });
   }, [slug]);
 
@@ -43,21 +37,8 @@ const ProductPage = () => {
     ? Math.round(((product.compareAt - product.price) / product.compareAt) * 100)
     : 0;
 
-  const whopUrl = checkoutUrlFor(product);
-
-  const buyNow = () => {
-    // With Whop connected, "buy now" hands the visitor straight to the
-    // hosted checkout. Without it, the built-in order flow takes over.
-    if (whopUrl) {
-      trackCheckoutStart(product.slug, product.price);
-      window.open(whopUrl, "_blank", "noopener,noreferrer");
-      return;
-    }
-    add(product.slug, qty);
-    navigate("/checkout");
-  };
-
-  const related = products.filter((p) => p.slug !== product.slug).slice(0, 3);
+  const onWhop = Boolean(checkoutUrlFor(product));
+  const related = products.filter((p) => p.slug !== product.slug);
 
   return (
     <>
@@ -155,40 +136,21 @@ const ProductPage = () => {
 
             <div className="my-8 gold-rule" />
 
-            {/* Quantity + actions */}
-            <div className="flex flex-wrap items-center gap-4">
-              <div className="flex items-center rounded-sm border border-border">
-                <button
-                  type="button"
-                  onClick={() => setQty((q) => Math.max(1, q - 1))}
-                  aria-label="−"
-                  className="grid h-12 w-12 place-items-center text-navy-700 hover:bg-secondary"
-                >
-                  <Minus className="h-4 w-4" />
-                </button>
-                <span className="w-12 text-center font-display text-lg tabular-nums">{qty}</span>
-                <button
-                  type="button"
-                  onClick={() => setQty((q) => q + 1)}
-                  aria-label="+"
-                  className="grid h-12 w-12 place-items-center text-navy-700 hover:bg-secondary"
-                >
-                  <Plus className="h-4 w-4" />
-                </button>
-              </div>
-
-              <button type="button" onClick={() => add(product.slug, qty)} className="btn-navy flex-1">
-                {t("product.addToCart")}
-              </button>
-            </div>
-
-            <button type="button" onClick={buyNow} className="btn-gold mt-3 w-full">
-              {t("product.buyNow")}
-            </button>
+            {/* One button, straight to checkout — no forms, no cart. */}
+            <a
+              href={buyLink(product, lang)}
+              target="_blank"
+              rel="noreferrer noopener"
+              onClick={() => onBuyClick(product)}
+              className="btn-gold w-full text-base"
+            >
+              {t("product.buyNow")} · {formatPrice(product.price, lang, site.currency.symbol)}
+              <ArrowRight className="h-4 w-4 flip-rtl" />
+            </a>
 
             <p className="mt-4 flex items-center justify-center gap-2 text-[12px] text-muted-foreground">
               <ShieldCheck className="h-4 w-4 text-gold" />
-              {whopUrl ? t("product.whop") : t("product.secure")}
+              {onWhop ? t("product.whop") : t("product.secure")}
             </p>
 
             {/* Included */}
@@ -223,7 +185,6 @@ const ProductPage = () => {
               ))}
             </dl>
 
-            {/* FAQ */}
             <Accordion type="single" collapsible className="mt-8">
               {faqs.slice(0, 3).map((faq, i) => (
                 <AccordionItem key={i} value={`p-faq-${i}`} className="border-b border-border">
@@ -240,17 +201,18 @@ const ProductPage = () => {
         </div>
       </section>
 
-      {/* Related */}
-      <section className="bg-ivory-dim/50 section">
-        <div className="container-luxe">
-          <SectionHeading eyebrow={t("shop.eyebrow")} title={t("product.related")} />
-          <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
-            {related.map((item) => (
-              <ProductCard key={item.id} product={item} />
-            ))}
+      {related.length > 0 && (
+        <section className="bg-ivory-dim/50 section">
+          <div className="container-luxe">
+            <SectionHeading eyebrow={t("shop.eyebrow")} title={t("product.related")} />
+            <div className="mx-auto grid max-w-xl gap-7">
+              {related.map((item) => (
+                <ProductCard key={item.id} product={item} />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </>
   );
 };

@@ -6,13 +6,12 @@ import ProductCard from "@/components/ProductCard";
 import TrustStrip from "@/components/TrustStrip";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { formatPrice, useLang } from "@/i18n/LanguageContext";
-import { useCart } from "@/context/CartContext";
 import { faqs, getProduct, products, testimonials } from "@/data/products";
+import { buyLink, onBuyClick } from "@/lib/buy";
 import { brandImages, site } from "@/data/site";
 
 const HomePage = () => {
   const { t, L, lang } = useLang();
-  const { add } = useCart();
   const flagship = getProduct("the-edible-codex")!;
 
   const valueProps = [
@@ -154,9 +153,16 @@ const HomePage = () => {
                   </span>
                 )}
               </div>
-              <button type="button" onClick={() => add(flagship.slug)} className="btn-gold">
-                {t("product.addToCart")}
-              </button>
+              <a
+                href={buyLink(flagship, lang)}
+                target="_blank"
+                rel="noreferrer noopener"
+                onClick={() => onBuyClick(flagship)}
+                className="btn-gold"
+              >
+                {t("product.buyNow")}
+                <ArrowRight className="h-4 w-4 flip-rtl" />
+              </a>
             </div>
           </div>
         </div>
@@ -190,8 +196,8 @@ const HomePage = () => {
         <div className="container-luxe">
           <SectionHeading eyebrow={t("shop.eyebrow")} title={t("shop.title")} subtitle={t("shop.subtitle")} />
 
-          <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
-            {products.slice(0, 3).map((product) => (
+          <div className="mx-auto grid max-w-4xl gap-7 sm:grid-cols-2">
+            {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>

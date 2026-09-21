@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Globe, Menu, ShoppingBag, X } from "lucide-react";
+import { Globe, Menu, X } from "lucide-react";
 import Logo from "@/components/Logo";
-import { useCart } from "@/context/CartContext";
 import { useLang } from "@/i18n/LanguageContext";
 
 const links = [
@@ -15,7 +14,6 @@ const links = [
 
 const Navbar = () => {
   const { t, toggleLang } = useLang();
-  const { count, openCart } = useCart();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
@@ -67,19 +65,6 @@ const Navbar = () => {
             {t("nav.language")}
           </button>
 
-          <button
-            type="button"
-            onClick={openCart}
-            aria-label={t("nav.cart")}
-            className="relative grid h-10 w-10 place-items-center rounded-sm text-navy-700 transition-colors hover:text-gold-600"
-          >
-            <ShoppingBag className="h-5 w-5" />
-            {count > 0 && (
-              <span className="absolute -top-0.5 end-0 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-gold px-1 text-[10px] font-bold text-ink">
-                {count}
-              </span>
-            )}
-          </button>
 
           <button
             type="button"

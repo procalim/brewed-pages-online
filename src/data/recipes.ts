@@ -93,7 +93,7 @@ export const recipes: Recipe[] = [
     steps: [
       "Season chicken and dredge lightly in flour.",
       "Sear chicken in a pan with oil/butter until golden. Remove and set aside.",
-      "Saut\\351 garlic for 1 minute. Add chicken broth to deglaze pan.",
+      "Sauté garlic for 1 minute. Add chicken broth to deglaze pan.",
       "Add heavy cream, sun-dried tomatoes, thyme, parmesan, and chili flakes. Simmer 5 minutes.",
       "Return chicken to sauce. Simmer another 3–5 minutes.",
       "Garnish with fresh basil. Serve over pasta or mashed potatoes.",
@@ -110,7 +110,7 @@ export const recipes: Recipe[] = [
     serves: "6",
     tags: ["Beef", "Mexican"],
     title: { ar: "تاكو البيريا بالجبن", en: "Quesabirria Tacos (Birria Tacos)" },
-    subtitle: { ar: "لحم مطهوّ ببطء، وتورتيلا مغموسة بالدهن، وصلصة الغمس.", en: "The most famous 'dipping taco' with a rich, red consomm\\351." },
+    subtitle: { ar: "لحم مطهوّ ببطء، وتورتيلا مغموسة بالدهن، وصلصة الغمس.", en: "The most famous 'dipping taco' with a rich, red consommé." },
     ingredients: [
       "1 kg Beef Chuck roast (cut into chunks)",
       "4 dried Guajillo chilies (rehydrated)",
@@ -125,12 +125,12 @@ export const recipes: Recipe[] = [
       "Blend rehydrated chilies, onion, garlic, spices, vinegar, and 1 cup broth until smooth.",
       "Sear beef chunks. Pour blended sauce over meat. Add remaining broth.",
       "Simmer on low 3–4 hours (or Instant Pot 45 mins) until meat falls apart.",
-      "Remove meat, shred with forks. Keep liquid (Consomm\\351) in the pot.",
-      "Dip a tortilla into the red consomm\\351 grease (floating on top). Place in a hot skillet.",
+      "Remove meat, shred with forks. Keep liquid (Consommé) in the pot.",
+      "Dip a tortilla into the red consommé grease (floating on top). Place in a hot skillet.",
       "Add cheese and shredded meat. Fold over. Fry until crispy.",
-      "Serve with a cup of hot consomm\\351 for dipping.",
+      "Serve with a cup of hot consommé for dipping.",
     ],
-    tip: "Skim the red fat from the top of the consomm\\351 — that's what you dip the tortillas in",
+    tip: "Skim the red fat from the top of the consommé — that's what you dip the tortillas in",
   },
   {
     slug: "gigi-hadid-spicy-vodka-pasta",
@@ -155,7 +155,7 @@ export const recipes: Recipe[] = [
     ],
     steps: [
       "Cook pasta. Save ½ cup pasta water.",
-      "Saut\\351 onion and garlic in olive oil until soft.",
+      "Sauté onion and garlic in olive oil until soft.",
       "Add tomato paste; cook until caramelized (darker red).",
       "Add vodka; cook 2 minutes to evaporate alcohol.",
       "Add heavy cream and red pepper flakes. Stir into a sauce.",
@@ -424,9 +424,23 @@ export const recipes: Recipe[] = [
 
 export const getRecipe = (slug?: string) => recipes.find((r) => r.slug === slug);
 
-/** Path to a recipe's plate photo, or null when it has none yet. */
-export const recipePhoto = (recipe: Recipe) =>
-  recipe.photo ? `${import.meta.env.BASE_URL}brand/recipes/${recipe.slug}.jpg` : null;
+/**
+ * Plate photos are imported rather than served from /public so the build
+ * fingerprints each file. Replacing a photo then changes its URL, and
+ * browsers pick the new one up instead of showing a cached copy.
+ */
+const photoUrls = import.meta.glob("../assets/recipes/*.jpg", {
+  eager: true,
+  query: "?url",
+  import: "default",
+}) as Record<string, string>;
+
+const photoBySlug = Object.fromEntries(
+  Object.entries(photoUrls).map(([path, url]) => [path.split("/").pop()!.replace(/\.jpg$/, ""), url]),
+);
+
+/** URL of a recipe's plate photo, or null when it has none yet. */
+export const recipePhoto = (recipe: Recipe) => (recipe.photo ? photoBySlug[recipe.slug] ?? null : null);
 
 /** Every tag in use, for the filter row. */
 export const recipeTags = [...new Set(recipes.flatMap((r) => r.tags))].sort();

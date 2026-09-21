@@ -196,6 +196,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "green-goddess-salad",
+    photo: true,
     number: 4,
     source: "codex",
     accent: "green",

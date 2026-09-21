@@ -109,6 +109,17 @@ const BuyButton = ({ product, withPrice = false, className = "" }: Props) => {
                     {t("checkout.loading")}
                   </p>
                 )}
+
+                {/* The hosted page carries methods the embed leaves out. */}
+                <a
+                  href={hostedUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="mt-4 flex items-center justify-center gap-1.5 border-t border-border pt-4 text-[12px] text-muted-foreground underline underline-offset-4 transition-colors hover:text-gold-600"
+                >
+                  {t("checkout.moreMethods")}
+                  <ExternalLink className="h-3 w-3" />
+                </a>
               </>
             ) : (
               <div className="py-10 text-center">

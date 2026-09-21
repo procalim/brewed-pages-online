@@ -264,6 +264,10 @@ export const dictionary = {
     en: "The in-page checkout could not open. Use the button below to complete your purchase securely on Whop.",
   },
   "checkout.openHosted": { ar: "متابعة الدفع على Whop", en: "Continue to Whop checkout" },
+  "checkout.moreMethods": {
+    ar: "طرق دفع أخرى (تحويل بنكي · ACH · عملات رقمية)",
+    en: "Other payment methods (bank wire · ACH · crypto)",
+  },
 
   /* ── Trust strip ── */
   "trust.instant": { ar: "تحميل فوري", en: "Instant delivery" },

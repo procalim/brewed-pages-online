@@ -62,7 +62,7 @@ export const products: Product[] = [
     reviews: 812,
     featured: true,
     focus: "center 60%",
-    checkoutUrl: "https://whop.com/checkout/plan_em9IY2N3WR5Je",
+    checkoutUrl: "https://whop.com/c/the-edible-codex-cookbook/codex",
     planId: "plan_em9IY2N3WR5Je",
   },
   {

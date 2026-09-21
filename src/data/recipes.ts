@@ -101,6 +101,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "quesabirria-tacos",
+    photo: true,
     number: 21,
     source: "codex",
     accent: "dark",
@@ -132,6 +133,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "gigi-hadid-spicy-vodka-pasta",
+    photo: true,
     number: 6,
     source: "codex",
     accent: "magenta",
@@ -163,6 +165,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "emily-mariko-salmon-rice-bowl",
+    photo: true,
     number: 3,
     source: "codex",
     accent: "orange",
@@ -249,6 +252,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "smashed-potatoes",
+    photo: true,
     number: 15,
     source: "codex",
     accent: "gold",
@@ -303,6 +307,7 @@ export const recipes: Recipe[] = [
   },
   {
     slug: "dalgona-coffee",
+    photo: true,
     number: 11,
     source: "codex",
     accent: "gold",

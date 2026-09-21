@@ -7,7 +7,7 @@ import TrustStrip from "@/components/TrustStrip";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { formatPrice, useLang } from "@/i18n/LanguageContext";
 import { faqs, getProduct, products, testimonials } from "@/data/products";
-import { buyLink, onBuyClick } from "@/lib/buy";
+import BuyButton from "@/components/BuyButton";
 import { brandImages, site } from "@/data/site";
 
 const HomePage = () => {
@@ -153,16 +153,7 @@ const HomePage = () => {
                   </span>
                 )}
               </div>
-              <a
-                href={buyLink(flagship, lang)}
-                target="_blank"
-                rel="noreferrer noopener"
-                onClick={() => onBuyClick(flagship)}
-                className="btn-gold"
-              >
-                {t("product.buyNow")}
-                <ArrowRight className="h-4 w-4 flip-rtl" />
-              </a>
+              <BuyButton product={flagship} />
             </div>
           </div>
         </div>

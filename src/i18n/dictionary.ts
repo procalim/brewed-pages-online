@@ -219,14 +219,21 @@ export const dictionary = {
 
   "product.whop": { ar: "الدفع الآمن عبر Whop", en: "Secure payment via Whop" },
   "product.whopNote": {
-    ar: "ستنتقل إلى صفحة الدفع الرسمية لمتجرنا على منصّة Whop:",
-    en: "You'll continue to our store's official checkout on Whop:",
+    ar: "الدفع يتم داخل هذه الصفحة — لن تغادر الموقع.",
+    en: "Payment happens right here — you never leave the site.",
   },
+  "product.whopBy": { ar: "بتشفير ومعالجة من منصّة Whop", en: "Encrypted and processed by Whop" },
   "product.whopTrust": {
     ar: "دفع مشفّر · تسليم فوري · استرداد خلال ٣٠ يوماً",
     en: "Encrypted payment · instant delivery · 30-day refund",
   },
-  "product.viaWhop": { ar: "الدفع عبر Whop", en: "Checkout via Whop" },
+  "product.viaWhop": { ar: "الدفع الآمن عبر Whop", en: "Secure checkout by Whop" },
+  "checkout.loading": { ar: "جارٍ تحميل صفحة الدفع الآمنة…", en: "Loading the secure checkout…" },
+  "checkout.embedFailed": {
+    ar: "تعذّر فتح الدفع داخل الصفحة. اضغط الزر أدناه لإتمام الشراء بأمان على Whop.",
+    en: "The in-page checkout could not open. Use the button below to complete your purchase securely on Whop.",
+  },
+  "checkout.openHosted": { ar: "متابعة الدفع على Whop", en: "Continue to Whop checkout" },
 
   /* ── Trust strip ── */
   "trust.instant": { ar: "تحميل فوري", en: "Instant delivery" },

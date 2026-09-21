@@ -23,6 +23,12 @@ export type Product = {
    * This product's Whop checkout link. Falls back to site.checkout.url.
    */
   checkoutUrl?: string;
+  /**
+   * Whop plan id — lets the checkout open inside our own page instead of
+   * sending the buyer to another domain.
+   * معرّف الخطة في Whop — يجعل الدفع يفتح داخل صفحتنا بدل الانتقال لموقع آخر.
+   */
+  planId?: string;
 };
 
 /**
@@ -56,7 +62,8 @@ export const products: Product[] = [
     reviews: 812,
     featured: true,
     focus: "center 60%",
-    checkoutUrl: "https://whop.com/the-edible-codex/the-edible-codex-cookbook/",
+    checkoutUrl: "https://whop.com/checkout/plan_yC2EH8kuwf8pi",
+    planId: "plan_yC2EH8kuwf8pi",
   },
   {
     id: 2,
@@ -82,7 +89,8 @@ export const products: Product[] = [
     reviews: 208,
     featured: true,
     focus: "center 75%",
-    checkoutUrl: "https://whop.com/the-edible-codex/the-edible-codex-five-sauces/",
+    checkoutUrl: "https://whop.com/checkout/plan_em9IY2N3WR5Je",
+    planId: "plan_em9IY2N3WR5Je",
   },
 ];
 

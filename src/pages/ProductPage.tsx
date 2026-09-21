@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowRight, ChevronLeft, Check, Download, RotateCcw, ShieldCheck, Star } from "lucide-react";
+import { ChevronLeft, Check, Download, RotateCcw, ShieldCheck, Star } from "lucide-react";
 import Seo from "@/components/Seo";
 import ProductCard from "@/components/ProductCard";
 import SectionHeading from "@/components/SectionHeading";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { formatPrice, useLang } from "@/i18n/LanguageContext";
-import { buyLink, onBuyClick } from "@/lib/buy";
+import BuyButton from "@/components/BuyButton";
 import { faqs, getProduct, products } from "@/data/products";
-import { checkoutDomainLabel, checkoutUrlFor, site } from "@/data/site";
+import { checkoutUrlFor, site } from "@/data/site";
 
 const ProductPage = () => {
   const { slug } = useParams();
@@ -39,7 +39,6 @@ const ProductPage = () => {
 
   const whopUrl = checkoutUrlFor(product);
   const onWhop = Boolean(whopUrl);
-  const destination = checkoutDomainLabel(whopUrl);
   const isFree = product.price === 0;
   const related = products.filter((p) => p.slug !== product.slug);
 
@@ -140,18 +139,7 @@ const ProductPage = () => {
             <div className="my-8 gold-rule" />
 
             {/* One button, straight to checkout — no forms, no cart. */}
-            <a
-              href={buyLink(product, lang)}
-              target="_blank"
-              rel="noreferrer noopener"
-              onClick={() => onBuyClick(product)}
-              className="btn-gold w-full text-base"
-            >
-              {isFree
-                ? t("product.getFree")
-                : `${t("product.buyNow")} · ${formatPrice(product.price, lang, site.currency.symbol)}`}
-              <ArrowRight className="h-4 w-4 flip-rtl" />
-            </a>
+            <BuyButton product={product} withPrice className="w-full text-base" />
 
             {onWhop ? (
               <div className="mt-4 rounded-sm border border-gold/25 bg-ivory px-5 py-4 text-center">
@@ -159,9 +147,7 @@ const ProductPage = () => {
                   <ShieldCheck className="h-4 w-4 shrink-0 text-gold" />
                   {t("product.whopNote")}
                 </p>
-                <p dir="ltr" className="mt-1.5 font-sans text-[13px] font-semibold tracking-tight text-gold-600">
-                  {destination}
-                </p>
+                <p className="mt-1.5 text-[12px] font-semibold text-gold-600">{t("product.whopBy")}</p>
                 <p className="mt-2 text-[11px] text-muted-foreground">{t("product.whopTrust")}</p>
               </div>
             ) : (

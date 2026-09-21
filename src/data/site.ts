@@ -93,6 +93,12 @@ export const whatsappLink = (message: string) =>
 const base = import.meta.env.BASE_URL;
 
 export const brandImages = {
+  /**
+   * خلفية الواجهة — تستخدم صورة الشيف حتى تصل الصورة العريضة بالأطباق،
+   * وعندها يكفي استبدال الملف هنا.
+   * Hero backdrop: the chef portrait until the wide pass shot replaces it.
+   */
+  heroBackdrop: `${base}brand/chef-portrait.jpg`,
   logoCrest: `${base}brand/logo-crest.jpg`,
   logoFull: `${base}brand/logo-square.jpg`,
   chefPortrait: `${base}brand/chef-portrait.jpg`,

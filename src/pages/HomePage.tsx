@@ -51,6 +51,16 @@ const HomePage = () => {
 
       {/* ── HERO ── */}
       <section className="texture-dark relative overflow-hidden">
+        {/* The chef and his pass, blurred back so the headline stays readable */}
+        <img
+          src={brandImages.heroBackdrop}
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full scale-110 object-cover opacity-45 blur-[6px] md:opacity-40 md:blur-[8px]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/70 to-ink/90" />
+
         <div className="container-luxe relative z-10 grid items-center gap-12 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
           <div className="animate-fade-in">
             <span className="eyebrow eyebrow-start">{t("hero.eyebrow")}</span>
@@ -89,7 +99,7 @@ const HomePage = () => {
           </div>
 
           {/* Chef portrait in a gold frame */}
-          <div className="relative animate-fade-in-slow">
+          <div className="relative hidden animate-fade-in-slow lg:block">
             <div className="absolute -inset-3 rounded-sm border border-gold/25" aria-hidden="true" />
             <div className="absolute -inset-8 hidden rounded-sm border border-gold/10 lg:block" aria-hidden="true" />
             <img

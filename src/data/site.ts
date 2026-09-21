@@ -13,14 +13,14 @@ export const site = {
     nameAr: "ذا إديبل كودكس",
     taglineEn: "Modern Culinary Adventures",
     taglineAr: "مغامرات الطهي الحديثة",
-    /** Chef / founder name — replace with your own · ضع اسمك هنا */
-    chefEn: "Chef Procalim",
-    chefAr: "الشيف بروكاليم",
+    chefEn: "Chef Ahmet Salameh",
+    chefAr: "الشيف أحمد سلامة",
     establishedYear: 2021,
   },
 
   contact: {
-    email: "procalimyoga@gmail.com",
+    /** بريد المتجر — اتركه فارغاً ليختفي من الموقع · store email, empty hides it */
+    email: "",
     /** International format, digits only — used to build the WhatsApp link */
     whatsapp: "962775320369",
     phoneDisplay: "+962 7 7532 0369",
@@ -31,10 +31,8 @@ export const site = {
   },
 
   social: {
+    /** ضع رابط حسابك هنا · put your real profile link here */
     instagram: "https://instagram.com/",
-    tiktok: "https://tiktok.com/",
-    youtube: "https://youtube.com/",
-    x: "https://x.com/",
   },
 
   /** Currency shown on every price · العملة المعروضة */
@@ -87,6 +85,8 @@ export const whatsappLink = (message: string) =>
 const base = import.meta.env.BASE_URL;
 
 export const brandImages = {
+  logoCrest: `${base}brand/logo-crest.jpg`,
+  logoFull: `${base}brand/logo-square.jpg`,
   chefPortrait: `${base}brand/chef-portrait.jpg`,
   chefShrimp: `${base}brand/chef-shrimp-rainbow.jpg`,
   chefDuck: `${base}brand/chef-duck-cherry.jpg`,

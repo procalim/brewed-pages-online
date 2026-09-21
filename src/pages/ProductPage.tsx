@@ -149,6 +149,22 @@ const ProductPage = () => {
                 </p>
                 <p className="mt-1.5 text-[12px] font-semibold text-gold-600">{t("product.whopBy")}</p>
                 <p className="mt-2 text-[11px] text-muted-foreground">{t("product.whopTrust")}</p>
+
+                <div className="mt-4 border-t border-gold/20 pt-3">
+                  <p className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+                    {t("product.methods")}
+                  </p>
+                  <div className="mt-2 flex flex-wrap items-center justify-center gap-1.5">
+                    {["Apple Pay", "Google Pay", "Visa", "Mastercard", "Amex", "PayPal"].map((method) => (
+                      <span
+                        key={method}
+                        className="rounded-sm border border-border bg-white px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.06em] text-navy-700"
+                      >
+                        {method}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             ) : (
               <p className="mt-4 flex items-center justify-center gap-2 text-[12px] text-muted-foreground">

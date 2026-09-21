@@ -24,7 +24,7 @@ All content lives in four files — you never have to dig through components.
 
 | الملف · File | ماذا يحتوي · What it holds |
 | --- | --- |
-| `src/data/site.ts` | الاسم، اسم الشيف، البريد، الجوال، واتساب، الموقع، الروابط الاجتماعية، العملة |
+| `src/data/site.ts` | الاسم، اسم الشيف، البريد (اتركه فارغاً ليختفي)، الجوال، واتساب، إنستغرام، العملة |
 | `src/data/products.ts` | المنتجات وأسعارها وأوصافها ومميزاتها، التقييمات، الأسئلة الشائعة، أكواد الخصم |
 | `src/data/policies.ts` | سياسة الخصوصية، الشروط والأحكام، سياسة الاسترداد |
 | `src/i18n/dictionary.ts` | كل نصوص الواجهة بالعربية والإنجليزية في مكان واحد |
@@ -39,6 +39,9 @@ All content lives in four files — you never have to dig through components.
 
 صورك في `public/brand/` وتُستدعى عبر `brandImages` في `src/data/site.ts`:
 
+- `logo-full.jpg` — الشعار الأصلي كما أرسلته
+- `logo-crest.jpg` — الشارة وحدها (الشوكة والسكين والملعقة) وتظهر في الشريط العلوي
+- `logo-square.jpg` · `icon-180.png` — أيقونة المتصفّح وصورة المشاركة الاجتماعية
 - `chef-portrait.jpg` — الواجهة الرئيسية وصفحة عن الشيف
 - `chef-shrimp-rainbow.jpg`, `chef-duck-cherry.jpg`, `chef-beef-tenderloin.jpg` — المعرض وبطاقات المنتجات
 - `edible-codex-cover.jpg` — غلاف الإصدار الرئيسي وصورة المشاركة الاجتماعية

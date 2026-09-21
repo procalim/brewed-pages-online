@@ -19,9 +19,9 @@ const ContactPage = () => {
     // No backend yet — the message is handed to the visitor's mail client.
     // لا يوجد خادم بعد — تُفتح رسالة بريد جاهزة للإرسال.
     const body = `${form.name} · ${form.email}\n\n${form.message}`;
-    window.location.href = `mailto:${site.contact.email}?subject=${encodeURIComponent(
-      form.subject || site.brand.name,
-    )}&body=${encodeURIComponent(body)}`;
+    window.location.href = site.contact.email
+      ? `mailto:${site.contact.email}?subject=${encodeURIComponent(form.subject || site.brand.name)}&body=${encodeURIComponent(body)}`
+      : whatsappLink(`${form.subject || site.brand.name}\n${body}`);
     window.setTimeout(() => {
       setSending(false);
       toast({ title: t("contact.form.success") });
@@ -29,9 +29,19 @@ const ContactPage = () => {
     }, 600);
   };
 
-  const details = [
-    { Icon: Mail, label: t("contact.email"), value: site.contact.email, href: `mailto:${site.contact.email}` },
-    { Icon: Phone, label: t("contact.phone"), value: site.contact.phoneDisplay, href: `tel:${site.contact.phoneDisplay.replace(/\s/g, "")}` },
+  type ContactRow = { Icon: typeof Mail; label: string; value: string; href?: string };
+
+  const details: ContactRow[] = [
+    // The email row only exists when an address is configured.
+    ...(site.contact.email
+      ? [{ Icon: Mail, label: t("contact.email"), value: site.contact.email, href: `mailto:${site.contact.email}` }]
+      : []),
+    {
+      Icon: Phone,
+      label: t("contact.phone"),
+      value: site.contact.phoneDisplay,
+      href: `tel:${site.contact.phoneDisplay.replace(/\s/g, "")}`,
+    },
     { Icon: MapPin, label: t("contact.location"), value: lang === "ar" ? site.contact.cityAr : site.contact.cityEn },
     { Icon: Clock, label: t("contact.hours"), value: lang === "ar" ? site.contact.hoursAr : site.contact.hoursEn },
   ];

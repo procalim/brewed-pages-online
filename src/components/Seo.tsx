@@ -15,7 +15,7 @@ const setMeta = (selector: string, attr: "name" | "property", key: string, conte
 };
 
 /** Keeps <title> and the social meta tags in sync with the active page and language. */
-const Seo = ({ title, description, image = `${import.meta.env.BASE_URL}brand/edible-codex-cover.jpg` }: SeoProps) => {
+const Seo = ({ title, description, image = `${import.meta.env.BASE_URL}brand/logo-square.jpg` }: SeoProps) => {
   const { lang } = useLang();
   const brand = lang === "ar" ? site.brand.nameAr : site.brand.name;
 

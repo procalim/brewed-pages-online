@@ -223,6 +223,7 @@ export const dictionary = {
     en: "Payment happens right here — you never leave the site.",
   },
   "product.whopBy": { ar: "بتشفير ومعالجة من منصّة Whop", en: "Encrypted and processed by Whop" },
+  "product.methods": { ar: "طرق الدفع المقبولة", en: "Accepted payment methods" },
   "product.whopTrust": {
     ar: "دفع مشفّر · تسليم فوري · استرداد خلال ٣٠ يوماً",
     en: "Encrypted payment · instant delivery · 30-day refund",

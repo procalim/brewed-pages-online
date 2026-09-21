@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Instagram, Mail, MapPin, Phone, Send, Youtube } from "lucide-react";
+import { Instagram, Mail, MapPin, Phone, Send } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
 import { site } from "@/data/site";
 
 const PaymentMark = ({ label }: { label: string }) => (
-  <span className="grid h-8 w-12 place-items-center rounded-sm border border-gold/25 bg-white/5 text-[9px] font-semibold uppercase tracking-[0.08em] text-ivory/70">
+  <span className="grid h-8 min-w-[48px] place-items-center rounded-sm border border-gold/25 bg-white/5 px-2 text-[9px] font-semibold uppercase tracking-[0.08em] text-ivory/70">
     {label}
   </span>
 );
@@ -25,6 +25,8 @@ const Footer = () => {
     { to: "/policies/refund", key: "legal.refund" as const },
     { to: "/contact", key: "nav.contact" as const },
   ];
+
+  const payments = ["Apple Pay", "Google Pay", "Visa", "MC", "Amex", "PayPal"];
   const legal = [
     { to: "/policies/privacy", key: "legal.privacy" as const },
     { to: "/policies/terms", key: "legal.terms" as const },
@@ -79,12 +81,14 @@ const Footer = () => {
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-ivory/60">{t("footer.about")}</p>
 
           <ul className="mt-6 space-y-2.5 text-sm text-ivory/70">
-            <li className="flex items-center gap-2.5">
-              <Mail className="h-4 w-4 text-gold" />
-              <a href={`mailto:${site.contact.email}`} className="hover:text-gold">
-                {site.contact.email}
-              </a>
-            </li>
+            {site.contact.email && (
+              <li className="flex items-center gap-2.5">
+                <Mail className="h-4 w-4 text-gold" />
+                <a href={`mailto:${site.contact.email}`} className="hover:text-gold">
+                  {site.contact.email}
+                </a>
+              </li>
+            )}
             <li className="flex items-center gap-2.5">
               <Phone className="h-4 w-4 text-gold" />
               <span dir="ltr">{site.contact.phoneDisplay}</span>
@@ -124,16 +128,13 @@ const Footer = () => {
           </p>
 
           <div className="flex items-center gap-2" title={t("footer.payments")}>
-            {["Visa", "MC", "Amex", "Apple", "Google", "PayPal"].map((p) => (
+            {payments.map((p) => (
               <PaymentMark key={p} label={p} />
             ))}
           </div>
 
           <div className="flex items-center gap-3">
-            {[
-              { href: site.social.instagram, Icon: Instagram, label: "Instagram" },
-              { href: site.social.youtube, Icon: Youtube, label: "YouTube" },
-            ].map(({ href, Icon, label }) => (
+            {[{ href: site.social.instagram, Icon: Instagram, label: "Instagram" }].map(({ href, Icon, label }) => (
               <a
                 key={label}
                 href={href}

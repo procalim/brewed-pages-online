@@ -5,6 +5,7 @@ import Seo from "@/components/Seo";
 import { formatPrice, useLang } from "@/i18n/LanguageContext";
 import { useCart } from "@/context/CartContext";
 import { checkoutUrlFor, site, whatsappLink } from "@/data/site";
+import { trackCheckoutStart } from "@/lib/pixel";
 
 const CheckoutPage = () => {
   const { t, L, lang } = useLang();
@@ -91,6 +92,7 @@ const CheckoutPage = () => {
                         href={url}
                         target="_blank"
                         rel="noreferrer noopener"
+                        onClick={() => trackCheckoutStart(product.slug, product.price)}
                         className="btn-gold w-full justify-between"
                       >
                         <span className="truncate">{L(product.title)}</span>

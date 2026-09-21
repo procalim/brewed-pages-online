@@ -86,6 +86,23 @@ checkout: {
 أكواد الخصم العاملة داخل الموقع: `CODEX20` (٢٠٪) و `CHEF10` (١٠٪) — عدّلها في `products.ts`.
 ملاحظة: الخصم يُطبَّق على عرض السلة فقط؛ السعر النهائي عند الدفع يحدّده Whop.
 
+## ٥ب. بكسل Whop والتتبّع · Whop pixel
+
+في شاشة **"Set up our pixel"** يعطيك Whop كوداً يبدأ بـ `<script>!function(w,d,s,u,n,a,b){...`.
+الصقه في `index.html` عند التعليق المكتوب `WHOP PIXEL` — **مرة واحدة تكفي**: Whop يقول
+"in the `<head>` of every page"، وهذا الموقع يملك ملف صفحة واحداً فقط يخدم كل المسارات.
+
+بعد اللصق يعمل التتبّع تلقائياً:
+
+- `src/components/RouteTracker.tsx` يبلّغ البكسل بكل انتقال بين الصفحات (ضروري لأن الموقع
+  SPA ولا يعيد تحميل الصفحة، وبدونه يسجّل Whop زيارة واحدة فقط لكل جلسة).
+- عند الضغط على "اشترِ الآن" أو زر الدفع، يُرسل حدث `begin_checkout` مع اسم المنتج وسعره.
+- إن كان اسم الدالة في كود Whop غير `whopq`، أضفه في `GLOBAL_NAMES` داخل `src/lib/pixel.ts`.
+
+بدون لصق الكود لا يحدث شيء ولا تظهر أخطاء — التتبّع يتجاهل نفسه بصمت.
+
+في خانة **"Enter website URL to verify installation"** ضع رابط موقعك بعد النشر (الخطوة ٩).
+
 ## ٦. اللغة والاتجاه · Language & direction
 
 - العربية هي اللغة الافتراضية، والاتجاه `rtl` يُضبط تلقائياً على `<html>`.
@@ -112,6 +129,30 @@ Vite · React 18 · TypeScript · Tailwind CSS · shadcn/ui · React Router · l
 
 ## ٩. النشر · Deploy
 
-`npm run build` ثم ارفع مجلد `dist/` إلى أي استضافة ثابتة (Netlify، Vercel، Cloudflare Pages، أو Lovable).
-احرص على توجيه كل المسارات إلى `index.html` لأن الموقع يستخدم توجيهاً من طرف العميل.
-Configure an SPA fallback to `index.html` — the site uses client-side routing.
+```sh
+npm run build     # → dist/
+```
+
+ارفع مجلد `dist/` إلى أي استضافة ثابتة: Netlify أو Vercel أو Cloudflare Pages أو Lovable.
+توجيه المسارات إلى `index.html` مُعدّ مسبقاً:
+
+- `public/_redirects` → Netlify و Cloudflare Pages
+- `vercel.json` → Vercel
+
+بدون هذا التوجيه تعمل الصفحة الرئيسية فقط، وتعطي الروابط العميقة مثل
+`/shop/the-edible-codex` خطأ 404 عند فتحها مباشرة.
+
+### الموقع و Whop معاً · This site alongside Whop
+
+في شاشة **"Create your website"** لدى Whop ثلاثة خيارات:
+
+| الخيار | ماذا يعني لهذا الموقع |
+| --- | --- |
+| **Use a blueprint** | قالب جاهز من Whop — يتجاهل هذا الموقع بالكامل |
+| **Build with AI** | يبني موقعاً جديداً من وصف — يتجاهل هذا الموقع أيضاً |
+| **Import a website** | يعيد بناء الموقع من رابطه داخل محرّر Whop |
+| **Connect your website** ← | يُبقي الموقع كما هو ويضيف التتبّع فقط |
+
+**الموصى به: `Connect your website`.** هذا الموقع تطبيق React تفاعلي (سلة، تبديل لغة،
+بحث وفلاتر، درج سلة)؛ الاستيراد `Import a website` ينسخ الشكل داخل محرّر Whop وقد تفقد
+هذه الوظائف. الأفضل: انشر الموقع على نطاقك، الصق البكسل، واترك Whop للدفع والتسليم.

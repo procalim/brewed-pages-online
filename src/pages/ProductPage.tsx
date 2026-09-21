@@ -9,6 +9,7 @@ import { formatPrice, useLang } from "@/i18n/LanguageContext";
 import { useCart } from "@/context/CartContext";
 import { faqs, getProduct, products } from "@/data/products";
 import { checkoutUrlFor, site } from "@/data/site";
+import { trackCheckoutStart } from "@/lib/pixel";
 
 const ProductPage = () => {
   const { slug } = useParams();
@@ -48,6 +49,7 @@ const ProductPage = () => {
     // With Whop connected, "buy now" hands the visitor straight to the
     // hosted checkout. Without it, the built-in order flow takes over.
     if (whopUrl) {
+      trackCheckoutStart(product.slug, product.price);
       window.open(whopUrl, "_blank", "noopener,noreferrer");
       return;
     }

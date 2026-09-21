@@ -27,11 +27,21 @@ jobs:
 
       - run: npm ci
 
-      # Pages serves the site from /<repo>/, so the build needs that base path.
-      - run: npm run build -- --base=/${{ github.event.repository.name }}/
+      # A repo named <user>.github.io is served from the root; every other
+      # repo is served from /<repo>/, and the build needs the right base.
+      - name: Build with the correct base path
+        run: |
+          if [[ "${{ github.event.repository.name }}" == *.github.io ]]; then
+            npm run build -- --base=/
+          else
+            npm run build -- --base=/${{ github.event.repository.name }}/
+          fi
 
       # Pages has no SPA rewrite; 404.html makes deep links resolve.
       - run: cp dist/index.html dist/404.html
+
+      # Keep Pages from running Jekyll, which would drop /.well-known files.
+      - run: touch dist/.nojekyll
 
       - uses: actions/configure-pages@v5
         with:

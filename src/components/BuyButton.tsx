@@ -19,7 +19,10 @@ const BuyButton = ({ product, withPrice = false, className = "" }: Props) => {
   const [open, setOpen] = useState(false);
   const [embedFailed, setEmbedFailed] = useState(false);
   const [embedReady, setEmbedReady] = useState(false);
+  /** Whether Whop resolved a wallet for this device: unknown → yes → no. */
+  const [wallet, setWallet] = useState<"pending" | "ready" | "none">("pending");
   const mountRef = useRef<HTMLDivElement | null>(null);
+  const walletRef = useRef<HTMLDivElement | null>(null);
 
   const isFree = product.price === 0;
   const hostedUrl = buyLink(product, lang);
@@ -55,6 +58,50 @@ const BuyButton = ({ product, withPrice = false, className = "" }: Props) => {
       cancelled = true;
       window.clearInterval(poll);
       window.clearTimeout(timer);
+    };
+  }, [open, product.planId]);
+
+  /**
+   * Apple Pay and Google Pay come from Whop's own express element, which the
+   * checkout script registers as <whop-express-checkout-button>. Mounting it
+   * here keeps the wallet sheet on this site rather than sending the buyer to
+   * whop.com. The element reports which wallet — if any — this device offers,
+   * and the block stays collapsed unless one actually rendered.
+   * زر المحافظ من Whop نفسه، يعمل داخل الموقع دون مغادرته.
+   */
+  useEffect(() => {
+    if (!open || !product.planId) return;
+
+    const host = walletRef.current;
+    if (!host) return;
+
+    setWallet("pending");
+    loadWhopCheckout().catch(() => setWallet("none"));
+
+    const el = document.createElement("whop-express-checkout-button");
+    el.setAttribute("plan-id", product.planId);
+    el.setAttribute("return-url", window.location.href);
+    el.setAttribute("theme", "light");
+    el.style.display = "block";
+
+    const onResolved = (event: Event) => {
+      const rendered = (event as CustomEvent<{ rendered?: string }>).detail?.rendered;
+      setWallet(rendered && rendered !== "none" ? "ready" : "none");
+    };
+    el.addEventListener("express-method-resolved", onResolved);
+    host.replaceChildren(el);
+
+    // An older checkout script would never define the element, so stop
+    // reserving room for it rather than leaving a gap above the card form.
+    const giveUp = window.setTimeout(
+      () => setWallet((state) => (state === "pending" ? "none" : state)),
+      5000,
+    );
+
+    return () => {
+      window.clearTimeout(giveUp);
+      el.removeEventListener("express-method-resolved", onResolved);
+      host.replaceChildren();
     };
   }, [open, product.planId]);
 
@@ -97,29 +144,22 @@ const BuyButton = ({ product, withPrice = false, className = "" }: Props) => {
           <div className="px-4 py-4">
             {!embedFailed ? (
               <>
-                {/* Apple Pay and Google Pay only render on Whop's own page,
-                    not inside the embedded frame, so the wallets get a button
-                    of their own rather than hiding behind a footnote.
-                    محافظ الدفع تعمل على صفحة Whop فقط، لذلك لها زر واضح. */}
-                <a
-                  href={hostedUrl}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="flex w-full items-center justify-center gap-2 rounded-md bg-ink px-4 py-3.5 text-center text-[13px] font-semibold leading-tight text-ivory transition-colors hover:bg-ink-soft"
-                >
-                  <Wallet className="h-4 w-4 shrink-0 text-gold-300" />
-                  {t("checkout.express")}
-                </a>
-                <p className="mt-2 text-center text-[11px] leading-relaxed text-muted-foreground">
-                  {t("checkout.expressNote")}
-                </p>
-
-                <div className="my-4 flex items-center gap-3">
-                  <span className="h-px flex-1 bg-border" />
-                  <span className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                    {t("checkout.orCard")}
-                  </span>
-                  <span className="h-px flex-1 bg-border" />
+                {/* Clipped rather than display:none while the wallet is still
+                    resolving, so Whop's frame keeps a real width to measure
+                    itself against and the card form below does not jump. */}
+                <div className={wallet === "ready" ? "" : "max-h-0 overflow-hidden opacity-0"}>
+                  <p className="mb-2 flex items-center justify-center gap-1.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                    <Wallet className="h-3.5 w-3.5 text-gold-600" />
+                    {t("checkout.express")}
+                  </p>
+                  <div ref={walletRef} />
+                  <div className="my-4 flex items-center gap-3">
+                    <span className="h-px flex-1 bg-border" />
+                    <span className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                      {t("checkout.orCard")}
+                    </span>
+                    <span className="h-px flex-1 bg-border" />
+                  </div>
                 </div>
 
                 <div
@@ -134,6 +174,17 @@ const BuyButton = ({ product, withPrice = false, className = "" }: Props) => {
                     {t("checkout.loading")}
                   </p>
                 )}
+
+                {/* The hosted page carries methods the embed leaves out. */}
+                <a
+                  href={hostedUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="mt-4 flex items-center justify-center gap-1.5 border-t border-border pt-4 text-[12px] text-muted-foreground underline underline-offset-4 transition-colors hover:text-gold-600"
+                >
+                  {t("checkout.moreMethods")}
+                  <ExternalLink className="h-3 w-3" />
+                </a>
               </>
             ) : (
               <div className="py-10 text-center">

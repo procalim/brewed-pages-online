@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://procalim.github.io/sitemap.xml
+Sitemap: https://ediblecodex.com/sitemap.xml

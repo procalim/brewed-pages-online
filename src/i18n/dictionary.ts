@@ -271,6 +271,50 @@ export const dictionary = {
   "checkout.express": { ar: "الدفع السريع", en: "Express checkout" },
   "checkout.orCard": { ar: "أو ادفع بالبطاقة هنا", en: "or pay by card here" },
 
+  /* ── Search results · عناوين وأوصاف نتائج البحث ──
+     Written for the search listing rather than the page: each one leads with
+     what a searcher is looking for and closes with the reason to click —
+     price, delivery, refund. Kept short enough to survive Google's truncation.
+     عناوين مكتوبة لنتيجة البحث لا للصفحة نفسها. */
+  "seo.home.title": { ar: "٢٦٠ وصفة مصوّرة خطوة بخطوة", en: "260 Recipes, Photographed Step by Step" },
+  "seo.home.desc": {
+    ar: "كتاب طبخ رقمي من مطبخ محترف — ٢٦٠ وصفة مصوّرة ومشروحة بالجرام والكوب، مع ١٠٠ وصفة سريعة هدية. تحميل فوري بـ ٩٫٩٩ دولاراً واسترداد خلال ٣٠ يوماً.",
+    en: "A digital cookbook from a professional kitchen — 260 photographed recipes written in grams and cups, plus 100 quick meals free. Instant download for $9.99, 30-day refund.",
+  },
+  "seo.shop.title": { ar: "الكتاب الكامل والصلصات الخمس", en: "The Book & The Five Sauces" },
+  "seo.shop.desc": {
+    ar: "إصداران: ذا إديبل كودكس بـ ٩٫٩٩ دولاراً، والصلصات الخمس المميّزة مجاناً. تحميل فوري، وصول مدى الحياة، واسترداد خلال ٣٠ يوماً.",
+    en: "Two editions: The Edible Codex for $9.99, and The Five Signature Sauces free. Instant download, lifetime access, 30-day refund.",
+  },
+  "seo.recipes.title": { ar: "١٣ وصفة مجانية مصوّرة", en: "13 Free Recipes, Photographed" },
+  "seo.recipes.desc": {
+    ar: "وصفات مجانية من الكتاب — تاكو كيسابيريا، مطري مي تشكن، باستا الفيتا المخبوزة وغيرها. مقادير دقيقة، خطوات واضحة، وصورة للطبق النهائي.",
+    en: "Free recipes from the book — quesabirria tacos, marry me chicken, baked feta pasta and more. Exact quantities, clear steps, and a photo of the finished plate.",
+  },
+  "seo.faq.title": { ar: "الأسئلة الشائعة — الشراء والتحميل", en: "FAQ — Buying and Downloading" },
+  "seo.faq.desc": {
+    ar: "كل ما تحتاج معرفته قبل الشراء: صيغ الملفات، طريقة التحميل، اللغات، طرق الدفع، وسياسة الاسترداد خلال ٣٠ يوماً.",
+    en: "Everything you need before buying: file formats, how delivery works, languages, payment methods, and the 30-day refund policy.",
+  },
+  "seo.about.title": { ar: "الشيف أحمد سلامة", en: "Chef Ahmet Salameh" },
+  "seo.about.desc": {
+    ar: "قصة المطبخ الذي وُلد منه ذا إديبل كودكس — من الخدمة اليومية إلى ٢٦٠ وصفة مُختبرة ومصوّرة.",
+    en: "The story of the kitchen behind The Edible Codex — from daily service to 260 tested, photographed recipes.",
+  },
+  "seo.contact.title": { ar: "تواصل معنا", en: "Contact Us" },
+  "seo.contact.desc": {
+    ar: "أسئلة عن الكتاب أو عن طلبك؟ راسلنا على واتساب ونردّ خلال ساعات.",
+    en: "Questions about the book or your order? Message us on WhatsApp and we reply within hours.",
+  },
+  "seo.productSuffix": {
+    ar: "تحميل فوري · وصول مدى الحياة · استرداد خلال ٣٠ يوماً",
+    en: "Instant download · lifetime access · 30-day refund",
+  },
+  "seo.recipeSuffix": {
+    ar: "وصفة مجانية مصوّرة خطوة بخطوة من ذا إديبل كودكس",
+    en: "A free step-by-step recipe, photographed, from The Edible Codex",
+  },
+
   /* ── Trust strip ── */
   "trust.instant": { ar: "تحميل فوري", en: "Instant delivery" },
   "trust.secure": { ar: "دفع آمن", en: "Secure payment" },

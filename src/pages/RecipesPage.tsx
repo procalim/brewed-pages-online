@@ -35,8 +35,8 @@ const RecipesPage = () => {
   return (
     <>
       <Seo
-        title={t("recipes.title")}
-        description={t("recipes.subtitle")}
+        title={t("seo.recipes.title")}
+        description={t("seo.recipes.desc")}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "CollectionPage",

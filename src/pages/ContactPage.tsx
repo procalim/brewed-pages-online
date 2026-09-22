@@ -48,7 +48,7 @@ const ContactPage = () => {
 
   return (
     <>
-      <Seo title={t("contact.title")} description={t("contact.subtitle")} />
+      <Seo title={t("seo.contact.title")} description={t("seo.contact.desc")} />
 
       <section className="texture-navy">
         <div className="container-luxe py-16 text-center md:py-20">

@@ -12,8 +12,8 @@ const FaqPage = () => {
   return (
     <>
       <Seo
-        title={t("faq.title")}
-        description={t("faq.subtitle")}
+        title={t("seo.faq.title")}
+        description={t("seo.faq.desc")}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "FAQPage",

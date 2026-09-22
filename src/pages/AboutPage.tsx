@@ -23,7 +23,7 @@ const AboutPage = () => {
 
   return (
     <>
-      <Seo title={t("about.title")} description={t("about.lead")} image={brandImages.chefPortrait} />
+      <Seo title={t("seo.about.title")} description={t("seo.about.desc")} image={brandImages.chefPortrait} />
 
       {/* Hero */}
       <section className="texture-dark relative overflow-hidden">

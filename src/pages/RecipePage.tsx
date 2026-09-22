@@ -41,7 +41,7 @@ const RecipePage = () => {
     <>
       <Seo
         title={L(recipe.title)}
-        description={L(recipe.subtitle)}
+        description={`${L(recipe.subtitle)} · ${recipe.time} · ${t("seo.recipeSuffix")}`}
         image={photo ?? undefined}
         jsonLd={{
           "@context": "https://schema.org",

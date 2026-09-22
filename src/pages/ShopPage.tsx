@@ -10,7 +10,7 @@ const ShopPage = () => {
 
   return (
     <>
-      <Seo title={t("shop.title")} description={t("shop.subtitle")} />
+      <Seo title={t("seo.shop.title")} description={t("seo.shop.desc")} />
 
       <section className="texture-navy relative overflow-hidden">
         <img

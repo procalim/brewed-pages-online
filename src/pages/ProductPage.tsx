@@ -46,7 +46,7 @@ const ProductPage = () => {
     <>
       <Seo
         title={L(product.title)}
-        description={L(product.description)}
+        description={`${L(product.subtitle)} · ${t("seo.productSuffix")}`}
         image={product.image}
         jsonLd={{
           "@context": "https://schema.org",

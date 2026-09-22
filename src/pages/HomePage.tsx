@@ -32,8 +32,8 @@ const HomePage = () => {
   return (
     <>
       <Seo
-        title={t("hero.title.line1") + " " + t("hero.title.line2")}
-        description={t("hero.subtitle")}
+        title={t("seo.home.title")}
+        description={t("seo.home.desc")}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Store",

@@ -271,6 +271,14 @@ export const dictionary = {
   "checkout.express": { ar: "الدفع السريع", en: "Express checkout" },
   "checkout.orCard": { ar: "أو ادفع بالبطاقة هنا", en: "or pay by card here" },
 
+  /* ── Technique videos · مقاطع التقنيات ── */
+  "videos.eyebrow": { ar: "من المطبخ", en: "From the kitchen" },
+  "videos.title": { ar: "تقنيات في أقل من دقيقة", en: "Techniques in Under a Minute" },
+  "videos.subtitle": {
+    ar: "أربع تقنيات مطاعم مصوّرة في المطبخ، بالطريقة نفسها التي يشرحها بها الكتاب: القاعدة أولاً، ثم الطبق.",
+    en: "Four restaurant techniques filmed in the kitchen, explained the way the book explains them: the rule first, then the plate.",
+  },
+
   /* ── Search results · عناوين وأوصاف نتائج البحث ──
      Written for the search listing rather than the page: each one leads with
      what a searcher is looking for and closes with the reason to click —

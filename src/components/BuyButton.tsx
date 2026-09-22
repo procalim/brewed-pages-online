@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, ExternalLink, Loader2 } from "lucide-react";
+import { ArrowRight, ExternalLink, Loader2, Wallet } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { formatPrice, useLang } from "@/i18n/LanguageContext";
 import { loadWhopCheckout } from "@/lib/whopCheckout";
@@ -97,6 +97,31 @@ const BuyButton = ({ product, withPrice = false, className = "" }: Props) => {
           <div className="px-4 py-4">
             {!embedFailed ? (
               <>
+                {/* Apple Pay and Google Pay only render on Whop's own page,
+                    not inside the embedded frame, so the wallets get a button
+                    of their own rather than hiding behind a footnote.
+                    محافظ الدفع تعمل على صفحة Whop فقط، لذلك لها زر واضح. */}
+                <a
+                  href={hostedUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="flex w-full items-center justify-center gap-2 rounded-md bg-ink px-4 py-3.5 text-center text-[13px] font-semibold leading-tight text-ivory transition-colors hover:bg-ink-soft"
+                >
+                  <Wallet className="h-4 w-4 shrink-0 text-gold-300" />
+                  {t("checkout.express")}
+                </a>
+                <p className="mt-2 text-center text-[11px] leading-relaxed text-muted-foreground">
+                  {t("checkout.expressNote")}
+                </p>
+
+                <div className="my-4 flex items-center gap-3">
+                  <span className="h-px flex-1 bg-border" />
+                  <span className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                    {t("checkout.orCard")}
+                  </span>
+                  <span className="h-px flex-1 bg-border" />
+                </div>
+
                 <div
                   ref={mountRef}
                   data-whop-checkout-plan-id={product.planId}
@@ -109,17 +134,6 @@ const BuyButton = ({ product, withPrice = false, className = "" }: Props) => {
                     {t("checkout.loading")}
                   </p>
                 )}
-
-                {/* The hosted page carries methods the embed leaves out. */}
-                <a
-                  href={hostedUrl}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="mt-4 flex items-center justify-center gap-1.5 border-t border-border pt-4 text-[12px] text-muted-foreground underline underline-offset-4 transition-colors hover:text-gold-600"
-                >
-                  {t("checkout.moreMethods")}
-                  <ExternalLink className="h-3 w-3" />
-                </a>
               </>
             ) : (
               <div className="py-10 text-center">

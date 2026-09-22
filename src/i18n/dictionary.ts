@@ -268,6 +268,15 @@ export const dictionary = {
     ar: "طرق دفع أخرى (تحويل بنكي · ACH · عملات رقمية)",
     en: "Other payment methods (bank wire · ACH · crypto)",
   },
+  "checkout.express": {
+    ar: "الدفع السريع — Apple Pay و Google Pay",
+    en: "Express checkout — Apple Pay & Google Pay",
+  },
+  "checkout.expressNote": {
+    ar: "يفتح صفحة الدفع الرسمية لـ Whop، وتدعم أيضاً PayPal والتحويل البنكي.",
+    en: "Opens Whop's official checkout, which also takes PayPal and bank transfer.",
+  },
+  "checkout.orCard": { ar: "أو ادفع بالبطاقة هنا", en: "or pay by card here" },
 
   /* ── Trust strip ── */
   "trust.instant": { ar: "تحميل فوري", en: "Instant delivery" },

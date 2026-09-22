@@ -30,12 +30,12 @@
          لا تعدّل محتوى هذا الكود. -->
 <script>!function(w,d,s,u,n,a,b){if(w[n])return;a=w[n]={q:[],t:+new Date,s:[],o:u,track:function(){a.q.push([+new Date].concat([].slice.call(arguments)))},setScope:function(){a.s=[].slice.call(arguments).filter(function(x){return typeof x==="string"});a.q.push([+new Date,"setScope"].concat(a.s))},scope:function(){var c=[].slice.call(arguments);return{track:function(){a.q.push([+new Date].concat([].slice.call(arguments)).concat([{__scope:c}]))}}}};b=d.createElement(s);b.async=1;b.src=u+"/s.js";d.getElementsByTagName(s)[0].parentNode.insertBefore(b,d.getElementsByTagName(s)[0])}(window,document,"script","https://t.whop.tw","whop");whop.setScope("biz_9eLjCbXTyya0ks");whop.track("page");</script>
 
-    <!-- The static fallback below only exists for clients that do not run
-         JavaScript. Marking the document as JS-capable before first paint
-         keeps real visitors from seeing it flash before React mounts.
-         إخفاء المحتوى الاحتياطي عن الزوّار كي لا يظهر لحظة عند فتح الموقع. -->
-    <script>document.documentElement.classList.add("js");</script>
-    <style>html.js #static-fallback{display:none}body{background:#0B1B33}</style>
+    <!-- The static fallback in the body is hidden outright and revealed only
+         where scripts do not run, so it never flashes before React mounts
+         while still being plain markup for crawlers and site importers.
+         المحتوى الاحتياطي مخفيّ عن الزوّار ويظهر فقط لمن لا يشغّل الجافاسكربت. -->
+    <noscript><style>#static-fallback{display:block !important}</style></noscript>
+    <style>body{background:#0B1B33}</style>
 
     <link rel="icon" type="image/png" href="./brand/icon-180.png" />
     <link rel="apple-touch-icon" href="./brand/icon-180.png" />
@@ -57,7 +57,7 @@
            يُستبدل فوراً عند تحميل الموقع، ووجوده لمحرّكات البحث وأدوات
            الاستيراد التي لا تشغّل الجافاسكربت.
            ───────────────────────────────────────────────────────────── -->
-      <div id="static-fallback" style="background:#0B1B33;color:#F7F3EA;font-family:Tajawal,Inter,system-ui,sans-serif;padding:48px 20px;text-align:center">
+      <div id="static-fallback" style="display:none;background:#0B1B33;color:#F7F3EA;font-family:Tajawal,Inter,system-ui,sans-serif;padding:48px 20px;text-align:center">
         <h1 style="font-family:'Playfair Display',Amiri,Georgia,serif;font-size:32px;margin:0 0 8px">
           The Edible Codex — ذا إديبل كودكس
         </h1>

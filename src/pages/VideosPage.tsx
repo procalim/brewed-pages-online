@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Seo from "@/components/Seo";
-import SectionHeading from "@/components/SectionHeading";
 import { useLang } from "@/i18n/LanguageContext";
 import { videoPoster, videos } from "@/data/videos";
 import { site } from "@/data/site";
@@ -24,11 +23,19 @@ const VideosPage = () => {
       />
 
       <section className="section container-luxe">
-        <SectionHeading
-          eyebrow={t("videos.eyebrow")}
-          title={t("videos.title")}
-          subtitle={t("videos.subtitle")}
-        />
+        {/* Written out rather than via SectionHeading, which always renders an
+            h2 — an index page needs an h1 of its own. */}
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-[11px] uppercase tracking-[0.28em] text-gold-600">
+            {t("videos.eyebrow")}
+          </p>
+          <h1 className="mt-3 font-display text-3xl text-navy-700 md:text-4xl">
+            {t("videos.title")}
+          </h1>
+          <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
+            {t("videos.subtitle")}
+          </p>
+        </div>
 
         <div className="mt-12 grid grid-cols-2 gap-6 md:grid-cols-4">
           {videos.map((video) => (

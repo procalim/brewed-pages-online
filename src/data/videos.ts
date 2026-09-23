@@ -24,7 +24,7 @@ export const videos: SiteVideo[] = [
   {
     slug: "fried-cheese",
     title: {
-      ar: "لماذا تتسرّب الجبنة عند القلي — والحل في ٣٠ دقيقة",
+      ar: "لماذا تتسرّب الجبنة المقلية — والحل في ٣٠ دقيقة",
       en: "Why Fried Cheese Leaks — and the 30-Minute Fix",
     },
     description: {
@@ -72,7 +72,7 @@ export const videos: SiteVideo[] = [
   {
     slug: "hollandaise-heat",
     title: {
-      ar: "الهولنديز ينفصل فوق ٦٥ درجة — إليك الحرارة الصحيحة",
+      ar: "الهولنديز ينفصل فوق ٦٥ درجة — الحرارة الصحيحة",
       en: "Hollandaise Splits Above 65°C — Here Is the Right Heat",
     },
     description: {

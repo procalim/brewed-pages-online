@@ -24,10 +24,12 @@ const readEntries = (file) => {
     const rest = source.slice(match.index);
     const title = rest.match(/title:\s*\{\s*ar:\s*"([^"]+)"/);
     const subtitle = rest.match(/subtitle:\s*\{\s*\n?\s*ar:\s*"([^"]+)"/);
+    const description = rest.match(/description:\s*\{\s*\n?\s*ar:\s*"([^"]+)"/);
     entries.push({
       slug: match[1],
       title: title?.[1] ?? "",
       subtitle: subtitle?.[1] ?? "",
+      description: description?.[1] ?? "",
     });
   }
   return entries;
@@ -35,6 +37,7 @@ const readEntries = (file) => {
 
 const products = readEntries("src/data/products.ts");
 const recipes = readEntries("src/data/recipes.ts");
+const clips = readEntries("src/data/videos.ts");
 
 const brand = "ذا إديبل كودكس";
 const productSuffix = "تحميل فوري · وصول مدى الحياة · استرداد خلال ٣٠ يوماً";
@@ -78,6 +81,21 @@ export const routes = [
     changefreq: "monthly",
     title: recipe.title,
     description: `${recipe.subtitle} · ${recipeSuffix}`,
+  })),
+  {
+    path: "/videos",
+    priority: "0.8",
+    changefreq: "monthly",
+    title: "تقنيات مطبخ مصوّرة",
+    description:
+      "مقاطع قصيرة من مطبخ محترف: لماذا تتسرّب الجبنة المقلية، متى ينفصل الهولنديز، وكيف يُضغط الأرز المقرمش. قاعدة واحدة في كل مقطع.",
+  },
+  ...clips.map((clip) => ({
+    path: `/videos/${clip.slug}`,
+    priority: "0.7",
+    changefreq: "monthly",
+    title: clip.title,
+    description: clip.description,
   })),
   {
     path: "/about",

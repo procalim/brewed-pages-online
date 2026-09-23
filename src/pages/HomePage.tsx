@@ -12,7 +12,6 @@ import { recipes } from "@/data/recipes";
 import RecipeCard from "@/components/RecipeCard";
 import BuyButton from "@/components/BuyButton";
 import { brandImages, site } from "@/data/site";
-import { videos, videoClip, videoPoster } from "@/data/videos";
 
 const HomePage = () => {
   const { t, L, lang } = useLang();
@@ -38,35 +37,20 @@ const HomePage = () => {
         description={t("seo.home.desc")}
         jsonLd={{
           "@context": "https://schema.org",
-          "@graph": [
-            {
-              "@type": "Store",
-              name: site.brand.name,
-              description: t("hero.subtitle"),
-              url: site.url,
-              logo: `${site.url}/brand/logo-square.jpg`,
-              image: `${site.url}/brand/logo-square.jpg`,
-              founder: { "@type": "Person", name: site.brand.chefEn },
-              telephone: site.contact.phoneDisplay,
-              address: { "@type": "PostalAddress", addressLocality: "Amman", addressCountry: "JO" },
-              sameAs: [site.social.instagram],
-            },
-            // One entry per clip, so each can earn a video result of its own
-            // with its poster as the thumbnail. كل مقطع يظهر بصورته في جوجل.
-            ...videos.map((video) => ({
-              "@type": "VideoObject",
-              name: L(video.title),
-              description: L(video.description),
-              thumbnailUrl: `${site.url}${videoPoster(video)}`,
-              contentUrl: `${site.url}${videoClip(video)}`,
-              // Full ISO 8601 with the offset: Google treats a bare date as
-              // incomplete and flags it. الوقت والمنطقة الزمنية مطلوبان.
-              uploadDate: "2026-09-22T00:00:00+03:00",
-              duration: `PT${video.duration}S`,
-              inLanguage: lang,
-              publisher: { "@type": "Organization", name: site.brand.name },
-            })),
-          ],
+          "@type": "Store",
+          name: site.brand.name,
+          description: t("hero.subtitle"),
+          url: site.url,
+          logo: `${site.url}/brand/logo-square.jpg`,
+          image: `${site.url}/brand/logo-square.jpg`,
+          founder: { "@type": "Person", name: site.brand.chefEn },
+          telephone: site.contact.phoneDisplay,
+          address: { "@type": "PostalAddress", addressLocality: "Amman", addressCountry: "JO" },
+          sameAs: [site.social.instagram],
+          // The clips' VideoObject markup lives on their watch pages, not here:
+          // Google treats a video as supplementary wherever the page is about
+          // something else, and refuses to index it.
+          // بيانات الفيديو على صفحات المقاطع، لأن جوجل لا يفهرسها هنا.
         }}
       />
 

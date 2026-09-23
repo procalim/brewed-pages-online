@@ -8,6 +8,7 @@ const links = [
   { to: "/", key: "nav.home" },
   { to: "/shop", key: "nav.shop" },
   { to: "/recipes", key: "nav.recipes" },
+  { to: "/videos", key: "videos.nav" },
   { to: "/about", key: "nav.about" },
   { to: "/faq", key: "nav.faq" },
   { to: "/contact", key: "nav.contact" },

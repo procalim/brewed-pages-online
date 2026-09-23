@@ -274,6 +274,20 @@ export const dictionary = {
   /* ── Technique videos · مقاطع التقنيات ── */
   "videos.eyebrow": { ar: "من المطبخ", en: "From the kitchen" },
   "videos.title": { ar: "تقنيات في أقل من دقيقة", en: "Techniques in Under a Minute" },
+  "videos.nav": { ar: "المقاطع", en: "Videos" },
+  "videos.why": { ar: "لماذا تعمل هذه الطريقة", en: "Why this works" },
+  "videos.more": { ar: "مقاطع أخرى", en: "More techniques" },
+  "videos.all": { ar: "كل المقاطع", en: "All techniques" },
+  "videos.notFound": { ar: "المقطع غير موجود", en: "Video not found" },
+  "videos.bookPitch": {
+    ar: "هذه واحدة من مئات التفاصيل التي يشرحها الكتاب — القاعدة أولاً، ثم الوصفة، ثم صورة الطبق النهائي.",
+    en: "This is one of hundreds of details the book explains — the rule first, then the recipe, then a photo of the finished plate.",
+  },
+  "seo.videos.title": { ar: "تقنيات مطبخ مصوّرة", en: "Kitchen Techniques on Camera" },
+  "seo.videos.desc": {
+    ar: "مقاطع قصيرة من مطبخ محترف: لماذا تتسرّب الجبنة المقلية، متى ينفصل الهولنديز، وكيف يُضغط الأرز المقرمش. قاعدة واحدة في كل مقطع.",
+    en: "Short clips from a professional kitchen: why fried cheese leaks, when hollandaise splits, and how crispy rice is pressed. One rule per clip.",
+  },
   "videos.subtitle": {
     ar: "أربع تقنيات مطاعم مصوّرة في المطبخ، بالطريقة نفسها التي يشرحها بها الكتاب: القاعدة أولاً، ثم الطبق.",
     en: "Four restaurant techniques filmed in the kitchen, explained the way the book explains them: the rule first, then the plate.",

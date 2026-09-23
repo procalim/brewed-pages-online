@@ -13,6 +13,8 @@ import HomePage from "@/pages/HomePage";
 import ShopPage from "@/pages/ShopPage";
 import RecipesPage from "@/pages/RecipesPage";
 import RecipePage from "@/pages/RecipePage";
+import VideosPage from "@/pages/VideosPage";
+import VideoPage from "@/pages/VideoPage";
 import ProductPage from "@/pages/ProductPage";
 import AboutPage from "@/pages/AboutPage";
 import ContactPage from "@/pages/ContactPage";
@@ -43,6 +45,8 @@ const App = () => (
                   <Route path="/product/:slug" element={<ProductPage />} />
                   <Route path="/recipes" element={<RecipesPage />} />
                   <Route path="/recipes/:slug" element={<RecipePage />} />
+                  <Route path="/videos" element={<VideosPage />} />
+                  <Route path="/videos/:slug" element={<VideoPage />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/faq" element={<FaqPage />} />
                   <Route path="/contact" element={<ContactPage />} />

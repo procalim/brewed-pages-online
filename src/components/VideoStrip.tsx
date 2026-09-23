@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { Play } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
 import { videos, videoClip, videoPoster, type SiteVideo } from "@/data/videos";
@@ -49,7 +50,13 @@ const VideoCard = ({ video }: { video: SiteVideo }) => {
       </div>
 
       <figcaption className="mt-3">
-        <h3 className="font-display text-[15px] leading-snug text-navy-700">{L(video.title)}</h3>
+        {/* The title links to the clip's own watch page, which is where it can
+            be indexed and where the technique is written out. */}
+        <h3 className="font-display text-[15px] leading-snug text-navy-700">
+          <Link to={`/videos/${video.slug}`} className="transition-colors hover:text-gold-600">
+            {L(video.title)}
+          </Link>
+        </h3>
         <p className="mt-1 text-[12.5px] leading-relaxed text-muted-foreground">
           {L(video.description)}
         </p>
@@ -79,6 +86,12 @@ const VideoStrip = () => {
           {videos.map((video) => (
             <VideoCard key={video.slug} video={video} />
           ))}
+        </div>
+
+        <div className="mt-10 text-center">
+          <Link to="/videos" className="btn-outline-gold">
+            {t("videos.all")}
+          </Link>
         </div>
       </div>
     </section>

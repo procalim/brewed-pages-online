@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { ArrowRight, Check, ChevronLeft } from "lucide-react";
 import Seo from "@/components/Seo";
+import { breadcrumbList } from "@/lib/breadcrumbs";
 import BuyButton from "@/components/BuyButton";
 import { useLang } from "@/i18n/LanguageContext";
 import { getProduct } from "@/data/products";
@@ -44,6 +45,13 @@ const VideoPage = () => {
         image={videoPoster(video)}
         jsonLd={{
           "@context": "https://schema.org",
+          "@graph": [
+            breadcrumbList([
+              { name: t("nav.home"), path: "/" },
+              { name: t("videos.nav"), path: "/videos" },
+              { name: L(video.title), path: `/videos/${video.slug}` },
+            ]),
+            {
           "@type": "VideoObject",
           name: L(video.title),
           description: L(video.description),
@@ -53,6 +61,8 @@ const VideoPage = () => {
           duration: `PT${video.duration}S`,
           inLanguage: lang,
           publisher: { "@type": "Organization", name: site.brand.name },
+            },
+          ],
         }}
       />
 

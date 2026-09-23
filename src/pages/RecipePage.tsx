@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowRight, ChevronLeft, Clock, Lightbulb, Users } from "lucide-react";
 import Seo from "@/components/Seo";
+import { breadcrumbList } from "@/lib/breadcrumbs";
 import RecipeCard from "@/components/RecipeCard";
 import SectionHeading from "@/components/SectionHeading";
 import BuyButton from "@/components/BuyButton";
@@ -45,6 +46,13 @@ const RecipePage = () => {
         image={photo ?? undefined}
         jsonLd={{
           "@context": "https://schema.org",
+          "@graph": [
+            breadcrumbList([
+              { name: t("nav.home"), path: "/" },
+              { name: t("nav.recipes"), path: "/recipes" },
+              { name: L(recipe.title), path: `/recipes/${recipe.slug}` },
+            ]),
+            {
           "@type": "Recipe",
           name: L(recipe.title),
           description: L(recipe.subtitle),
@@ -61,6 +69,8 @@ const RecipePage = () => {
             text: step,
           })),
           isPartOf: { "@type": "Book", name: site.brand.name },
+            },
+          ],
         }}
       />
 

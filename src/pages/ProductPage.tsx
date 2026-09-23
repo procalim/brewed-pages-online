@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ChevronLeft, Check, Download, RotateCcw, ShieldCheck, Star } from "lucide-react";
 import Seo from "@/components/Seo";
+import { breadcrumbList } from "@/lib/breadcrumbs";
 import ProductCard from "@/components/ProductCard";
 import SectionHeading from "@/components/SectionHeading";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -50,6 +51,13 @@ const ProductPage = () => {
         image={product.image}
         jsonLd={{
           "@context": "https://schema.org",
+          "@graph": [
+            breadcrumbList([
+              { name: t("nav.home"), path: "/" },
+              { name: t("nav.shop"), path: "/shop" },
+              { name: L(product.title), path: `/shop/${product.slug}` },
+            ]),
+            {
           "@type": "Product",
           name: L(product.title),
           description: L(product.description),
@@ -67,6 +75,8 @@ const ProductPage = () => {
             availability: "https://schema.org/InStock",
             itemCondition: "https://schema.org/NewCondition",
           },
+            },
+          ],
         }}
       />
 

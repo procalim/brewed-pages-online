@@ -1,0 +1,63 @@
+/**
+ * Writes a real index.html at every address the app serves.
+ *
+ * GitHub Pages has no SPA rewrite: for a path with no file behind it, it
+ * serves 404.html — with an HTTP 404. A visitor saw the page render and
+ * noticed nothing, but every crawler was told the page does not exist, and
+ * Google refused to index anything but the home page. Giving each route its
+ * own file turns that into a 200, and lets each one carry its own title,
+ * description and canonical for crawlers that do not run JavaScript.
+ *
+ * صفحات جيت هب لا تعرف مسارات التطبيق، فكانت تُعيد 404 لكل صفحة داخلية —
+ * يراها الزائر سليمة بينما يراها جوجل غير موجودة. هذا الملف يكتب صفحة
+ * حقيقية لكل عنوان.
+ */
+import fs from "node:fs";
+import path from "node:path";
+import { origin, pageTitle, root, routes } from "./routes.mjs";
+
+const dist = path.join(root, "dist");
+const template = fs.readFileSync(path.join(dist, "index.html"), "utf8");
+
+const escape = (value) =>
+  value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+/** Swaps in this route's own metadata, leaving the rest of the document alone. */
+const render = (route) => {
+  const url = `${origin}${route.path}`;
+  const title = escape(pageTitle(route));
+  const description = escape(route.description);
+
+  return template
+    .replace(/<title>[\s\S]*?<\/title>/, `<title>${title}</title>`)
+    .replace(
+      /<meta\s+name="description"[\s\S]*?\/>/,
+      `<meta name="description" content="${description}" />`,
+    )
+    .replace(
+      /<meta property="og:title" content="[^"]*" \/>/,
+      `<meta property="og:title" content="${title}" />`,
+    )
+    .replace(
+      /<meta\s+property="og:description"[\s\S]*?\/>/,
+      `<meta property="og:description" content="${description}" />`,
+    )
+    .replace(
+      "</head>",
+      `  <link rel="canonical" href="${url}" />\n    <meta property="og:url" content="${url}" />\n  </head>`,
+    );
+};
+
+let written = 0;
+for (const route of routes) {
+  const target =
+    route.path === "/" ? path.join(dist, "index.html") : path.join(dist, route.path, "index.html");
+  fs.mkdirSync(path.dirname(target), { recursive: true });
+  fs.writeFileSync(target, render(route));
+  written += 1;
+}
+
+// Kept for any address not in the list — a mistyped URL still lands in the app.
+fs.writeFileSync(path.join(dist, "404.html"), template);
+
+console.log(`prerender: ${written} routes written under dist/`);

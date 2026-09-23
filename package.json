@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/generate-seo-files.mjs && vite build",
-    "build:dev": "node scripts/generate-seo-files.mjs && vite build --mode development",
+    "build": "node scripts/generate-seo-files.mjs && vite build && node scripts/prerender-routes.mjs",
+    "build:dev": "node scripts/generate-seo-files.mjs && vite build --mode development && node scripts/prerender-routes.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

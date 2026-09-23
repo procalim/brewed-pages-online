@@ -8,32 +8,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const { url } = JSON.parse(fs.readFileSync(path.join(root, "site.config.json"), "utf8"));
-const origin = url.replace(/\/$/, "");
-
-// Product slugs are read straight out of the catalogue.
-const readSlugs = (file) =>
-  [...fs.readFileSync(path.join(root, file), "utf8").matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]);
-
-const slugs = readSlugs("src/data/products.ts");
-const recipeSlugs = readSlugs("src/data/recipes.ts");
-
-const routes = [
-  { path: "/", priority: "1.0", changefreq: "weekly" },
-  { path: "/shop", priority: "0.9", changefreq: "weekly" },
-  ...slugs.map((slug) => ({ path: `/shop/${slug}`, priority: "0.9", changefreq: "weekly" })),
-  { path: "/recipes", priority: "0.9", changefreq: "weekly" },
-  ...recipeSlugs.map((slug) => ({ path: `/recipes/${slug}`, priority: "0.8", changefreq: "monthly" })),
-  { path: "/about", priority: "0.6", changefreq: "monthly" },
-  { path: "/faq", priority: "0.6", changefreq: "monthly" },
-  { path: "/contact", priority: "0.5", changefreq: "monthly" },
-  { path: "/policies/privacy", priority: "0.3", changefreq: "yearly" },
-  { path: "/policies/terms", priority: "0.3", changefreq: "yearly" },
-  { path: "/policies/refund", priority: "0.3", changefreq: "yearly" },
-];
+import { origin, root, routes } from "./routes.mjs";
 
 const today = new Date().toISOString().slice(0, 10);
 

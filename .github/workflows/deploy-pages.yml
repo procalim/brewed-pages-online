@@ -37,8 +37,9 @@ jobs:
             npm run build -- --base=/${{ github.event.repository.name }}/
           fi
 
-      # Pages has no SPA rewrite; 404.html makes deep links resolve.
-      - run: cp dist/index.html dist/404.html
+      # The build's pre-render step already wrote dist/<route>/index.html for
+      # every address, and dist/404.html for anything else, so Pages serves a
+      # 200 where it used to serve 404.html with an HTTP 404.
 
       # Keep Pages from running Jekyll, which would drop /.well-known files.
       - run: touch dist/.nojekyll

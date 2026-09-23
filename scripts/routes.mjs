@@ -1,0 +1,128 @@
+/**
+ * The single list of addresses the site serves — read by the sitemap writer
+ * and by the pre-render step, so the two can never disagree about what
+ * exists. Titles and descriptions mirror the `seo.*` entries in
+ * src/i18n/dictionary.ts; change them there and here together.
+ *
+ * قائمة صفحات الموقع الوحيدة، تقرأ منها خريطة الموقع وصفحات ما قبل البناء.
+ */
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+
+export const origin = JSON.parse(
+  fs.readFileSync(path.join(root, "site.config.json"), "utf8"),
+).url.replace(/\/$/, "");
+
+/** Pulls slug, Arabic title and Arabic subtitle out of a catalogue file. */
+const readEntries = (file) => {
+  const source = fs.readFileSync(path.join(root, file), "utf8");
+  const entries = [];
+  for (const match of source.matchAll(/slug:\s*"([^"]+)"/g)) {
+    const rest = source.slice(match.index);
+    const title = rest.match(/title:\s*\{\s*ar:\s*"([^"]+)"/);
+    const subtitle = rest.match(/subtitle:\s*\{\s*\n?\s*ar:\s*"([^"]+)"/);
+    entries.push({
+      slug: match[1],
+      title: title?.[1] ?? "",
+      subtitle: subtitle?.[1] ?? "",
+    });
+  }
+  return entries;
+};
+
+const products = readEntries("src/data/products.ts");
+const recipes = readEntries("src/data/recipes.ts");
+
+const brand = "ذا إديبل كودكس";
+const productSuffix = "تحميل فوري · وصول مدى الحياة · استرداد خلال ٣٠ يوماً";
+const recipeSuffix = "وصفة مجانية مصوّرة خطوة بخطوة من ذا إديبل كودكس";
+
+export const routes = [
+  {
+    path: "/",
+    priority: "1.0",
+    changefreq: "weekly",
+    title: "٢٦٠ وصفة مصوّرة خطوة بخطوة",
+    description:
+      "كتاب طبخ رقمي من مطبخ محترف — ٢٦٠ وصفة مصوّرة ومشروحة بالجرام والكوب، مع ١٠٠ وصفة سريعة هدية. تحميل فوري بـ ٩٫٩٩ دولاراً واسترداد خلال ٣٠ يوماً.",
+  },
+  {
+    path: "/shop",
+    priority: "0.9",
+    changefreq: "weekly",
+    title: "الكتاب الكامل والصلصات الخمس",
+    description:
+      "إصداران: ذا إديبل كودكس بـ ٩٫٩٩ دولاراً، والصلصات الخمس المميّزة مجاناً. تحميل فوري، وصول مدى الحياة، واسترداد خلال ٣٠ يوماً.",
+  },
+  ...products.map((product) => ({
+    path: `/shop/${product.slug}`,
+    priority: "0.9",
+    changefreq: "weekly",
+    title: product.title,
+    description: `${product.subtitle} · ${productSuffix}`,
+  })),
+  {
+    path: "/recipes",
+    priority: "0.9",
+    changefreq: "weekly",
+    title: "١٣ وصفة مجانية مصوّرة",
+    description:
+      "وصفات مجانية من الكتاب — تاكو كيسابيريا، مطري مي تشكن، باستا الفيتا المخبوزة وغيرها. مقادير دقيقة، خطوات واضحة، وصورة للطبق النهائي.",
+  },
+  ...recipes.map((recipe) => ({
+    path: `/recipes/${recipe.slug}`,
+    priority: "0.8",
+    changefreq: "monthly",
+    title: recipe.title,
+    description: `${recipe.subtitle} · ${recipeSuffix}`,
+  })),
+  {
+    path: "/about",
+    priority: "0.6",
+    changefreq: "monthly",
+    title: "الشيف أحمد سلامة",
+    description:
+      "قصة المطبخ الذي وُلد منه ذا إديبل كودكس — من الخدمة اليومية إلى ٢٦٠ وصفة مُختبرة ومصوّرة.",
+  },
+  {
+    path: "/faq",
+    priority: "0.6",
+    changefreq: "monthly",
+    title: "الأسئلة الشائعة — الشراء والتحميل",
+    description:
+      "كل ما تحتاج معرفته قبل الشراء: صيغ الملفات، طريقة التحميل، اللغات، طرق الدفع، وسياسة الاسترداد خلال ٣٠ يوماً.",
+  },
+  {
+    path: "/contact",
+    priority: "0.5",
+    changefreq: "monthly",
+    title: "تواصل معنا",
+    description: "أسئلة عن الكتاب أو عن طلبك؟ راسلنا على واتساب ونردّ خلال ساعات.",
+  },
+  {
+    path: "/policies/privacy",
+    priority: "0.3",
+    changefreq: "yearly",
+    title: "سياسة الخصوصية",
+    description: "كيف نتعامل مع بياناتك عند الشراء من ذا إديبل كودكس.",
+  },
+  {
+    path: "/policies/terms",
+    priority: "0.3",
+    changefreq: "yearly",
+    title: "الشروط والأحكام",
+    description: "شروط استخدام الموقع وشراء الإصدارات الرقمية.",
+  },
+  {
+    path: "/policies/refund",
+    priority: "0.3",
+    changefreq: "yearly",
+    title: "سياسة الاسترداد",
+    description: "استرداد كامل خلال ٣٠ يوماً من الشراء، دون أسئلة.",
+  },
+];
+
+export const pageTitle = (route) => `${route.title} | ${brand}`;

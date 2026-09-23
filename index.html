@@ -37,8 +37,15 @@
     <noscript><style>#static-fallback{display:block !important}</style></noscript>
     <style>body{background:#0B1B33}</style>
 
-    <link rel="icon" type="image/png" href="./brand/icon-180.png" />
-    <link rel="apple-touch-icon" href="./brand/icon-180.png" />
+    <!-- Absolute, not relative: this one document is served for every route,
+         so "./brand/…" resolved against /recipes/… and 404'd everywhere but
+         the home page — which is why search results showed a blank globe.
+         Google wants a square icon whose side is a multiple of 48, and looks
+         for /favicon.ico as well, so both are served.
+         مسارات مطلقة، وإلا فشلت الأيقونة في كل صفحة عدا الرئيسية. -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" href="/brand/icon-192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/brand/icon-180.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

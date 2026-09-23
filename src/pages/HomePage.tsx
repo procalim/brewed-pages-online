@@ -59,7 +59,9 @@ const HomePage = () => {
               description: L(video.description),
               thumbnailUrl: `${site.url}${videoPoster(video)}`,
               contentUrl: `${site.url}${videoClip(video)}`,
-              uploadDate: "2026-09-22",
+              // Full ISO 8601 with the offset: Google treats a bare date as
+              // incomplete and flags it. الوقت والمنطقة الزمنية مطلوبان.
+              uploadDate: "2026-09-22T00:00:00+03:00",
               duration: `PT${video.duration}S`,
               inLanguage: lang,
               publisher: { "@type": "Organization", name: site.brand.name },

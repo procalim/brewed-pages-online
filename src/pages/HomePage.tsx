@@ -11,7 +11,7 @@ import { faqs, getProduct, products, testimonials } from "@/data/products";
 import { recipes } from "@/data/recipes";
 import RecipeCard from "@/components/RecipeCard";
 import BuyButton from "@/components/BuyButton";
-import { brandImages, site } from "@/data/site";
+import { bookPages, brandImages, site } from "@/data/site";
 
 const HomePage = () => {
   const { t, L, lang } = useLang();
@@ -89,7 +89,7 @@ const HomePage = () => {
 
             <dl className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-gold/20 pt-8">
               {[
-                { value: "260", label: t("hero.stat.recipes") },
+                { value: "264", label: t("hero.stat.recipes") },
                 { value: "100", label: t("hero.stat.bonus") },
                 { value: "12K+", label: t("hero.stat.readers") },
               ].map((stat) => (
@@ -103,8 +103,11 @@ const HomePage = () => {
             </dl>
           </div>
 
-          {/* Chef portrait in a gold frame */}
-          <div className="relative hidden animate-fade-in-slow lg:block">
+          {/* The chef, in a gold frame — on the phone too, where most of the
+              traffic is. Hiding it below lg left a bare band of statistics
+              between the headline and the trust row.
+              الصورة تظهر على الهاتف أيضاً، حيث يأتي أغلب الزوّار. */}
+          <div className="relative mx-auto w-full max-w-sm animate-fade-in-slow lg:max-w-none">
             <div className="absolute -inset-3 rounded-sm border border-gold/25" aria-hidden="true" />
             <div className="absolute -inset-8 hidden rounded-sm border border-gold/10 lg:block" aria-hidden="true" />
             <img
@@ -113,12 +116,16 @@ const HomePage = () => {
               className="relative aspect-[4/5] w-full rounded-sm object-cover object-top shadow-luxe"
               fetchPriority="high"
             />
-            <div className="absolute bottom-5 start-5 end-5 rounded-sm border border-gold/25 bg-ink/85 px-5 py-4 backdrop-blur-sm">
+            {/* Under the photo on a phone, over it from sm up — the overlay
+                would otherwise sit on Skyline's head.
+                تحت الصورة على الهاتف، وفوقها على الشاشات الأكبر. */}
+            <div className="relative mt-3 rounded-sm border border-gold/25 bg-ink/85 px-5 py-4 backdrop-blur-sm sm:absolute sm:bottom-5 sm:start-5 sm:end-5 sm:mt-0">
               <p className="font-display text-base text-ivory">
                 {lang === "ar" ? site.brand.chefAr : site.brand.chefEn}
               </p>
-              <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-gold/80">
-                {lang === "ar" ? site.brand.taglineAr : site.brand.taglineEn}
+              <p className="mt-1.5 text-[12px] leading-relaxed text-gold/90">{t("hero.portrait.line")}</p>
+              <p className="mt-2 text-[10px] uppercase tracking-[0.16em] text-ivory/45">
+                {t("hero.portrait.brand")}
               </p>
             </div>
           </div>
@@ -152,7 +159,7 @@ const HomePage = () => {
           <div className="relative order-2 lg:order-1">
             <div className="absolute -inset-4 rounded-sm border border-gold/20" aria-hidden="true" />
             <img
-              src={brandImages.codexCover}
+              src={bookPages.cover}
               alt={L(flagship.title)}
               loading="lazy"
               className="relative w-full rounded-sm object-cover shadow-luxe"

@@ -38,7 +38,7 @@ const hashed = (slug) => {
 };
 
 const PRODUCT_IMAGE = {
-  "the-edible-codex": "/brand/edible-codex-cover.jpg",
+  "the-edible-codex": "/brand/book/cover.jpg",
   "the-five-sauces": "/brand/chef-shrimp-rainbow.jpg",
 };
 

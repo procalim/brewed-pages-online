@@ -103,3 +103,16 @@ export const brandImages = {
   chefBeef: `${base}brand/chef-beef-tenderloin.jpg`,
   codexCover: `${base}brand/edible-codex-cover.jpg`,
 } as const;
+
+/**
+ * صفحات حقيقية من داخل الكتاب — الغلاف، صفحة الافتتاح، الفهرس، ووصفتان.
+ * Real pages lifted out of the book itself. A buyer deciding on a cookbook
+ * wants to see a page, not another photograph of a plate.
+ */
+export const bookPages = {
+  cover: `${base}brand/book/cover.jpg`,
+  frontispiece: `${base}brand/book/frontispiece.jpg`,
+  contents: `${base}brand/book/contents.jpg`,
+  recipeMain: `${base}brand/book/recipe-main.jpg`,
+  recipeSide: `${base}brand/book/recipe-side.jpg`,
+} as const;

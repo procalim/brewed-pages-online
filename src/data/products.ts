@@ -1,5 +1,5 @@
 import type { Localized } from "@/i18n/LanguageContext";
-import { brandImages } from "./site";
+import { bookPages, brandImages } from "./site";
 
 export type Product = {
   id: number;
@@ -39,29 +39,34 @@ export const products: Product[] = [
   {
     id: 1,
     slug: "the-edible-codex",
-    title: { ar: "ذا إديبل كودكس — الكتاب الكامل", en: "The Edible Codex — The Book" },
-    subtitle: { ar: "٢٦٠ وصفة منسّقة + ١٠٠ وصفة سريعة هدية", en: "260 curated recipes + 100 quick meals free" },
+    title: { ar: "٢٦٤ وصفة احترافية + ١٠٠ وصفة مجاناً", en: "264 Chef Recipes + 100 Free" },
+    subtitle: { ar: "ذا إديبل كودكس — المجلّد الكامل في ٣٨٩ صفحة", en: "The Edible Codex — the complete 389-page volume" },
     description: {
-      ar: "المجلّد الرقمي الكامل: ٢٦٠ وصفة مقسّمة على تسعة فصول، من المقبلات الباردة إلى اللحوم والمأكولات البحرية والتنسيق. كل وصفة مصوّرة بالطبق النهائي، ومشروحة بمقادير مزدوجة بالجرام والكوب، مع ملاحظات المطبخ التي عادة لا تُكتب في الكتب.",
-      en: "The complete digital volume: 260 recipes across nine chapters, from cold starters through meats, seafood and plating. Every recipe is photographed as a finished plate and written with dual measurements in grams and cups, alongside the kitchen notes books usually leave out.",
+      ar: "المجلّد الرقمي الكامل: ٣٦٤ وصفة في ٣٨٩ صفحة — ٢٦٤ وصفة من المطبخ المحترف، ومعها ١٠٠ وصفة من الوصفات التي اجتاحت الإنترنت، مجاناً. كل وصفة على صفحة واحدة، بصورتها الخاصة، بالمقادير والخطوات وملاحظة الشيف — لا تقليب بين صفحتين وأنت تطبخ.",
+      en: "The complete digital volume: 364 recipes across 389 pages — 264 from a professional kitchen, plus 100 of the internet's most-cooked dishes, free. Every recipe sits on a single page with its own photograph, its measurements, its method and a chef's note — no flipping back and forth while you cook.",
     },
     features: [
-      { ar: "٢٦٠ وصفة مع صورة نهائية لكل طبق", en: "260 recipes, each with a finished plate photo" },
-      { ar: "فصل هدية: ١٠٠ وصفة سريعة خلال ٢٠ دقيقة", en: "Bonus chapter: 100 quick meals in 20 minutes" },
-      { ar: "مقادير بالجرام والكوب معاً", en: "Dual measurements — grams and cups" },
-      { ar: "قوائم تسوّق أسبوعية قابلة للطباعة", en: "Printable weekly shopping lists" },
-      { ar: "صيغة PDF و EPUB · عربي وإنجليزي", en: "PDF and EPUB · Arabic and English" },
-      { ar: "تحديثات مجانية مدى الحياة", en: "Free lifetime updates" },
+      { ar: "٢٦٤ وصفة احترافية + ١٠٠ وصفة مجاناً = ٣٦٤", en: "264 chef recipes + 100 free = 364" },
+      { ar: "صورة خاصة لكل وصفة — ٣٦٤ صورة", en: "Its own photograph for every recipe — 364 in all" },
+      { ar: "كل وصفة كاملة على صفحة واحدة", en: "Every recipe complete on one page" },
+      { ar: "ملاحظة الشيف مع كل وصفة", en: "A chef's note with every recipe" },
+      { ar: "٣٨٩ صفحة · نسخة كاملة ونسخة خفيفة للهاتف", en: "389 pages · full edition and a light one for your phone" },
+      { ar: "تحميل فوري وتحديثات مجانية مدى الحياة", en: "Instant download and free lifetime updates" },
     ],
-    image: brandImages.codexCover,
-    gallery: [brandImages.codexCover, brandImages.chefShrimp, brandImages.chefDuck, brandImages.chefBeef],
+    image: bookPages.cover,
+    gallery: [
+      bookPages.cover,
+      bookPages.recipeMain,
+      bookPages.contents,
+      bookPages.recipeSide,
+      bookPages.frontispiece,
+    ],
     price: 9.99,
     compareAt: 19.99,
     badge: "bestseller",
     rating: 4.9,
     reviews: 812,
     featured: true,
-    focus: "center 60%",
     checkoutUrl: "https://whop.com/c/the-edible-codex-cookbook/codex",
     planId: "plan_em9IY2N3WR5Je",
   },

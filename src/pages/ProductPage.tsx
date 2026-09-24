@@ -114,7 +114,7 @@ const ProductPage = () => {
             </div>
 
             {product.gallery.length > 1 && (
-              <div className="mt-4 grid grid-cols-4 gap-3">
+              <div className={`mt-4 grid gap-3 ${product.gallery.length > 4 ? "grid-cols-5" : "grid-cols-4"}`}>
                 {product.gallery.map((image, i) => (
                   <button
                     key={image + i}

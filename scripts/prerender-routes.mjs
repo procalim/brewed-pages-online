@@ -19,6 +19,37 @@ import { origin, pageTitle, root, routes } from "./routes.mjs";
 const dist = path.join(root, "dist");
 const template = fs.readFileSync(path.join(dist, "index.html"), "utf8");
 
+/**
+ * The picture a page should show when it is shared or listed in a result.
+ *
+ * Every pre-rendered page was shipping the home page's logo, written as the
+ * relative "./brand/logo-square.jpg" — which on /recipes/<slug>/ resolves to
+ * /recipes/<slug>/brand/... and 404s. With nothing usable declared, Google
+ * picked whatever image it liked off the rendered page, which is why recipes
+ * came up in search under a neighbouring recipe's photograph.
+ * كل صفحة كانت تعلن صورة الشعار بمسار نسبي مكسور، فكان جوجل يختار صورة
+ * عشوائية من الصفحة — ولهذا ظهرت وصفات بصور وصفات أخرى.
+ */
+const assets = fs.existsSync(path.join(dist, "assets")) ? fs.readdirSync(path.join(dist, "assets")) : [];
+
+const hashed = (slug) => {
+  const hit = assets.find((f) => new RegExp(`^${slug}-[A-Za-z0-9_-]+\\.jpg$`).test(f));
+  return hit ? `/assets/${hit}` : null;
+};
+
+const PRODUCT_IMAGE = {
+  "the-edible-codex": "/brand/edible-codex-cover.jpg",
+  "the-five-sauces": "/brand/chef-shrimp-rainbow.jpg",
+};
+
+const imageFor = (route) => {
+  const [, section, slug] = route.path.split("/");
+  if (section === "recipes" && slug) return hashed(slug);
+  if (section === "videos" && slug) return hashed(slug);
+  if (section === "shop" && slug) return PRODUCT_IMAGE[slug] ?? null;
+  return null;
+};
+
 const escape = (value) =>
   value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
@@ -27,6 +58,7 @@ const render = (route) => {
   const url = `${origin}${route.path}`;
   const title = escape(pageTitle(route));
   const description = escape(route.description);
+  const image = origin + (imageFor(route) ?? "/brand/logo-square.jpg");
 
   return template
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${title}</title>`)
@@ -41,6 +73,14 @@ const render = (route) => {
     .replace(
       /<meta\s+property="og:description"[\s\S]*?\/>/,
       `<meta property="og:description" content="${description}" />`,
+    )
+    .replace(
+      /<meta property="og:image" content="[^"]*" \/>/,
+      `<meta property="og:image" content="${image}" />`,
+    )
+    .replace(
+      /<meta name="twitter:image" content="[^"]*" \/>/,
+      `<meta name="twitter:image" content="${image}" />`,
     )
     .replace(
       "</head>",

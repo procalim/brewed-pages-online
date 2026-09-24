@@ -40,7 +40,7 @@ export const products: Product[] = [
     id: 1,
     slug: "the-edible-codex",
     title: { ar: "٢٦٤ وصفة احترافية + ١٠٠ وصفة مجاناً", en: "264 Chef Recipes + 100 Free" },
-    subtitle: { ar: "ذا إديبل كودكس — المجلّد الكامل في ٣٨٩ صفحة", en: "The Edible Codex — the complete 389-page volume" },
+    subtitle: { ar: "كتاب رقمي — ذا إديبل كودكس في ٣٨٩ صفحة", en: "A digital book — The Edible Codex in 389 pages" },
     description: {
       ar: "المجلّد الرقمي الكامل: ٣٦٤ وصفة في ٣٨٩ صفحة — ٢٦٤ وصفة من المطبخ المحترف، ومعها ١٠٠ وصفة من الوصفات التي اجتاحت الإنترنت، مجاناً. كل وصفة على صفحة واحدة، بصورتها الخاصة، بالمقادير والخطوات وملاحظة الشيف — لا تقليب بين صفحتين وأنت تطبخ.",
       en: "The complete digital volume: 364 recipes across 389 pages — 264 from a professional kitchen, plus 100 of the internet's most-cooked dishes, free. Every recipe sits on a single page with its own photograph, its measurements, its method and a chef's note — no flipping back and forth while you cook.",
@@ -50,12 +50,13 @@ export const products: Product[] = [
       { ar: "صورة خاصة لكل وصفة — ٣٦٤ صورة", en: "Its own photograph for every recipe — 364 in all" },
       { ar: "كل وصفة كاملة على صفحة واحدة", en: "Every recipe complete on one page" },
       { ar: "ملاحظة الشيف مع كل وصفة", en: "A chef's note with every recipe" },
-      { ar: "٣٨٩ صفحة · نسخة كاملة ونسخة خفيفة للهاتف", en: "389 pages · full edition and a light one for your phone" },
+      { ar: "ملف رقمي يُقرأ على الجوال واللوح والحاسوب", en: "A digital file that reads on phone, tablet and desktop" },
       { ar: "تحميل فوري وتحديثات مجانية مدى الحياة", en: "Instant download and free lifetime updates" },
     ],
     image: bookPages.cover,
     gallery: [
       bookPages.cover,
+      bookPages.onScreen,
       bookPages.recipeMain,
       bookPages.contents,
       bookPages.recipeSide,

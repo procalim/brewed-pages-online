@@ -11,6 +11,15 @@ import BuyButton from "@/components/BuyButton";
 import { faqs, getProduct, products } from "@/data/products";
 import { checkoutUrlFor, site } from "@/data/site";
 
+/** Tailwind needs the whole class name in the source, so they are spelled out. */
+const THUMB_COLS: Record<number, string> = {
+  2: "grid-cols-2",
+  3: "grid-cols-3",
+  4: "grid-cols-4",
+  5: "grid-cols-5",
+  6: "grid-cols-3 sm:grid-cols-6",
+};
+
 const ProductPage = () => {
   const { slug } = useParams();
   const { t, L, lang } = useLang();
@@ -114,7 +123,7 @@ const ProductPage = () => {
             </div>
 
             {product.gallery.length > 1 && (
-              <div className={`mt-4 grid gap-3 ${product.gallery.length > 4 ? "grid-cols-5" : "grid-cols-4"}`}>
+              <div className={`mt-4 grid gap-3 ${THUMB_COLS[product.gallery.length] ?? "grid-cols-4"}`}>
                 {product.gallery.map((image, i) => (
                   <button
                     key={image + i}

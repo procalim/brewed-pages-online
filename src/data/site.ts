@@ -115,4 +115,6 @@ export const bookPages = {
   contents: `${base}brand/book/contents.jpg`,
   recipeMain: `${base}brand/book/recipe-main.jpg`,
   recipeSide: `${base}brand/book/recipe-side.jpg`,
+  /** The book on a tablet and a phone — it is a file, not a parcel. */
+  onScreen: `${base}brand/book/on-screen.jpg`,
 } as const;

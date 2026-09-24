@@ -25,8 +25,8 @@ export const dictionary = {
   "hero.title.line1": { ar: "فنّ الطبق", en: "The Art of" },
   "hero.title.line2": { ar: "الاحترافي", en: "The Plate" },
   "hero.subtitle": {
-    ar: "٢٦٤ وصفة مُنسَّقة بعناية، مصوَّرة ومشروحة خطوة بخطوة، من مطبخ محترف إلى مطبخك.",
-    en: "264 curated recipes, photographed and broken down step by step — from a professional kitchen to yours.",
+    ar: "٢٦١ وصفة مُنسَّقة بعناية، مصوَّرة ومشروحة خطوة بخطوة، من مطبخ محترف إلى مطبخك.",
+    en: "261 curated recipes, photographed and broken down step by step — from a professional kitchen to yours.",
   },
   "hero.cta.primary": { ar: "احصل على النسخة", en: "Get the Codex" },
   "hero.cta.secondary": { ar: "تصفّح المتجر", en: "Browse the Shop" },
@@ -34,8 +34,8 @@ export const dictionary = {
   "hero.stat.bonus": { ar: "وصفة سريعة مجاناً", en: "Free quick meals" },
   "hero.stat.readers": { ar: "قارئ حول العالم", en: "Readers worldwide" },
   "hero.portrait.line": {
-    ar: "كتبتُ ٣٦٤ وصفة كما أطبخها فعلاً — لا كما تُكتب في الكتب.",
-    en: "I wrote 364 recipes the way I actually cook them — not the way books write them.",
+    ar: "كتبتُ ٣٦١ وصفة كما أطبخها فعلاً — لا كما تُكتب في الكتب.",
+    en: "I wrote 361 recipes the way I actually cook them — not the way books write them.",
   },
   "hero.portrait.brand": { ar: "مؤسّس ذا إديبل كودكس · عمّان", en: "Founder of The Edible Codex · Amman" },
   "hero.scroll": { ar: "تابع النزول", en: "Scroll" },
@@ -71,10 +71,10 @@ export const dictionary = {
   "featured.eyebrow": { ar: "الإصدار الرئيسي", en: "The Flagship" },
   "featured.title": { ar: "ذا إديبل كودكس", en: "The Edible Codex" },
   "featured.body": {
-    ar: "مجلّد رقمي من ٢٦٤ وصفة مقسّمة إلى فصول: المقبلات، اللحوم، المأكولات البحرية، الصلصات، والتنسيق. مع فصل هدية من ١٠٠ وصفة سريعة تُنجز في ٢٠ دقيقة.",
-    en: "A digital volume of 264 recipes across chapters — starters, meats, seafood, sauces and plating — plus a bonus chapter of 100 quick meals you can finish in 20 minutes.",
+    ar: "مجلّد رقمي من ٢٦١ وصفة مقسّمة إلى فصول: المقبلات، اللحوم، المأكولات البحرية، الصلصات، والتنسيق. مع فصل هدية من ١٠٠ وصفة سريعة تُنجز في ٢٠ دقيقة.",
+    en: "A digital volume of 261 recipes across chapters — starters, meats, seafood, sauces and plating — plus a bonus chapter of 100 quick meals you can finish in 20 minutes.",
   },
-  "featured.bullet.1": { ar: "٢٦٤ وصفة مع صور نهائية لكل طبق", en: "264 recipes, each with a finished plate photo" },
+  "featured.bullet.1": { ar: "٢٦١ وصفة مع صور نهائية لكل طبق", en: "261 recipes, each with a finished plate photo" },
   "featured.bullet.2": { ar: "فصل كامل عن الصلصات الملوّنة", en: "A full chapter on signature colour sauces" },
   "featured.bullet.3": { ar: "قوائم تسوّق جاهزة للطباعة", en: "Printable shopping lists" },
   "featured.bullet.4": { ar: "هدية: ١٠٠ وصفة سريعة", en: "Bonus: 100 quick meals" },
@@ -184,8 +184,8 @@ export const dictionary = {
   "offer.eyebrow": { ar: "عرض الإطلاق", en: "Launch Offer" },
   "offer.title": { ar: "النسخة الكاملة + الهدية", en: "The Complete Edition + Bonus" },
   "offer.body": {
-    ar: "احصل على ٢٦٤ وصفة مع فصل الـ١٠٠ وصفة السريعة مجاناً، بسعر الإطلاق ولفترة محدودة.",
-    en: "Get all 264 recipes with the 100 quick-meals chapter free, at launch pricing for a limited time.",
+    ar: "احصل على ٢٦١ وصفة مع فصل الـ١٠٠ وصفة السريعة مجاناً، بسعر الإطلاق ولفترة محدودة.",
+    en: "Get all 261 recipes with the 100 quick-meals chapter free, at launch pricing for a limited time.",
   },
   "offer.cta": { ar: "اطلب الآن", en: "Order now" },
 
@@ -309,10 +309,10 @@ export const dictionary = {
      what a searcher is looking for and closes with the reason to click —
      price, delivery, refund. Kept short enough to survive Google's truncation.
      عناوين مكتوبة لنتيجة البحث لا للصفحة نفسها. */
-  "seo.home.title": { ar: "٢٦٤ وصفة مصوّرة خطوة بخطوة", en: "264 Recipes, Photographed Step by Step" },
+  "seo.home.title": { ar: "٢٦١ وصفة مصوّرة خطوة بخطوة", en: "261 Recipes, Photographed Step by Step" },
   "seo.home.desc": {
-    ar: "كتاب طبخ رقمي من مطبخ محترف — ٢٦٤ وصفة مصوّرة ومشروحة بالجرام والكوب، مع ١٠٠ وصفة سريعة هدية. تحميل فوري بـ ٩٫٩٩ دولاراً واسترداد خلال ٣٠ يوماً.",
-    en: "A digital cookbook from a professional kitchen — 264 photographed recipes written in grams and cups, plus 100 quick meals free. Instant download for $9.99, 30-day refund.",
+    ar: "كتاب طبخ رقمي من مطبخ محترف — ٢٦١ وصفة مصوّرة ومشروحة بالجرام والكوب، مع ١٠٠ وصفة سريعة هدية. تحميل فوري بـ ٩٫٩٩ دولاراً واسترداد خلال ٣٠ يوماً.",
+    en: "A digital cookbook from a professional kitchen — 261 photographed recipes written in grams and cups, plus 100 quick meals free. Instant download for $9.99, 30-day refund.",
   },
   "seo.shop.title": { ar: "الكتاب الكامل والصلصات الخمس", en: "The Book & The Five Sauces" },
   "seo.shop.desc": {
@@ -331,8 +331,8 @@ export const dictionary = {
   },
   "seo.about.title": { ar: "الشيف أحمد سلامة", en: "Chef Ahmet Salameh" },
   "seo.about.desc": {
-    ar: "قصة المطبخ الذي وُلد منه ذا إديبل كودكس — من الخدمة اليومية إلى ٢٦٤ وصفة مُختبرة ومصوّرة.",
-    en: "The story of the kitchen behind The Edible Codex — from daily service to 264 tested, photographed recipes.",
+    ar: "قصة المطبخ الذي وُلد منه ذا إديبل كودكس — من الخدمة اليومية إلى ٢٦١ وصفة مُختبرة ومصوّرة.",
+    en: "The story of the kitchen behind The Edible Codex — from daily service to 261 tested, photographed recipes.",
   },
   "seo.contact.title": { ar: "تواصل معنا", en: "Contact Us" },
   "seo.contact.desc": {

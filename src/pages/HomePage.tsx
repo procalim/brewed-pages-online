@@ -89,7 +89,7 @@ const HomePage = () => {
 
             <dl className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-gold/20 pt-8">
               {[
-                { value: "264", label: t("hero.stat.recipes") },
+                { value: "261", label: t("hero.stat.recipes") },
                 { value: "100", label: t("hero.stat.bonus") },
                 { value: "12K+", label: t("hero.stat.readers") },
               ].map((stat) => (

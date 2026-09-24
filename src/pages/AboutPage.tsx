@@ -17,7 +17,7 @@ const AboutPage = () => {
 
   const numbers = [
     { value: "14+", label: t("about.numbers.years") },
-    { value: "264", label: t("about.numbers.recipes") },
+    { value: "261", label: t("about.numbers.recipes") },
     { value: "37", label: t("about.numbers.countries") },
   ];
 

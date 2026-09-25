@@ -108,7 +108,7 @@ export const recipes: Recipe[] = [
     accent: "dark",
     time: "3 h",
     serves: "6",
-    tags: ["Beef", "Mexican"],
+    tags: ["Beef", "Mexican", "Dinner"],
     title: { ar: "تاكو البيريا بالجبن", en: "Quesabirria Tacos (Birria Tacos)" },
     subtitle: { ar: "لحم مطهوّ ببطء، وتورتيلا مغموسة بالدهن، وصلصة الغمس.", en: "The most famous 'dipping taco' with a rich, red consommé." },
     ingredients: [
@@ -140,7 +140,7 @@ export const recipes: Recipe[] = [
     accent: "magenta",
     time: "25 min",
     serves: "2",
-    tags: ["Pasta", "Viral"],
+    tags: ["Pasta", "Viral", "Italian"],
     title: { ar: "باستا جيجي حديد الحارّة", en: "Gigi Hadid's Spicy Vodka Pasta" },
     subtitle: { ar: "صلصة وردية كريمية جعلت الفودكا مكوّناً مشهوراً.", en: "A celebrity recipe that became a staple for spicy pasta lovers." },
     ingredients: [
@@ -172,7 +172,7 @@ export const recipes: Recipe[] = [
     accent: "orange",
     time: "15 min",
     serves: "1",
-    tags: ["Seafood", "Quick"],
+    tags: ["Seafood", "Quick", "Japanese", "Dinner"],
     title: { ar: "بول السلمون والأرز", en: "Emily Mariko's Salmon Rice Bowl" },
     subtitle: { ar: "بقايا السلمون والأرز تتحوّل إلى وجبة كاملة.", en: "Famous for the 'ice cube hack' to reheat rice without drying it out." },
     ingredients: [
@@ -202,7 +202,7 @@ export const recipes: Recipe[] = [
     accent: "green",
     time: "20 min",
     serves: "4",
-    tags: ["Salad", "Vegetarian"],
+    tags: ["Salad", "Vegetarian", "American"],
     title: { ar: "سلطة الإلهة الخضراء", en: "Green Goddess Salad" },
     subtitle: { ar: "سلطة مفرومة ناعماً بصلصة خضراء كثيفة.", en: "A viral vegan salad eaten like a dip with tortilla chips." },
     ingredients: [
@@ -230,7 +230,7 @@ export const recipes: Recipe[] = [
     accent: "orange",
     time: "40 min",
     serves: "6",
-    tags: ["Seafood", "Party"],
+    tags: ["Seafood", "Party", "Japanese", "Dinner"],
     title: { ar: "السوشي المخبوز", en: "Sushi Bake" },
     subtitle: { ar: "كل نكهات رول السوشي في صينية واحدة تُقدَّم ساخنة.", en: "A deconstructed sushi roll baked in a casserole dish." },
     ingredients: [
@@ -288,7 +288,7 @@ export const recipes: Recipe[] = [
     accent: "magenta",
     time: "25 min",
     serves: "4",
-    tags: ["Seafood", "Appetizer"],
+    tags: ["Seafood", "Appetizer", "American"],
     title: { ar: "روبيان بانغ بانغ", en: "Bang Bang Shrimp" },
     subtitle: { ar: "روبيان مقرمش بصلصة حلوة حارّة.", en: "Crispy shrimp tossed in a sweet and spicy creamy sauce." },
     ingredients: [
@@ -317,7 +317,7 @@ export const recipes: Recipe[] = [
     accent: "gold",
     time: "10 min",
     serves: "1",
-    tags: ["Drinks", "Coffee"],
+    tags: ["Drinks", "Coffee", "Korean"],
     title: { ar: "قهوة الدالغونا المخفوقة", en: "Dalgona Coffee (Whipped Coffee)" },
     subtitle: { ar: "قهوة مخفوقة حتى تصبح كريمة فوق الحليب البارد.", en: "The viral 'quarantine drink' that started it all in 2020." },
     ingredients: [
@@ -443,7 +443,7 @@ export const recipes: Recipe[] = [
     accent: "orange",
     time: "35 min",
     serves: "4",
-    tags: ["Bread", "Viral"],
+    tags: ["Bread", "Viral", "Korean"],
     title: { ar: "خبز الثوم الكوري بالجبنة الكريمية", en: "Korean Cream Cheese Garlic Bread" },
     subtitle: {
       ar: "أكلة الشارع الكورية التي تجمع الحلو والمالح والثوم بجرأة.",

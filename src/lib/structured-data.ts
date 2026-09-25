@@ -33,7 +33,7 @@ export type Trail = { name: string; path: string }[];
 const COURSES = new Set(["Appetizer", "Salad", "Dessert", "Drinks", "Coffee", "Bread",
                          "Sides", "Sandwich", "Dinner", "Pasta", "Sauce"]);
 const CUISINES = new Set(["Middle Eastern", "Mexican", "Italian", "Korean", "Japanese",
-                          "Thai", "French", "Chinese", "Indian", "Greek"]);
+                          "Thai", "French", "Chinese", "Indian", "Greek", "American"]);
 
 const isoDuration = (time: string) => {
   const match = time.match(/^(\d+)\s*(min|h)$/i);

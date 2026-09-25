@@ -79,7 +79,13 @@ const RecipesPage = () => {
             />
           </div>
 
-          <div className="mt-5 flex flex-wrap justify-center gap-2">
+          {/* One scrolling line on a phone: twenty-seven wrapped buttons
+              pushed the first recipe seven rows down the screen. Wide enough
+              and they wrap as before.
+              شريط أفقي على الهاتف بدل جدار من الأزرار يدفع الوصفات للأسفل. */}
+          <div
+            className="-mx-5 mt-5 flex snap-x gap-2 overflow-x-auto px-5 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:flex-wrap md:justify-center md:overflow-visible md:px-0 md:pb-0"
+          >
             {["all", ...recipeTags].map((value) => {
               const active = tag === value;
               return (
@@ -87,7 +93,7 @@ const RecipesPage = () => {
                   key={value}
                   type="button"
                   onClick={() => setTag(value)}
-                  className={`rounded-sm border px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] transition-all duration-300 ${
+                  className={`shrink-0 snap-start rounded-sm border px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] transition-all duration-300 ${
                     active
                       ? "border-gold bg-gold-gradient text-ink"
                       : "border-border text-navy-700 hover:border-gold hover:text-gold-600"

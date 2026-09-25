@@ -14,6 +14,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { createServer } from "vite";
 import { origin, pageTitle, root, routes } from "./routes.mjs";
 
 const dist = path.join(root, "dist");
@@ -32,8 +33,8 @@ const template = fs.readFileSync(path.join(dist, "index.html"), "utf8");
  */
 const assets = fs.existsSync(path.join(dist, "assets")) ? fs.readdirSync(path.join(dist, "assets")) : [];
 
-const hashed = (slug) => {
-  const hit = assets.find((f) => new RegExp(`^${slug}-[A-Za-z0-9_-]+\\.jpg$`).test(f));
+const hashed = (slug, ext = "jpg") => {
+  const hit = assets.find((f) => new RegExp(`^${slug}-[A-Za-z0-9_-]+\\.${ext}$`).test(f));
   return hit ? `/assets/${hit}` : null;
 };
 
@@ -50,8 +51,89 @@ const imageFor = (route) => {
   return null;
 };
 
+/**
+ * The catalogue, loaded through Vite so the aliases and `import.meta.glob`
+ * in the data files resolve exactly as they do in the app — no second copy
+ * of the recipes for the build step to drift away from.
+ * تُحمَّل البيانات عبر Vite نفسه، فلا تتكرّر ولا تختلف عن التي يراها الموقع.
+ */
+const vite = await createServer({ server: { middlewareMode: true }, appType: "custom", logLevel: "error" });
+const load = (file) => vite.ssrLoadModule(file);
+const [{ recipes }, { products }, { videos }, schema, { dictionary }] = await Promise.all([
+  load("/src/data/recipes.ts"),
+  load("/src/data/products.ts"),
+  load("/src/data/videos.ts"),
+  load("/src/lib/structured-data.ts"),
+  load("/src/i18n/dictionary.ts"),
+]);
+await vite.close();
+
+/** Arabic is what the page serves by default, so it is what the build writes. */
+const say = (key) => dictionary[key].ar;
+
+const structuredData = new Map();
+for (const recipe of recipes) {
+  structuredData.set(`/recipes/${recipe.slug}`, schema.recipeGraph({
+    trail: [
+      { name: say("nav.home"), path: "/" },
+      { name: say("nav.recipes"), path: "/recipes" },
+      { name: recipe.title.ar, path: `/recipes/${recipe.slug}` },
+    ],
+    name: recipe.title.ar,
+    description: recipe.subtitle.ar,
+    photo: recipe.photo ? hashed(recipe.slug) : null,
+    lang: "ar",
+    serves: recipe.serves,
+    time: recipe.time,
+    tags: recipe.tags,
+    ingredients: recipe.ingredients,
+    steps: recipe.steps,
+  }));
+}
+for (const product of products) {
+  structuredData.set(`/shop/${product.slug}`, schema.productGraph({
+    trail: [
+      { name: say("nav.home"), path: "/" },
+      { name: say("nav.shop"), path: "/shop" },
+      { name: product.title.ar, path: `/shop/${product.slug}` },
+    ],
+    name: product.title.ar,
+    description: product.description.ar,
+    image: product.image,
+    slug: product.slug,
+    price: product.price,
+  }));
+}
+for (const video of videos) {
+  structuredData.set(`/videos/${video.slug}`, schema.videoGraph({
+    trail: [
+      { name: say("nav.home"), path: "/" },
+      { name: say("videos.nav"), path: "/videos" },
+      { name: video.title.ar, path: `/videos/${video.slug}` },
+    ],
+    name: video.title.ar,
+    description: video.description.ar,
+    thumbnail: hashed(video.slug) ?? "",
+    clip: hashed(video.slug, "mp4") ?? "",
+    duration: video.duration,
+    lang: "ar",
+  }));
+}
+
 const escape = (value) =>
   value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+/**
+ * This page's structured data, ready for the document — Google reads it
+ * without running a line of the app.
+ * البيانات المنظَّمة داخل الصفحة نفسها، يقرأها جوجل بلا جافاسكربت.
+ */
+const markup = (route) => {
+  const data = structuredData.get(route.path);
+  if (!data) return "";
+  const json = JSON.stringify(data).replace(/</g, "\\u003c");
+  return `    <script type="application/ld+json" data-page="true">${json}</script>\n`;
+};
 
 /** Swaps in this route's own metadata, leaving the rest of the document alone. */
 const render = (route) => {
@@ -84,7 +166,8 @@ const render = (route) => {
     )
     .replace(
       "</head>",
-      `  <link rel="canonical" href="${url}" />\n    <meta property="og:url" content="${url}" />\n  </head>`,
+      `  <link rel="canonical" href="${url}" />\n    <meta property="og:url" content="${url}" />\n` +
+        `${markup(route)}  </head>`,
     );
 };
 

@@ -68,6 +68,11 @@ const Seo = ({
 
   useEffect(() => {
     if (!jsonLd) return;
+    // The build writes this page's markup into the HTML already, so the copy
+    // it wrote goes before React adds its own — otherwise a crawler that does
+    // run the script sees the same recipe declared twice.
+    // البناء يكتب البيانات في الصفحة، فنزيل نسخته قبل إضافة نسختنا.
+    document.head.querySelectorAll("script[data-page]").forEach((el) => el.remove());
     const script = document.createElement("script");
     script.type = "application/ld+json";
     script.dataset.page = "true";

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ChevronLeft, Check, Download, RotateCcw, ShieldCheck, Star } from "lucide-react";
 import Seo from "@/components/Seo";
-import { breadcrumbList } from "@/lib/breadcrumbs";
+import { productGraph } from "@/lib/structured-data";
 import ProductCard from "@/components/ProductCard";
 import SectionHeading from "@/components/SectionHeading";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -58,35 +58,18 @@ const ProductPage = () => {
         title={L(product.title)}
         description={`${L(product.subtitle)} · ${t("seo.productSuffix")}`}
         image={product.image}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@graph": [
-            breadcrumbList([
-              { name: t("nav.home"), path: "/" },
-              { name: t("nav.shop"), path: "/shop" },
-              { name: L(product.title), path: `/shop/${product.slug}` },
-            ]),
-            {
-          "@type": "Product",
+        jsonLd={productGraph({
+          trail: [
+            { name: t("nav.home"), path: "/" },
+            { name: t("nav.shop"), path: "/shop" },
+            { name: L(product.title), path: `/shop/${product.slug}` },
+          ],
           name: L(product.title),
           description: L(product.description),
-          image: `${site.url}${product.image}`,
-          brand: { "@type": "Brand", name: site.brand.name },
-          // No aggregateRating here: the reviews on the site are still
-          // placeholders, and publishing invented ratings as structured data
-          // would mislead shoppers and breach Google's guidelines. Add it
-          // once real reviews exist.
-          offers: {
-            "@type": "Offer",
-            url: `${site.url}/shop/${product.slug}`,
-            price: product.price,
-            priceCurrency: site.currency.code,
-            availability: "https://schema.org/InStock",
-            itemCondition: "https://schema.org/NewCondition",
-          },
-            },
-          ],
-        }}
+          image: product.image,
+          slug: product.slug,
+          price: product.price,
+        })}
       />
 
       <div className="border-b border-border bg-white">

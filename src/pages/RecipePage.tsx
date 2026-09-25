@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowRight, ChevronLeft, Clock, Lightbulb, Users } from "lucide-react";
 import Seo from "@/components/Seo";
-import { breadcrumbList } from "@/lib/breadcrumbs";
+import { recipeGraph } from "@/lib/structured-data";
 import RecipeCard from "@/components/RecipeCard";
 import SectionHeading from "@/components/SectionHeading";
 import BuyButton from "@/components/BuyButton";
@@ -44,34 +44,22 @@ const RecipePage = () => {
         title={L(recipe.title)}
         description={`${L(recipe.subtitle)} · ${recipe.time} · ${t("seo.recipeSuffix")}`}
         image={photo ?? undefined}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@graph": [
-            breadcrumbList([
-              { name: t("nav.home"), path: "/" },
-              { name: t("nav.recipes"), path: "/recipes" },
-              { name: L(recipe.title), path: `/recipes/${recipe.slug}` },
-            ]),
-            {
-          "@type": "Recipe",
+        jsonLd={recipeGraph({
+          trail: [
+            { name: t("nav.home"), path: "/" },
+            { name: t("nav.recipes"), path: "/recipes" },
+            { name: L(recipe.title), path: `/recipes/${recipe.slug}` },
+          ],
           name: L(recipe.title),
           description: L(recipe.subtitle),
-          ...(photo ? { image: `${site.url}${photo}` } : {}),
-          author: { "@type": "Person", name: site.brand.chefEn },
-          inLanguage: lang,
-          recipeYield: recipe.serves,
-          totalTime: recipe.time,
-          keywords: recipe.tags.join(", "),
-          recipeIngredient: recipe.ingredients,
-          recipeInstructions: recipe.steps.map((step, i) => ({
-            "@type": "HowToStep",
-            position: i + 1,
-            text: step,
-          })),
-          isPartOf: { "@type": "Book", name: site.brand.name },
-            },
-          ],
-        }}
+          photo,
+          lang,
+          serves: recipe.serves,
+          time: recipe.time,
+          tags: recipe.tags,
+          ingredients: recipe.ingredients,
+          steps: recipe.steps,
+        })}
       />
 
       <div className="border-b border-border bg-white">

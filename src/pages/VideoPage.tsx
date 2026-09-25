@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { ArrowRight, Check, ChevronLeft } from "lucide-react";
 import Seo from "@/components/Seo";
-import { breadcrumbList } from "@/lib/breadcrumbs";
+import { videoGraph } from "@/lib/structured-data";
 import BuyButton from "@/components/BuyButton";
 import { useLang } from "@/i18n/LanguageContext";
 import { getProduct } from "@/data/products";
@@ -43,27 +43,19 @@ const VideoPage = () => {
         title={L(video.title)}
         description={L(video.description)}
         image={videoPoster(video)}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@graph": [
-            breadcrumbList([
-              { name: t("nav.home"), path: "/" },
-              { name: t("videos.nav"), path: "/videos" },
-              { name: L(video.title), path: `/videos/${video.slug}` },
-            ]),
-            {
-          "@type": "VideoObject",
+        jsonLd={videoGraph({
+          trail: [
+            { name: t("nav.home"), path: "/" },
+            { name: t("videos.nav"), path: "/videos" },
+            { name: L(video.title), path: `/videos/${video.slug}` },
+          ],
           name: L(video.title),
           description: L(video.description),
-          thumbnailUrl: `${site.url}${videoPoster(video)}`,
-          contentUrl: `${site.url}${videoClip(video)}`,
-          uploadDate: "2026-09-22T00:00:00+03:00",
-          duration: `PT${video.duration}S`,
-          inLanguage: lang,
-          publisher: { "@type": "Organization", name: site.brand.name },
-            },
-          ],
-        }}
+          thumbnail: videoPoster(video),
+          clip: videoClip(video),
+          duration: video.duration,
+          lang,
+        })}
       />
 
       <div className="border-b border-border bg-white">

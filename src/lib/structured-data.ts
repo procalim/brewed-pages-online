@@ -23,6 +23,18 @@ export type Trail = { name: string; path: string }[];
  * a recipe result gets clicked.
  * الوقت يُكتب بصيغة ISO وإلا تجاهله جوجل.
  */
+/**
+ * The tags are written for the filter row, but they carry two things Google
+ * asks a recipe for by name. Only the words below count — a tag like "Viral"
+ * or "Quick" is neither a course nor a cuisine, and guessing one would be
+ * worse than leaving the field out.
+ * الوسوم تحمل نوع الطبق ومطبخه؛ نأخذ المعروف منها فقط ولا نخمّن الباقي.
+ */
+const COURSES = new Set(["Appetizer", "Salad", "Dessert", "Drinks", "Coffee", "Bread",
+                         "Sides", "Sandwich", "Dinner", "Pasta", "Sauce"]);
+const CUISINES = new Set(["Middle Eastern", "Mexican", "Italian", "Korean", "Japanese",
+                          "Thai", "French", "Chinese", "Indian", "Greek"]);
+
 const isoDuration = (time: string) => {
   const match = time.match(/^(\d+)\s*(min|h)$/i);
   if (!match) return time;
@@ -53,11 +65,17 @@ export const recipeGraph = (args: {
     name: args.name,
     description: args.description,
     ...(args.photo ? { image: `${site.url}${args.photo}` } : {}),
-    author: { "@type": "Person", name: site.brand.chefEn },
+    author: { "@type": "Person", name: site.brand.chefEn, url: `${site.url}/about` },
     inLanguage: args.lang,
     recipeYield: args.serves,
     totalTime: isoDuration(args.time),
     keywords: args.tags.join(", "),
+    ...(args.tags.find((tag) => COURSES.has(tag))
+      ? { recipeCategory: args.tags.find((tag) => COURSES.has(tag)) }
+      : {}),
+    ...(args.tags.find((tag) => CUISINES.has(tag))
+      ? { recipeCuisine: args.tags.find((tag) => CUISINES.has(tag)) }
+      : {}),
     recipeIngredient: args.ingredients,
     recipeInstructions: args.steps.map((step, i) => ({
       "@type": "HowToStep",

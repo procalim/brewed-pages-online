@@ -25,8 +25,8 @@ export const dictionary = {
   "hero.title.line1": { ar: "فنّ الطبق", en: "The Art of" },
   "hero.title.line2": { ar: "الاحترافي", en: "The Plate" },
   "hero.subtitle": {
-    ar: "٢٦١ وصفة مُنسَّقة بعناية، مصوَّرة ومشروحة خطوة بخطوة، من مطبخ محترف إلى مطبخك.",
-    en: "261 curated recipes, photographed and broken down step by step — from a professional kitchen to yours.",
+    ar: "٢٦١ وصفة مُنسَّقة + ١٠٠ وصفة مجاناً، مصوَّرة ومشروحة خطوة بخطوة، من مطبخ محترف إلى مطبخك.",
+    en: "261 curated recipes + 100 free, photographed and broken down step by step — from a professional kitchen to yours.",
   },
   "hero.cta.primary": { ar: "احصل على النسخة", en: "Get the Codex" },
   "hero.cta.secondary": { ar: "تصفّح المتجر", en: "Browse the Shop" },
